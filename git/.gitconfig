@@ -1,0 +1,54 @@
+[user]
+  name = Daniel Bittencourt
+  email = contactbiz.dan@gmail.com
+  signingkey = ~/.ssh/id_ed25519_sk.pub
+
+[includeIf "gitdir:~/work/"]
+  # configure work details
+  path = .gitconfig-work
+
+[core]
+  edior = nvim
+  pager = delta
+	excludesfile = ~/.gitignore
+
+[init]
+  defaultBranch = main
+
+[fetch]
+  prune = true
+
+[pull]
+  ff = only
+
+[diff]
+  colorMoved = default
+
+[commit]
+  gpgsign = true
+
+[tag]
+  gpgsign = true
+
+[merge]
+  conflictstyle = diff3
+
+[interactive]
+  diffFilter = delta --color-only --features=interactive
+
+[pager]
+  blame  = delta
+  diff   = delta
+  reflog = delta
+  show   = delta
+
+[delta]
+  # use n and N to move between diff sections
+  navigate = true
+  true-color = always
+
+[delta "interactive"]
+  keep-plus-minus-markers = false
+
+[gpg]
+  format = ssh

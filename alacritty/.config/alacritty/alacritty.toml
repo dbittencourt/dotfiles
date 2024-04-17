@@ -1,0 +1,85 @@
+live_config_reload = true
+
+[env]
+TERM="xterm-256color"
+
+# rebelot/kanagawa.nvim theme colors
+[colors.primary]
+background = "0x1f1f28"
+foreground = "0xdcd7ba"
+
+[colors.normal]
+black = "0x090618"
+red = "0xc34043"
+green = "0x76946a"
+yellow = "0xc0a36e"
+blue = "0x7e9cd8"
+magenta = "0x957fb8"
+cyan = "0x6a9589"
+white = "0xc8c093"
+
+[colors.bright]
+black = "0x727169"
+red = "0xe82424"
+green = "0x98bb6c"
+yellow = "0xe6c384"
+blue = "0x7fb4ca"
+magenta = "0x938aa9"
+cyan = "0x7aa89f"
+white = "0xdcd7ba"
+
+[colors.selection]
+background = "0x2d4f67"
+foreground = "0xc8c093"
+
+[[colors.indexed_colors]]
+index = 16
+color = "0xffa066"
+
+[[colors.indexed_colors]]
+index = 17
+color = "0xff5d62"
+
+[mouse]
+hide_when_typing = true
+
+[window]
+dynamic_padding = true
+decorations = "full"
+opacity = 0.9
+
+[font]
+size = 15
+
+[font.normal]
+family = "MesloLGS NF"
+style = "Regular"
+
+[font.bold]
+family = "MesloLGS NF"
+style = "Bold"
+
+[font.italic]
+family = "MesloLGS NF"
+style = "Italic"
+
+[font.bold_italic]
+family = "MesloLGS NF"
+style = "Bold Italic"
+
+[font.offset]
+x = 0
+y = 0
+
+[font.glyph_offset]
+x = 0
+y = 2
+
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>"
+save_to_clipboard = true
+
+[cursor]
+style = "Block"
+vi_mode_style = "Beam"
+unfocused_hollow = true
