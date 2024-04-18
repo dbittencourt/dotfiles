@@ -34,7 +34,7 @@
   conflictstyle = diff3
 
 [interactive]
-  diffFilter = delta --color-only --features=interactive
+  diffFilter = delta --color-only
 
 [pager]
   blame  = delta
@@ -46,8 +46,9 @@
   # use n and N to move between diff sections
   navigate = true
   true-color = always
-
-[delta "interactive"]
+  syntax-theme = zenburn
+  plus-style = syntax  "#006000"
+  plus-emph-style = syntax "#5f875f"
   keep-plus-minus-markers = false
 
 [gpg]
