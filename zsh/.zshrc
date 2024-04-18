@@ -121,6 +121,19 @@ export NVM_DIR="$HOME/.nvm"
 
 export GPG_TTY=$(tty)
 
+export PATH=/opt/homebrew/bin:\
+/usr/local/bin:\
+/usr/bin:\
+/bin:\
+/usr/sbin:\
+/sbin:\
+/usr/local/share/dotnet:~/.dotnet/tools:\
+/System/Cryptexes/App/usr/bin:\
+/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:\
+/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:\
+/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:\
+$PATH
+
 # setup fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
 
@@ -140,16 +153,3 @@ _fzf_compgen_path() {
 _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
-
-export PATH=/opt/homebrew/bin:\
-/usr/local/bin:\
-/usr/bin:\
-/bin:\
-/usr/sbin:\
-/sbin:\
-/usr/local/share/dotnet:~/.dotnet/tools:\
-/System/Cryptexes/App/usr/bin:\
-/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:\
-/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:\
-/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:\
-$PATH
