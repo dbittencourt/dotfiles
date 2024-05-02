@@ -56,7 +56,7 @@ return {
       keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
       opts.desc = "Restart LSP"
-      keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
+      keymap.set("n", "<leader>rl", ":LspRestart<CR>", opts)
     end
 
     -- Enable snippets-completion (nvim-cmp) and folding (nvim-ufo)
