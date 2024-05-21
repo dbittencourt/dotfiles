@@ -36,6 +36,12 @@ opt.swapfile = false
 opt.spelllang = "en_us"
 opt.spell = true
 
+-- fold configuration
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+
 -- restore session config
 vim.o.sessionoptions =
   "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"

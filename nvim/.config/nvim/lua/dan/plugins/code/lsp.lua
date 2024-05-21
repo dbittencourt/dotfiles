@@ -10,7 +10,7 @@ return {
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local keymap = vim.keymap
 
-    local on_attach = function(_, bufnr)
+    local on_attach = function(client, bufnr)
       local opts = { noremap = true, silent = true, buffer = bufnr }
       -- set keybinds
       opts.desc = "Show LSP references"
@@ -46,17 +46,13 @@ return {
       opts.desc = "Show line diagnostics"
       keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 
-      opts.desc = "Go to previous diagnostic"
-      keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-
-      opts.desc = "Go to next diagnostic"
-      keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-
-      opts.desc = "Show documentation for what is under cursor"
-      keymap.set("n", "K", vim.lsp.buf.hover, opts)
-
       opts.desc = "Restart LSP"
       keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
+
+      -- enable inlay hints introduced in nvim 0.10
+      if client.sever_capabilities.inlayHintProvider then
+        vim.lsp.inlay_hint.enable(true, bufnr)
+      end
     end
 
     -- Enable snippets-completion (nvim-cmp) and folding (nvim-ufo)
