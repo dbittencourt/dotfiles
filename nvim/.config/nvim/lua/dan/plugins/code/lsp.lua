@@ -50,13 +50,9 @@ return {
       keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
 
       -- enable inlay hints introduced in nvim 0.10
-      vim.keymap.set("n", "<leader>dh", function()
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ nil }))
-      end, vim.tbl_extend(
-        "force",
-        opts,
-        { desc = "lsp toggle inlay hints" }
-      ))
+      if client.supports_method("inlayHintProvider") then
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+      end
     end
 
     -- Enable snippets-completion (nvim-cmp) and folding
