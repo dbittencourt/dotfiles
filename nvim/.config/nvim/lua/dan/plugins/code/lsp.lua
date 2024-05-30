@@ -47,7 +47,7 @@ return {
       keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 
       opts.desc = "Restart LSP"
-      keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
+      keymap.set("n", "<leader>lr", ":LspRestart<CR>", opts)
 
       -- enable inlay hints introduced in nvim 0.10
       if client.supports_method("inlayHintProvider") then
