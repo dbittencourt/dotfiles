@@ -11,15 +11,6 @@ return {
     local builtin = require("telescope.builtin")
     local actions = require("telescope.actions")
 
-    local function filenameFirst(_, path)
-      local tail = vim.fs.basename(path)
-      local parent = vim.fs.dirname(path)
-      if parent == "." then
-        return tail
-      end
-      return string.format("%s\t\t%s", tail, parent)
-    end
-
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "TelescopeResults",
       callback = function(ctx)
@@ -32,7 +23,12 @@ return {
 
     telescope.setup({
       defaults = {
-        path_display = filenameFirst,
+        -- display filename followed by path
+        path_display = {
+          filename_first = {
+            reverse_directories = false,
+          },
+        },
 
         -- display prompt and results at the top
         layout_strategy = "horizontal",
