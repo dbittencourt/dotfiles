@@ -8,7 +8,7 @@
   path = .gitconfig-work
 
 [core]
-  edior = nvim
+  editor = nvim
   pager = delta
 	excludesfile = ~/.gitignore
 

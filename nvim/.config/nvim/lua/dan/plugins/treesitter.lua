@@ -25,7 +25,6 @@ return {
         "gitignore",
         "html",
         "lua",
-        "rust",
         "sql",
         "terraform",
         "yaml",

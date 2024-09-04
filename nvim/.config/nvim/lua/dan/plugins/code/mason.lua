@@ -17,7 +17,6 @@ return {
         "html",
         "lua_ls",
         "marksman",
-        "rust_analyzer",
         "tsserver",
       },
 

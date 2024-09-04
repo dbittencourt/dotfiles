@@ -110,14 +110,17 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
 export NVM_DIR="$HOME/.nvm"
-# This loads nvm
+# load nvm in macOS
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  
 # This loads nvm bash_completion
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] &&\
   \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  
+
+# load nvm in linux
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# This loads nvm bash_completion
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  
 
 export GPG_TTY=$(tty)
 
@@ -133,6 +136,8 @@ export PATH=/opt/homebrew/bin:\
 /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:\
 /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:\
 $PATH
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # setup fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
@@ -153,3 +158,10 @@ _fzf_compgen_path() {
 _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
+
+# if this is running under WSL2, it enables the use of physical keys
+export SSH_SK_HELPER="/mnt/c/Program Files/OpenSSH/ssh-sk-helper.exe"
+# This loads nvm bash_completion
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  
+
+export NODE_OPTIONS="--max-old-space-size=8192"
