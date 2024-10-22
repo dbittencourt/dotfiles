@@ -137,7 +137,8 @@ export PATH=/opt/homebrew/bin:\
 /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:\
 $PATH
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# load brew in linux
+[ -s "/home/linuxbrew/.linuxbrew/bin/brew" ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # setup fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
@@ -159,8 +160,6 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
-# if this is running under WSL2, it enables the use of physical keys
-export SSH_SK_HELPER="/mnt/c/Program Files/OpenSSH/ssh-sk-helper.exe"
 # This loads nvm bash_completion
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  
 

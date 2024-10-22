@@ -17,7 +17,7 @@ return {
         "html",
         "lua_ls",
         "marksman",
-        "tsserver",
+        "ts_ls",
       },
 
       -- auto-install configured servers with lspconfig
