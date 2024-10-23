@@ -24,11 +24,7 @@ return {
     telescope.setup({
       defaults = {
         -- display filename followed by path
-        path_display = {
-          filename_first = {
-            reverse_directories = false,
-          },
-        },
+        path_display = { "smart" },
 
         -- display prompt and results at the top
         layout_strategy = "horizontal",
