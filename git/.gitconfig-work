@@ -1,0 +1,8 @@
+#[user]
+  # set your work email here
+  # email = 
+
+#[credential]
+  # uncomment this line if your repo doesn't allow ssh (aka azure devops)
+  # helper = /usr/local/share/gcm-core/git-credential-manager
+
