@@ -1,7 +1,9 @@
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  dependencies = { "echasnovski/mini.nvim" },
   config = function()
+    -- mock nvim-web-devicons to use mini.icons instead
+    require("mini.icons").mock_nvim_web_devicons()
     local lazy_status = require("lazy.status")
     require("lualine").setup({
       options = {

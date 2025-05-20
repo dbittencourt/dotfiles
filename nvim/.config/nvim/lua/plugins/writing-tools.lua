@@ -3,7 +3,7 @@ return {
     "MeanderingProgrammer/render-markdown.nvim",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
+      "echasnovski/mini.nvim",
     },
     ft = { "markdown" },
     config = function()
@@ -32,13 +32,6 @@ return {
 
       require("render-markdown").setup({})
     end,
-  },
-  {
-    "brianhuster/live-preview.nvim",
-    dependencies = {
-      "ibhagwan/fzf-lua",
-    },
-    ft = { "markdown", "adoc", "html", "svg", "svgz" },
   },
   {
     "lervag/vimtex",

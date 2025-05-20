@@ -47,8 +47,6 @@ vim.o.foldlevelstart = 99
 vim.o.sessionoptions =
   "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
--- checkhealth settings
-vim.g.health = { style = "float" }
 -- disable optional language provider health checks
 vim.g.loaded_node_provider = 0
 vim.g.loaded_ruby_provider = 0

@@ -29,37 +29,4 @@ return {
       kanagawa.load("dragon")
     end,
   },
-  -- color highlighter
-  {
-    "catgoose/nvim-colorizer.lua",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("colorizer").setup({
-        user_default_options = {
-          names = false,
-          css = true,
-          css_fn = true,
-          sass = {
-            enable = true,
-            parsers = {
-              "css",
-            },
-          },
-        },
-      })
-    end,
-  },
-  -- set ruler at column 80
-  {
-    "m4xshen/smartcolumn.nvim",
-    opts = {
-      disabled_filetypes = {
-        "help",
-        "lazy",
-        "mason",
-        "lspinfo",
-        "checkhealth",
-      },
-    },
-  },
 }
