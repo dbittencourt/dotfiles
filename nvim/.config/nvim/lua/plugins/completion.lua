@@ -50,7 +50,7 @@ return {
         },
       },
       -- automatically trigger snippets when trigger character is used
-      -- like .
+      -- ps: trigger character is defined by lsps, like . or (
       trigger = {
         show_on_trigger_character = true,
       },
@@ -75,14 +75,23 @@ return {
       },
     },
     cmdline = {
-      keymap = { preset = "enter" },
-      -- completion = {
-      --   menu = { auto_show = true },
-      -- },
+      keymap = {
+        ["<CR>"] = { "accept", "fallback" },
+        ["<Up>"] = {
+          function(cmp)
+            return cmp.select_prev({ auto_insert = false })
+          end,
+          "fallback",
+        },
+        ["<Down>"] = {
+          function(cmp)
+            return cmp.select_next({ auto_insert = false })
+          end,
+          "fallback",
+        },
+      },
     },
     snippets = { preset = "default" },
-    -- experimental signature help support
-    signature = { enabled = true },
   },
   config = function(_, opts)
     local blink = require("blink.cmp")

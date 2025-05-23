@@ -37,6 +37,7 @@ require("lazy").setup("plugins", {
         "tarPlugin",
         "tohtml",
         "tutor",
+        "vimballPlugin",
         "zipPlugin",
       },
     },

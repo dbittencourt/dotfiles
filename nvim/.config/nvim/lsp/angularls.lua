@@ -12,7 +12,6 @@ local cmd = {
   angularls_path .. "/node_modules/@angular/language-server",
 }
 
----@type vim.lsp.Config
 return {
   filetypes = { "ts", "typescript", "htmlangular" },
   cmd = cmd,

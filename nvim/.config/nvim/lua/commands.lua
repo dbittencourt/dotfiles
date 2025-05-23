@@ -34,10 +34,10 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("dan/quick_close", { clear = true }),
-  desc = "Close with <gq>",
+  desc = "Close with <q>",
   pattern = { "help", "man", "qf", "scratch" },
   callback = function(args)
-    vim.keymap.set("n", "gq", "<cmd>quit<cr>", { buffer = args.buf })
+    vim.keymap.set("n", "q", "<cmd>quit<cr>", { buffer = args.buf })
   end,
 })
 

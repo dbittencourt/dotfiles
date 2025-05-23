@@ -2,16 +2,40 @@ local M = {}
 
 local methods = vim.lsp.protocol.Methods
 local function on_attach(client, bufnr)
-  local function keymap(mode, lhs, rhs, desc)
-    vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
+  local function keymap(mode, lhs, rhs, desc, noremap)
+    noremap = noremap or false
+    vim.keymap.set(
+      mode,
+      lhs,
+      rhs,
+      { buffer = bufnr, desc = desc, noremap = noremap }
+    )
   end
-  keymap(
-    "n",
-    "<leader>lr",
-    "<cmd>lua vim.lsp.stop_client(vim.lsp.get_clients())<cr><cmd>edit<cr>",
-    "Restart lsp"
-  )
-  keymap("n", "<leader>rn", vim.lsp.buf.rename, "Smart rename")
+
+  -- default neovim keymaps
+  -- grn: smart rename
+  -- gra: show code actions
+
+  keymap("n", "<leader>lr", function()
+    vim.lsp.stop_client(vim.lsp.get_clients())
+    vim.cmd("edit")
+  end, "Restart lsp")
+
+  -- override neovim default signature keymap to close blink if its open
+  if client:supports_method(methods.textDocument_signatureHelp) then
+    local blink_window = require("blink.cmp.completion.windows.menu")
+    local blink = require("blink.cmp")
+
+    keymap({ "n", "i", "s" }, "<C-S>", function()
+      if blink_window.win:is_open() then
+        blink.hide()
+      end
+
+      vim.lsp.buf.signature_help()
+    end, "Show signature", true)
+  end
+
+  -- diagnostics
   keymap("n", "<leader>d", vim.diagnostic.open_float, "Show line diagnostics")
   keymap(
     "n",
@@ -20,39 +44,34 @@ local function on_attach(client, bufnr)
     "Show buffer diagnostics"
   )
   keymap(
-    { "n", "v" },
-    "<leader>ca",
-    "<cmd>FzfLua lsp_code_actions<cr>",
-    "See available code actions"
+    "n",
+    "<leader>qd",
+    vim.diagnostic.setqflist,
+    "Send diagnostics to quickfix"
   )
+
+  -- code navigation
   keymap("n", "gd", "<cmd>FzfLua lsp_definitions<CR>", "Show lsp definitions")
   keymap("n", "gD", "<cmd>FzfLua lsp_typedefs<CR>", "Show lsp type definitions")
   keymap(
     "n",
-    "gi",
+    "gri",
     "<cmd>FzfLua lsp_implementations<CR>",
     "Show lsp implementations"
   )
-  keymap("n", "gR", "<cmd>FzfLua lsp_references<CR>", "Show lsp references")
+  keymap("n", "grr", "<cmd>FzfLua lsp_references<CR>", "Show lsp references")
   keymap(
     "n",
-    "gC",
+    "grc",
     "<cmd>FzfLua lsp_incoming_calls<CR>",
     "Show lsp incoming calls"
   )
-
-  if client:supports_method(methods.textDocument_signatureHelp) then
-    local blink_window = require("blink.cmp.completion.windows.menu")
-    local blink = require("blink.cmp")
-
-    keymap("i", "<C-k>", function()
-      if blink_window.win:is_open() then
-        blink.hide()
-      end
-
-      vim.lsp.buf.signature_help()
-    end, "Show signature")
-  end
+  keymap(
+    "n",
+    "grs",
+    "<cmd>FzfLua lsp_document_symbols<cr>",
+    "Show document symbols"
+  )
 
   if client:supports_method(methods.textDocument_documentHighlight) then
     local group =
@@ -76,18 +95,23 @@ end
 vim.g.inlay_hints = false
 
 -- set diagnostic symbols in the sign column
+local diagnostic_icons = {
+  [vim.diagnostic.severity.ERROR] = " ",
+  [vim.diagnostic.severity.WARN] = " ",
+  [vim.diagnostic.severity.INFO] = " ",
+  [vim.diagnostic.severity.HINT] = " ",
+}
 vim.diagnostic.config({
+  float = {
+    source = "if_many",
+  },
   signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = " ",
-      [vim.diagnostic.severity.WARN] = " ",
-      [vim.diagnostic.severity.INFO] = " ",
-      [vim.diagnostic.severity.HINT] = " ",
-    },
+    text = diagnostic_icons,
   },
 })
 
 -- update mappings when registering dynamic capabilities
+-- borrowed from https://github.com/MariaSolOs/dotfiles
 local register_capability = vim.lsp.handlers[methods.client_registerCapability]
 vim.lsp.handlers[methods.client_registerCapability] = function(err, res, ctx)
   local client = vim.lsp.get_client_by_id(ctx.client_id)
