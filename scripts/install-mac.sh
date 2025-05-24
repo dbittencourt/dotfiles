@@ -64,7 +64,7 @@ cd "$HOME/dotfiles" || {
 }
 
 # Array of configurations to stow
-configs=("alacritty" "bat" "git" "nvim" "yazi")
+configs=("alacritty" "bat" "git" "nvim" "yazi" "btop")
 for config in "${configs[@]}"; do
   print_status "Stowing $config configuration..."
   stow "$config" || {

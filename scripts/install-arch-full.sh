@@ -101,6 +101,7 @@ configs=(
   "qt6ct"
   "dunst"
   "MangoHud"
+  "btop"
 )
 for config in "${configs[@]}"; do
   print_status "Stowing $config configuration..."
