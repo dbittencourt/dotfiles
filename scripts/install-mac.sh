@@ -38,7 +38,8 @@ print_success "Brew installed"
 
 print_status "Installing cli tools..."
 brew install tree wget curlie stow bat git git-delta tmux neovim gpg openssh \
-  libfido2 ykman pinentry-mac nvm glow zsh fzf fd rg mas wireguard-go yazi btop
+  libfido2 ykman pinentry-mac nvm glow zsh fzf fd rg mas wireguard-go yazi \
+  dotnet btop
 print_success "cli tools installed"
 
 print_status "Installing gui apps..."
@@ -103,6 +104,12 @@ stow zsh || {
   print_error "Failed to stow zsh configuration"
   exit 1
 }
+
+# install node and npm
+nvm install 18.20
+
+# install lps, linters, daps, etc
+bash ./install-lsps.sh
 
 print_status "Setting up macOS preferences..."
 # Disable the "Are you sure you want to open this application?" dialog

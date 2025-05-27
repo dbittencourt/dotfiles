@@ -1,37 +1,3 @@
-local ensure_installed = {
-  "angular-language-server",
-  "html-lsp",
-  "css-lsp",
-  "some-sass-language-server",
-  "typescript-language-server",
-  "eslint-lsp", -- js/ts linter
-  "prettier", -- js/ts formatter
-  "gopls", -- go lsp
-  "golangci-lint",
-  "lua-language-server",
-  "stylua", -- lua formatter
-  "marksman", -- markdown linter
-  "ruff", -- python lsp
-  "roslyn", -- dotnet lsp
-  "csharpier", -- c# formatter
-  "netcoredbg", -- dotnet debugger
-  "shfmt", -- shell script formatter
-  "shellcheck", -- shell script linter
-}
-
-vim.api.nvim_create_autocmd("VimEnter", {
-  group = vim.api.nvim_create_augroup("dan/mason_install", { clear = true }),
-  desc = "Run MasonInstall for all lsps/formatters/daps that aren't installed",
-  callback = function()
-    local registry = require("mason-registry")
-    for _, server in ipairs(ensure_installed) do
-      if not registry.is_installed(server) then
-        vim.cmd("MasonInstall " .. server)
-      end
-    end
-  end,
-})
-
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("dan/quick_close", { clear = true }),
   desc = "Close with <q>",

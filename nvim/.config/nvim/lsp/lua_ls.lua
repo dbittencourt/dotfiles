@@ -1,4 +1,4 @@
--- lua config, install with:
+-- install with:
 -- mac: brew install lua-language-server
 -- arch: yay -S lua-language-server
 

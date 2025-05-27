@@ -3,21 +3,6 @@ return {
   { "nvim-lua/plenary.nvim", lazy = true },
   -- tmux integration
   { "christoomey/vim-tmux-navigator" },
-  { -- install lsps/formatters/linters/daps
-    "mason-org/mason.nvim",
-    config = function()
-      require("mason").setup({
-        registries = {
-          "github:mason-org/mason-registry",
-          "github:Crashdummyy/mason-registry",
-        },
-        ui = {
-          border = "rounded",
-        },
-      })
-    end,
-  },
-
   { -- set ruler at column 80
     "m4xshen/smartcolumn.nvim",
     opts = {

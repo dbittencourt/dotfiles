@@ -16,7 +16,6 @@ return {
         yaml = { "prettier" },
         markdown = { "prettier" },
         lua = { "stylua" },
-        go = { "goimports", "gofmt" },
         python = { "ruff" },
         bash = { "shfmt", "shellcheck" },
         zsh = { "shfmt", "shellcheck" },

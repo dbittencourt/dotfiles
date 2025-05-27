@@ -1,4 +1,3 @@
--- sass config
 -- install with: npm i -g some-sass-language-server
 
 return {

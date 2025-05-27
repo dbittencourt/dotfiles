@@ -1,5 +1,7 @@
--- markdown config
--- Pre-built binaries can be downloaded from https://github.com/artempyanykh/marksman/releases
+-- install with:
+-- mac: brew install marksman
+-- arch: yay -S marksman
+
 local bin_name = "marksman"
 local cmd = { bin_name, "server" }
 

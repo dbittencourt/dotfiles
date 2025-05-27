@@ -1,4 +1,6 @@
--- install with: pip install ruff
+-- install with:
+-- mac: brew install ruff
+-- arch: yay -S ruff
 
 return {
   cmd = { "ruff", "server" },
