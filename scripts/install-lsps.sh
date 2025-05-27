@@ -6,7 +6,7 @@ npm install -g \
   vscode-langservers-extracted \
   some-sass-language-server \
   @vtsls/language-server \
-  @angular/language-server@15.2.10 \
+  @angular/language-server@16.0.0 \
   bash-language-server \
   prettier
 
@@ -32,8 +32,8 @@ fi
 
 echo "Installing dotnet tools"
 dotnet tool install --global csharpier
-bash ./install-roslyn.sh
-bash ./install-netcoredbg.sh
+bash ~/dotfiles/scripts/install-roslyn.sh
+bash ~/dotfiles/scripts/install-netcoredbg.sh
 
 echo "All tools installed succesfully"
 exit 0

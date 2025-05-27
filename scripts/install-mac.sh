@@ -109,7 +109,7 @@ stow zsh || {
 nvm install 18.20
 
 # install lps, linters, daps, etc
-bash ./install-lsps.sh
+bash ~/dotfiles/scripts/install-lsps.sh
 
 print_status "Setting up macOS preferences..."
 # Disable the "Are you sure you want to open this application?" dialog

@@ -156,6 +156,6 @@ stow zsh || {
 nvm install 18.20
 
 # install lps, linters, daps, etc
-bash ./install-lsps.sh
+bash ~/dotfiles/scripts/install-lsps.sh
 
 print_success "Installation and configuration completed successfully. Please reboot the system."
