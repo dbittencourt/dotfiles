@@ -35,38 +35,44 @@ return {
     keymap.set(
       "n",
       "<leader>ff",
-      "<cmd>FzfLua files<CR>",
+      "<cmd>FzfLua files<cr>",
       { desc = "Fuzzy find files in cwd" }
     )
     keymap.set(
       "n",
       "<leader>fb",
-      "<cmd>FzfLua buffers<CR>",
+      "<cmd>FzfLua buffers<cr>",
       { desc = "Show open buffers" }
     )
     keymap.set(
       "n",
       "<leader>fr",
-      "<cmd>FzfLua oldfiles<CR>",
+      "<cmd>FzfLua oldfiles<cr>",
       { desc = "Fuzzy find recent files" }
     )
     keymap.set(
       "n",
       "<leader>fs",
-      "<cmd>FzfLua live_grep<CR>",
+      "<cmd>FzfLua live_grep<cr>",
       { desc = "Search string in cwd" }
     )
     keymap.set(
       "n",
       "<leader>fc",
-      "<cmd>FzfLua grep_cword<CR>",
+      "<cmd>FzfLua grep_cword<cr>",
       { desc = "Search word under cursor in cwd" }
     )
     keymap.set(
       "n",
       "<leader>fl",
-      "<cmd>FzfLua blines<CR>",
+      "<cmd>FzfLua blines<cr>",
       { desc = "Fuzzy find in current buffer" }
+    )
+    keymap.set(
+      "v",
+      "<leader>fv",
+      "<cmd>FzfLua grep_visual<cr>",
+      { desc = "Search selection in cwd" }
     )
   end,
 }

@@ -3,7 +3,6 @@ set -e
 
 NPM_PACKAGES=(
   vscode-langservers-extracted
-  some-sass-language-server
   @vtsls/language-server
   @angular/language-server@16.0.0
   bash-language-server
