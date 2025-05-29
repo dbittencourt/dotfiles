@@ -27,6 +27,7 @@ else
 fi
 
 echo -e "\nInstalling dotnet lsp/dap/tools..."
+curl -sSL https://aka.ms/install-artifacts-credprovider.sh | bash
 dotnet tool install --global csharpier
 bash ~/dotfiles/scripts/install-roslyn.sh
 bash ~/dotfiles/scripts/install-netcoredbg.sh

@@ -1,6 +1,6 @@
 -- install with:
 -- mac: brew install llvm
--- Arch: pacman -S clang
+-- arch: pacman -S clang
 
 return {
   cmd = {
@@ -12,5 +12,5 @@ return {
     "--function-arg-placeholders=false",
   },
   filetypes = { "c", "cpp" },
-  root_markers = { ".clangd" },
+  root_markers = { ".clangd", "compile_commands.json", ".git" },
 }

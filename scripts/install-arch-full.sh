@@ -33,7 +33,7 @@ sudo pacman -S --needed --noconfirm git base-devel linux-firmware amd-ucode \
   gnome-keyring seahorse \
   zsh tmux neovim stow ripgrep fd fzf bat unzip tree less man wget git-delta \
   yazi btop curlie wireguard-tools fastfetch tree-sitter-cli rclone \
-  rust dotnet-sdk go \
+  rust dotnet-sdk go cmake clang \
   texlive-luatex \
   xorg-font-util xorg-fonts-misc xorg-xinit noto-fonts noto-fonts-emoji \
   ttf-font-awesome ttf-nerd-fonts-symbols ttf-jetbrains-mono-nerd \

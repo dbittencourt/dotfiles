@@ -29,8 +29,10 @@ vim.o.clipboard = "unnamedplus"
 -- save undo history
 vim.o.undofile = true
 
-vim.o.splitright = true -- split vertical window to the right
-vim.o.splitbelow = true -- split horizontal window to the bottom
+-- split vertical window to the right
+vim.o.splitright = true
+-- split horizontal window to the bottom
+vim.o.splitbelow = true
 
 -- turn off swapfile
 vim.o.swapfile = false
@@ -45,7 +47,7 @@ vim.o.foldlevelstart = 99
 
 -- restore session config
 vim.o.sessionoptions =
-  "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+  "blank,buffers,curdir,folds,tabpages,winsize,winpos,terminal,localoptions"
 
 -- time required to trigger CursorHold
 vim.o.updatetime = 1000

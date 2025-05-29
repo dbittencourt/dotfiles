@@ -40,7 +40,7 @@ local function on_attach(client, bufnr)
   keymap(
     "n",
     "<leader>D",
-    "<cmd>FzfLua diagnostics_document<CR>",
+    "<cmd>FzfLua diagnostics_document<cr>",
     "Show buffer diagnostics"
   )
   keymap(
@@ -51,19 +51,19 @@ local function on_attach(client, bufnr)
   )
 
   -- code navigation
-  keymap("n", "gd", "<cmd>FzfLua lsp_definitions<CR>", "Show lsp definitions")
-  keymap("n", "gD", "<cmd>FzfLua lsp_typedefs<CR>", "Show lsp type definitions")
+  keymap("n", "gd", "<cmd>FzfLua lsp_definitions<cr>", "Show lsp definitions")
+  keymap("n", "gD", "<cmd>FzfLua lsp_typedefs<cr>", "Show lsp type definitions")
   keymap(
     "n",
     "gri",
-    "<cmd>FzfLua lsp_implementations<CR>",
+    "<cmd>FzfLua lsp_implementations<cr>",
     "Show lsp implementations"
   )
-  keymap("n", "grr", "<cmd>FzfLua lsp_references<CR>", "Show lsp references")
+  keymap("n", "grr", "<cmd>FzfLua lsp_references<cr>", "Show lsp references")
   keymap(
     "n",
     "grc",
-    "<cmd>FzfLua lsp_incoming_calls<CR>",
+    "<cmd>FzfLua lsp_incoming_calls<cr>",
     "Show lsp incoming calls"
   )
   keymap(

@@ -60,27 +60,19 @@ return {
           enable = true,
           lookahead = true,
           keymaps = {
-            ["a="] = {
+            ["aa"] = {
               query = "@assignment.outer",
               desc = "Select outer part of an assignment",
             },
-            ["i="] = {
+            ["ia"] = {
               query = "@assignment.inner",
               desc = "Select inner part of an assignment",
             },
-            ["l="] = {
-              query = "@assignment.lhs",
-              desc = "Select left hand side of an assignment",
-            },
-            ["r="] = {
-              query = "@assignment.rhs",
-              desc = "Select right hand side of an assignment",
-            },
-            ["aa"] = {
+            ["ap"] = {
               query = "@parameter.outer",
               desc = "Select outer part of a parameter/argument",
             },
-            ["ia"] = {
+            ["ip"] = {
               query = "@parameter.inner",
               desc = "Select inner part of a parameter/argument",
             },
@@ -132,7 +124,7 @@ return {
             -- swap parameters/argument with next
             ["<leader>na"] = "@parameter.inner",
             -- swap object property with next
-            ["<leader>n:"] = "@property.outer",
+            ["<leader>np"] = "@property.outer",
             -- swap function with next
             ["<leader>nm"] = "@function.outer",
           },
@@ -140,7 +132,7 @@ return {
             -- swap parameters/argument with prev
             ["<leader>pa"] = "@parameter.inner",
             -- swap object property with prev
-            ["<leader>p:"] = "@property.outer",
+            ["<leader>pp"] = "@property.outer",
             -- swap function with previous
             ["<leader>pm"] = "@function.outer",
           },
