@@ -22,6 +22,8 @@ if [[ "$os_type" == "Linux" ]]; then
 elif [[ "$os_type" == "Darwin" ]]; then
   echo "Detected macOS. Using brew to install packages..."
   brew install "${PACKAGES[@]}"
+  # clang-format doesn't ship with clang in homebrew package
+  brew install clang-format
 else
   echo "Warning: Unsupported OS '$os_type'. Skipping OS-specific packages."
 fi

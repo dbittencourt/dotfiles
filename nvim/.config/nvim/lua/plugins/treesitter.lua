@@ -34,8 +34,9 @@ return {
         "vimdoc", -- fix errors when using :help <anything>
         "python",
         "diff",
-        "go",
         "c_sharp",
+        "c",
+        "cpp",
       },
       incremental_selection = {
         enable = true,

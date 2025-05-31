@@ -21,20 +21,6 @@ local function on_attach(client, bufnr)
     vim.cmd("edit")
   end, "Restart lsp")
 
-  -- override neovim default signature keymap to close blink if its open
-  if client:supports_method(methods.textDocument_signatureHelp) then
-    local blink_window = require("blink.cmp.completion.windows.menu")
-    local blink = require("blink.cmp")
-
-    keymap({ "n", "i", "s" }, "<C-S>", function()
-      if blink_window.win:is_open() then
-        blink.hide()
-      end
-
-      vim.lsp.buf.signature_help()
-    end, "Show signature", true)
-  end
-
   -- diagnostics
   keymap("n", "<leader>d", vim.diagnostic.open_float, "Show line diagnostics")
   keymap(
@@ -72,6 +58,17 @@ local function on_attach(client, bufnr)
     "<cmd>FzfLua lsp_document_symbols<cr>",
     "Show document symbols"
   )
+
+  -- override neovim default signature keymap to close blink if its open
+  -- borrowed from https://github.com/MariaSolOs/dotfiles
+  if client:supports_method(methods.textDocument_signatureHelp) then
+    keymap({ "n", "i", "s" }, "<C-S>", function()
+      if require("blink.cmp.completion.windows.menu").win:is_open() then
+        require("blink.cmp").hide()
+      end
+      vim.lsp.buf.signature_help()
+    end, "Show signature", true)
+  end
 
   if client:supports_method(methods.textDocument_documentHighlight) then
     local group =

@@ -21,6 +21,8 @@ return {
         zsh = { "shfmt", "shellcheck" },
         sh = { "shfmt", "shellcheck" },
         cs = { "csharpier" },
+        c = { "clang-format" },
+        cpp = { "clang-format" },
       },
       format_on_save = {
         lsp_fallback = true,
