@@ -42,7 +42,7 @@ sudo pacman -S --needed --noconfirm git base-devel linux-firmware amd-ucode \
   alacritty thunar gvfs chromium transmission-gtk discord qalculate-gtk \
   celluloid libreoffice-still calibre darktable zathura-pdf-mupdf \
   wine mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon libva-mesa-driver \
-  libva-utils steam gamemode gamescope lact radeontop \
+  libva-utils steam gamemode gamescope lact radeontop lutris \
   lib32-xcb-util-keysyms \
   qemu-full qemu-img libvirt virt-install virt-manager virt-viewer edk2-ovmf \
   dnsmasq swtpm guestfs-tools libosinfo tuned
