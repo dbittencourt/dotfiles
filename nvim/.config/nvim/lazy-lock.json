@@ -9,17 +9,17 @@
   "kanagawa.nvim": { "branch": "master", "commit": "debe91547d7fb1eef34ce26a5106f277fbfdd109" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "lualine.nvim": { "branch": "master", "commit": "0c6cca9f2c63dadeb9225c45bc92bb95a151d4af" },
-  "mini.nvim": { "branch": "main", "commit": "c39f7f506939f065d0d1af237e2ea3f252edd3d4" },
+  "mini.nvim": { "branch": "main", "commit": "e32271c87c02ae0a875c5ea7942081318a075969" },
   "nui.nvim": { "branch": "main", "commit": "7cd18e73cfbd70e1546931b7268b3eebaeff9391" },
   "nvim-dap": { "branch": "master", "commit": "b0f983507e3702f073bfe1516846e58b56d4e42f" },
   "nvim-treesitter": { "branch": "master", "commit": "42fc28ba918343ebfd5565147a42a26580579482" },
-  "nvim-treesitter-context": { "branch": "master", "commit": "ed1cf48d5af252248c55f50b9427e8ce883a2c6b" },
+  "nvim-treesitter-context": { "branch": "master", "commit": "464a443b5a6657f39772b20baa95d02ffe97b268" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "0f051e9813a36481f48ca1f833897210dbcfffde" },
   "nvim-ts-autotag": { "branch": "main", "commit": "a1d526af391f6aebb25a8795cbc05351ed3620b5" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
-  "render-markdown.nvim": { "branch": "main", "commit": "8debb17aab2fbbf3b341e46ac032d0a6f937d8c3" },
+  "render-markdown.nvim": { "branch": "main", "commit": "dd620561843d5a62c917fffe77f2923c965d12c7" },
   "smartcolumn.nvim": { "branch": "main", "commit": "92f3773af80d674f1eb61e112dca79e2fa449fd1" },
   "vim-fugitive": { "branch": "master", "commit": "4a745ea72fa93bb15dd077109afbb3d1809383f2" },
-  "vim-tmux-navigator": { "branch": "master", "commit": "96da8e10ce83b754f442c3e25d1bf74451d220f2" },
-  "vimtex": { "branch": "master", "commit": "c50ba2f90ba8bd22fe607a799f74943c708a25c9" }
+  "vim-tmux-navigator": { "branch": "master", "commit": "97e58f2b3b4f8fd30ce149302f10202f363cc361" },
+  "vimtex": { "branch": "master", "commit": "f20b11458e97250d690ce0dc8670759b838cace9" }
 }
