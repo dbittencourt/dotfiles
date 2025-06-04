@@ -25,5 +25,5 @@ map.set(
 )
 
 -- selection helpers
-map.set("n", "<leader>ya", "ggvG$y", { desc = "Copy buffer content" })
-map.set("n", "<leader>yd", "ggvG$d", { desc = "Delete buffer content" })
+map.set("n", "<leader>ya", "0ggvG$y", { desc = "Copy buffer content" })
+map.set("n", "<leader>yd", "0ggvG$d", { desc = "Delete buffer content" })
