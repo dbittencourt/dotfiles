@@ -47,10 +47,6 @@ return {
       -- text manipulation around selection
       require("mini.surround").setup()
 
-      -- I use mini diff to format only the code I changed
-      -- TODO: not a fan of the ui changes, maybe I can disable them
-      require("mini.diff").setup()
-
       -- automatic pair completion
       require("mini.pairs").setup({
         modes = { insert = true, command = true, terminal = false },
