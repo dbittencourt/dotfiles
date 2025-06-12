@@ -31,6 +31,8 @@ return {
         cs = { "csharpier" },
         c = { "clang-format" },
         cpp = { "clang-format" },
+        sql = { "sql_formatter" },
+        pgsql = { "sql_formatter" },
       },
       formatters = {
         csharpier = {
@@ -38,6 +40,11 @@ return {
           args = { "format", "$FILENAME" },
           -- csharpier expects a file path argument rather than stdin
           stdin = false,
+        },
+        sql_formatter = {
+          command = "sql-formatter",
+          args = { "--language", "tsql" },
+          stdin = true,
         },
       },
       format_on_save = function()

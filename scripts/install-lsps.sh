@@ -7,6 +7,7 @@ NPM_PACKAGES=(
   @angular/language-server@16.0.0
   bash-language-server
   prettier
+  sql-formatter
 )
 echo "Installing some packages globally with npm..."
 echo "Packages: ${NPM_PACKAGES[*]}"
@@ -19,6 +20,7 @@ os_type=$(uname -s)
 if [[ "$os_type" == "Linux" ]]; then
   echo "Detected Linux. Using yay to install packages..."
   yay -S --noconfirm --needed "${PACKAGES[@]}"
+
 elif [[ "$os_type" == "Darwin" ]]; then
   echo "Detected macOS. Using brew to install packages..."
   brew install "${PACKAGES[@]}"
