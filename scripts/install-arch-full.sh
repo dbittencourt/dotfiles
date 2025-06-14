@@ -65,10 +65,13 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 curl -fsSL https://raw.githubusercontent.com/AdguardTeam/AdGuardCLI/nightly/install.sh | sh -s – -v
 
 print_status "Enabling services..."
-sudo systemctl enable bluetooth.service
-sudo systemctl start bluetooth.service
+sudo systemctl enable --now bluetooth.service
 sudo systemctl enable --now input-remapper
-sudo systemctl enable libvirtd.service
+# smart card daemon (yubikey)
+sudo systemctl enable --now pcscd.service
+
+# virtual machine services
+sudo systemctl enable --now libvirtd.service
 sudo systemctl enable --now tuned.service
 sudo tuned-adm profile virtual-host
 sudo usermod -aG libvirt "$USER"
@@ -77,9 +80,6 @@ sudo setfacl -R -m "u:${USER}:rwX" /var/lib/libvirt/images/
 sudo setfacl -m "d:u:${USER}:rwx" /var/lib/libvirt/images/
 sudo virsh net-autostart default
 sudo virsh net-start default
-
-print_status "Enabling smart card deamon..."
-sudo systemctl enable pcscd.service
 
 print_status "Setting up dotfiles..."
 cd "$HOME/dotfiles" || exit 1
