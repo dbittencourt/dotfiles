@@ -46,8 +46,8 @@ print_status "Installing gui apps..."
 brew install --cask 1password adguard affinity-designer affinity-photo \
   affinity-publisher airflow alacritty anki bettermouse calibre darktable \
   discord freedom fujifilm-x-raw-studio libreoffice lulu obs pearcleaner \
-  phoenix-slides raycast the-unarchiver tidal transmission vlc \
-  yubico-authenticator yubico-yubikey-manager whatsapp
+  phoenix-slides raycast the-unarchiver tidal transmission vlc whatsapp \
+  yubico-authenticator yubico-yubikey-manager font-jetbrains-mono-nerd-font
 brew cleanup
 print_status "gui apps installed"
 
@@ -55,7 +55,6 @@ print_status "Installing Apple Store apps..."
 mas install 1569813296 # 1Password for Safari
 mas install 424390742  # Compressor
 mas install 424389933  # Final Cut Pro
-mas install 1274495053 # Microsoft To Do
 print_success "Apple Store apps installed"
 
 print_status "Settint up dotfiles..."
@@ -64,7 +63,6 @@ cd "$HOME/dotfiles" || {
   exit 1
 }
 
-# Array of configurations to stow
 configs=("alacritty" "bat" "git" "nvim" "yazi" "btop")
 for config in "${configs[@]}"; do
   print_status "Stowing $config configuration..."
@@ -105,6 +103,9 @@ stow zsh || {
   exit 1
 }
 
+# update env variables
+source ~/.zshrc
+
 # install node and npm
 nvm install 18.20
 
@@ -112,15 +113,27 @@ nvm install 18.20
 bash ~/dotfiles/scripts/install-lsps.sh
 
 print_status "Setting up macOS preferences..."
-# Disable the "Are you sure you want to open this application?" dialog
+
+defaults write -globalDomain AppleInterfaceStyle Dark
+# disable the "Are you sure you want to open this application?" dialog
 defaults write com.apple.LaunchServices LSQuarantine -bool false
+# disable annoying siri
+defaults write com.apple.Siri StatusMenuVisible -bool false
+sudo defaults write /Library/Preferences/com.apple.Siri.plist DisableSiri -bool true
+# leave Bluetooth always visible
 defaults write com.apple.controlcenter "NSStatusItem Visible Bluetooth" -bool true
+
+# configure dock
 defaults write com.apple.dock tilesize -int 16
 defaults write com.apple.dock magnification -bool true
 defaults write com.apple.dock largesize -float 80
 defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock persistent-apps -array
+defaults write com.apple.dock show-recents -bool false
+
+# configure spotlight
 defaults write com.apple.spotlight SiriSuggestionsEnabled -bool false
-defaults write -globalDomain AppleInterfaceStyle Dark
+
 # Set the key repeat rate (lower values result in a faster rate)
 defaults write NSGlobalDomain KeyRepeat -int 1
 # Set the initial key repeat delay (lower value means a shorter delay before repeating)
@@ -135,7 +148,5 @@ killall ControlCenter
 killall Dock
 killall Finder
 killall SystemUIServer
-# todo: cleanup
-rm ~/.zprofile
 
 print_success "Installation and configuration completed successfully. Please reboot the system."
