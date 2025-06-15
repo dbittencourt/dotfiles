@@ -38,8 +38,7 @@ print_success "Brew installed"
 
 print_status "Installing cli tools..."
 brew install tree wget curlie stow bat git git-delta tmux neovim gpg openssh \
-  libfido2 ykman pinentry-mac nvm glow zsh fzf fd rg mas wireguard-go yazi \
-  dotnet btop
+  libfido2 ykman pinentry-mac nvm glow zsh fzf fd rg mas yazi dotnet btop
 print_success "cli tools installed"
 
 print_status "Installing gui apps..."
@@ -55,6 +54,7 @@ print_status "Installing Apple Store apps..."
 mas install 1569813296 # 1Password for Safari
 mas install 424390742  # Compressor
 mas install 424389933  # Final Cut Pro
+mas install 1451685025 # Wireguard gui
 print_success "Apple Store apps installed"
 
 print_status "Settint up dotfiles..."
@@ -122,7 +122,6 @@ defaults write com.apple.Siri StatusMenuVisible -bool false
 sudo defaults write /Library/Preferences/com.apple.Siri.plist DisableSiri -bool true
 # leave Bluetooth always visible
 defaults write com.apple.controlcenter "NSStatusItem Visible Bluetooth" -bool true
-
 # configure dock
 defaults write com.apple.dock tilesize -int 16
 defaults write com.apple.dock magnification -bool true
@@ -130,10 +129,10 @@ defaults write com.apple.dock largesize -float 80
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock persistent-apps -array
 defaults write com.apple.dock show-recents -bool false
-
 # configure spotlight
 defaults write com.apple.spotlight SiriSuggestionsEnabled -bool false
-
+# set list as default view for finder
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 # Set the key repeat rate (lower values result in a faster rate)
 defaults write NSGlobalDomain KeyRepeat -int 1
 # Set the initial key repeat delay (lower value means a shorter delay before repeating)
