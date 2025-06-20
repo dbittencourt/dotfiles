@@ -8,7 +8,6 @@ return {
   opts = {
     keymap = {
       preset = "enter",
-      ["<C-y>"] = { "select_and_accept" },
     },
     appearance = {
       use_nvim_cmp_as_default = false,
@@ -77,18 +76,6 @@ return {
     cmdline = {
       keymap = {
         ["<CR>"] = { "accept", "fallback" },
-        ["<Up>"] = {
-          function(cmp)
-            return cmp.select_prev({ auto_insert = false })
-          end,
-          "fallback",
-        },
-        ["<Down>"] = {
-          function(cmp)
-            return cmp.select_next({ auto_insert = false })
-          end,
-          "fallback",
-        },
       },
     },
     snippets = { preset = "default" },

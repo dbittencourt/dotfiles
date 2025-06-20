@@ -57,24 +57,36 @@ return {
         -- skip autopair when next character is closing pair
         -- and there are more closing pairs than opening pairs
         skip_unbalanced = true,
-        -- better deal with markdown code blocks
+        -- deals better with markdown code blocks
         markdown = true,
       })
 
       -- neovim session management
-      require("mini.sessions").setup()
-      vim.keymap.set(
-        "n",
-        "<leader>ss",
-        "<cmd>lua MiniSessions.write('session')<cr>",
-        { desc = "Save session for auto session root dir" }
-      )
-      vim.keymap.set(
-        "n",
-        "<leader>rs",
-        "<cmd>lua MiniSessions.read('session')<cr>",
-        { desc = "Restore session for cwd" }
-      )
+      local sessions = require("mini.sessions")
+      sessions.setup()
+      local function session_name()
+        local name = vim.fn.getcwd():gsub("/", "%%2F") .. ".vim"
+        return name
+      end
+      local function session_path()
+        local session_dir = sessions.config.directory
+          or (vim.fn.stdpath("data") .. "/session")
+        return session_dir .. "/" .. session_name()
+      end
+
+      vim.keymap.set("n", "<leader>ss", function()
+        sessions.write(session_name())
+      end, { desc = "Save session for current directory" })
+      vim.keymap.set("n", "<leader>rs", function()
+        if vim.loop.fs_stat(session_path()) then
+          sessions.read(session_name())
+        else
+          vim.notify(
+            "Session not found for current directory.",
+            vim.log.levels.WARN
+          )
+        end
+      end, { desc = "Restore session for current directory" })
 
       -- file explorer
       local files = require("mini.files")

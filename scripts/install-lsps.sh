@@ -31,10 +31,18 @@ else
 fi
 
 echo -e "\nInstalling dotnet lsp/dap/tools..."
-curl -sSL https://aka.ms/install-artifacts-credprovider.sh | bash
-dotnet tool install --global csharpier
+if [ -f "$HOME/.nuget/plugins/netcore/CredentialProvider.Microsoft/CredentialProvider.Microsoft.dll" ]; then
+  echo -e "Azure Artifacts Credential Provider is already installed."
+else
+  curl -sSL https://aka.ms/install-artifacts-credprovider.sh | bash
+fi
+if dotnet tool list -g | grep -q csharpier; then
+  echo -e "csharpier is already installed."
+else
+  dotnet tool install --global csharpier
+fi
 bash ~/dotfiles/scripts/install-roslyn.sh
 bash ~/dotfiles/scripts/install-netcoredbg.sh
 
-echo -e "\nAll tools installed succesfully"
+echo -e "\nAll tools installed succesfully."
 exit 0
