@@ -1,12 +1,11 @@
 #!/bin/bash
 
-# Colors for pretty output
+# colors for pretty output
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-# Function to print colored status messages
 print_status() {
   echo -e "${BLUE}[*]${NC} $1"
 }
@@ -134,12 +133,12 @@ defaults write com.apple.dock show-recents -bool false
 defaults write com.apple.spotlight SiriSuggestionsEnabled -bool false
 # set list as default view for finder
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
-# Set the key repeat rate (lower values result in a faster rate)
+# set the key repeat rate (lower values result in a faster rate)
 defaults write NSGlobalDomain KeyRepeat -int 1
-# Set the initial key repeat delay (lower value means a shorter delay before repeating)
+# set the initial key repeat delay (lower value means a shorter delay before repeating)
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-# This command configures macOS to use function keys as standard F1, F2, etc
+# this command configures macOS to use function keys as standard F1, F2, etc
 defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 

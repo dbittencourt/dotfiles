@@ -1,12 +1,11 @@
 #!/bin/bash
 
-# Colors for pretty output
+# colors for pretty output
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-# Function to print colored status messages
 print_status() {
   echo -e "${BLUE}[*]${NC} $1"
 }
@@ -35,7 +34,7 @@ sudo pacman -S --needed --noconfirm git base-devel \
 print_status "Installing nvm..."
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
-# Array of configurations to stow
+# array of configurations to stow
 configs=("bat" "git" "nvim" "yazi")
 for config in "${configs[@]}"; do
   print_status "Stowing $config configuration..."
@@ -48,11 +47,9 @@ done
 # install yazi kanagawa theme
 ya pack -a dangooddd/kanagawa
 
-# Build bat cache
 print_status "Building bat cache..."
 bat cache --build || print_error "Failed to build bat cache"
 
-# Setup tmux
 print_status "Setting up tmux..."
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || {
   print_error "Failed to clone tmux plugin manager"
@@ -63,7 +60,6 @@ stow tmux || {
   exit 1
 }
 
-# Setup zsh
 print_status "Setting up zsh..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || {
   print_error "Failed to install Oh My Zsh"

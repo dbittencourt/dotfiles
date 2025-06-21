@@ -1,12 +1,11 @@
 #!/bin/bash
 
-# Colors for pretty output
+# colors for pretty output
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-# Function to print colored status messages
 print_status() {
   echo -e "${BLUE}[*]${NC} $1"
 }
@@ -61,7 +60,7 @@ yay -S --noconfirm --needed hyprshot hyprpicker-git tofi 1password brave-bin \
 print_status "Installing nvm..."
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
-#  install adguard
+# install adguard
 curl -fsSL https://raw.githubusercontent.com/AdguardTeam/AdGuardCLI/nightly/install.sh | sh -s – -v
 
 print_status "Enabling services..."
@@ -84,7 +83,6 @@ sudo virsh net-start default
 print_status "Setting up dotfiles..."
 cd "$HOME/dotfiles" || exit 1
 
-# Array of configurations to stow
 configs=(
   "alacritty"
   "bat"
@@ -114,11 +112,9 @@ done
 # install yazi kanagawa theme
 ya pack -a dangooddd/kanagawa
 
-# Build bat cache
 print_status "Building bat cache..."
 bat cache --build || print_error "Failed to build bat cache"
 
-# Setup tmux
 print_status "Setting up tmux..."
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || {
   print_error "Failed to clone tmux plugin manager"
@@ -129,7 +125,6 @@ stow tmux || {
   exit 1
 }
 
-# Setup zsh
 print_status "Setting up zsh..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || {
   print_error "Failed to install Oh My Zsh"
@@ -141,7 +136,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/
 git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions" 2>/dev/null || true
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k" 2>/dev/null || true
 
-# Change default shell to zsh
+# change default shell to zsh
 if [ "$SHELL" != "$(which zsh)" ]; then
   print_status "Changing default shell to zsh..."
   chsh -s "$(which zsh)" || print_error "Failed to change shell to zsh"
