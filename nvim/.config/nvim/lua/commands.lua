@@ -11,8 +11,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = vim.api.nvim_create_augroup("dan/yank_highlight", { clear = true }),
   desc = "Highlight on yank",
   callback = function()
-    -- priority must be higher than lsp reference
-    vim.hl.on_yank({ timeout = 200, higroup = "Visual", priority = 250 })
+    vim.hl.on_yank({ timeout = 250, higroup = "Visual" })
   end,
 })
 

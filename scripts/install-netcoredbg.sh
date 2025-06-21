@@ -3,7 +3,7 @@ set -e
 
 DOTNET_TOOLS_DIR="$HOME/.dotnet/tools"
 NETCOREDBG_INSTALL_TARGET="${DOTNET_TOOLS_DIR}/netcoredbg"
-VERSION_FILE_PATH="${DOTNET_TOOLS_DIR}/.netcoredbg_version"
+VERSION_FILE_PATH="${NETCOREDBG_INSTALL_TARGET}/.netcoredbg_version"
 
 os_type=$(uname -s)
 arch_type=$(uname -m)
@@ -34,13 +34,13 @@ fi
 LOCAL_VERSION_TAG=""
 [ -f "${VERSION_FILE_PATH}" ] && LOCAL_VERSION_TAG=$(cat "${VERSION_FILE_PATH}")
 
-if [ -f "${NETCOREDBG_INSTALL_TARGET}" ] && [ "${LOCAL_VERSION_TAG}" == "${REMOTE_VERSION_TAG}" ] && [ "$REMOTE_VERSION_TAG" != "latest_unknown" ]; then
+if [ -d "${NETCOREDBG_INSTALL_TARGET}" ] && [ "${LOCAL_VERSION_TAG}" == "${REMOTE_VERSION_TAG}" ] && [ "$REMOTE_VERSION_TAG" != "latest_unknown" ]; then
   echo "netcoredbg is up to date: ${LOCAL_VERSION_TAG}"
   exit 0
 fi
 
 ACTION="Installing"
-[ -f "${NETCOREDBG_INSTALL_TARGET}" ] && ACTION="Updating"
+[ -d "${NETCOREDBG_INSTALL_TARGET}" ] && ACTION="Updating"
 echo "${ACTION} netcoredbg to ${REMOTE_VERSION_TAG} (current: ${LOCAL_VERSION_TAG:-not installed})."
 
 NETCOREDBG_DOWNLOAD_URL="${NETCOREDBG_DOWNLOAD_URL_TEMPLATE}"
@@ -61,25 +61,21 @@ tar -xzf "${NETCOREDBG_FILENAME}" -C "${TEMP_DBG_EXTRACT_DIR}" || {
   exit 1
 }
 
-EXPECTED_EXECUTABLE_PATH="${TEMP_DBG_EXTRACT_DIR}/netcoredbg/netcoredbg"
-if [ -f "${EXPECTED_EXECUTABLE_PATH}" ]; then
+EXPECTED_NETCOREDBG_DIR="${TEMP_DBG_EXTRACT_DIR}/netcoredbg"
+if [ -d "${EXPECTED_NETCOREDBG_DIR}" ]; then
   mkdir -p "${DOTNET_TOOLS_DIR}"
-  rm -f "${NETCOREDBG_INSTALL_TARGET}"
-  cp "${EXPECTED_EXECUTABLE_PATH}" "${NETCOREDBG_INSTALL_TARGET}" || {
+  rm -rf "${NETCOREDBG_INSTALL_TARGET}"
+  cp -r "${EXPECTED_NETCOREDBG_DIR}" "${NETCOREDBG_INSTALL_TARGET}" || {
     echo "Copy failed."
     exit 1
   }
-  chmod +x "${NETCOREDBG_INSTALL_TARGET}"
+  chmod +x "${NETCOREDBG_INSTALL_TARGET}/netcoredbg"
   echo "${REMOTE_VERSION_TAG}" >"${VERSION_FILE_PATH}"
   echo "netcoredbg ${ACTION}d successfully to version ${REMOTE_VERSION_TAG}."
 else
-  echo "Error: 'netcoredbg' executable not found at ${EXPECTED_EXECUTABLE_PATH}."
+  echo "Error: 'netcoredbg' directory not found at ${EXPECTED_NETCOREDBG_DIR}."
   echo "Contents of ${TEMP_DBG_EXTRACT_DIR}:"
   ls -lA "${TEMP_DBG_EXTRACT_DIR}"
-  [ -d "${TEMP_DBG_EXTRACT_DIR}/netcoredbg" ] && {
-    echo "Contents of ${TEMP_DBG_EXTRACT_DIR}/netcoredbg:"
-    ls -lA "${TEMP_DBG_EXTRACT_DIR}/netcoredbg"
-  }
   exit 1
 fi
 

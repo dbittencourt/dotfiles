@@ -23,7 +23,7 @@ export BAT_THEME="kanagawa"
 # avoid issues with huge javascript projects from work
 export NODE_OPTIONS="--max-old-space-size=8192"
 
-alias ta="tmux new -A -D -s main"
+alias ta="tmux new -A -D -s dotfiles"
 alias cat="bat" # use bat as default for cat
 
 # update path, check /etc/paths and /etc/paths.d to avoid duplicates
