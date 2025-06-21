@@ -46,7 +46,8 @@ brew install --cask 1password adguard affinity-designer affinity-photo \
   affinity-publisher airflow alacritty anki bettermouse calibre darktable \
   discord freedom fujifilm-x-raw-studio libreoffice lulu obs pearcleaner \
   phoenix-slides raycast the-unarchiver tidal transmission vlc whatsapp \
-  yubico-authenticator yubico-yubikey-manager font-jetbrains-mono-nerd-font
+  yubico-authenticator yubico-yubikey-manager font-jetbrains-mono-nerd-font \
+  karabiner-elements
 brew cleanup
 print_status "gui apps installed"
 
@@ -63,7 +64,7 @@ cd "$HOME/dotfiles" || {
   exit 1
 }
 
-configs=("alacritty" "bat" "git" "nvim" "yazi" "btop")
+configs=("alacritty" "bat" "git" "nvim" "yazi" "btop" "karabiner")
 for config in "${configs[@]}"; do
   print_status "Stowing $config configuration..."
   stow "$config" || {
