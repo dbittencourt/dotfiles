@@ -35,34 +35,32 @@ return {
   ft = { "cs", "csproj", "sln", "slnx", "props", "csx", "targets" },
   config = function()
     local dotnet = require("easy-dotnet")
-    dotnet.setup({
-      picker = "fzf",
-    })
+    local dap = require("dap")
+    local dapui = require("dapui")
 
-    local debug_dll = nil
+    dotnet.setup({ picker = "fzf" })
+
+    local debug_dll
     local function ensure_dll()
-      if debug_dll ~= nil then
+      if debug_dll then
         return debug_dll
       end
-      local dll = dotnet.get_debug_dll()
-      debug_dll = dll
-      return dll
+      debug_dll = dotnet.get_debug_dll()
+      return debug_dll
     end
 
-    local dap = require("dap")
-    for _, value in ipairs({ "cs", "fsharp" }) do
-      dap.configurations[value] = {
+    for _, lang in ipairs({ "cs", "fsharp" }) do
+      dap.configurations[lang] = {
         {
           type = "coreclr",
           name = "Program",
           request = "launch",
           env = function()
             local dll = ensure_dll()
-            local vars = dotnet.get_environment_variables(
+            return dotnet.get_environment_variables(
               dll.project_name,
               dll.absolute_project_path
-            )
-            return vars or nil
+            ) or nil
           end,
           program = function()
             local dll = ensure_dll()
@@ -74,8 +72,7 @@ return {
             return dll.target_path
           end,
           cwd = function()
-            local dll = ensure_dll()
-            return dll.absolute_project_path
+            return ensure_dll().absolute_project_path
           end,
         },
       }
@@ -91,84 +88,75 @@ return {
       args = { "--interpreter=vscode" },
     }
 
-    local dapui = require("dapui")
     dapui.setup()
-    dap.listeners.before.attach.dapui_config = function()
-      dapui.open()
+    for _, event in ipairs({ "attach", "launch" }) do
+      dap.listeners.before[event].dapui_config = dapui.open
     end
-    dap.listeners.before.launch.dapui_config = function()
-      dapui.open()
-    end
-    dap.listeners.before.event_terminated.dapui_config = function()
-      dapui.close()
-    end
-    dap.listeners.before.event_exited.dapui_config = function()
-      dapui.close()
+    for _, event in ipairs({ "event_terminated", "event_exited" }) do
+      dap.listeners.before[event].dapui_config = dapui.close
     end
 
-    -- change breaking point icons. still not sure on their colors,
-    -- maybe I should leave to the default colorscheme...
-    vim.fn.sign_define(
-      "DapBreakpoint",
-      { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" }
-    )
-    -- vim.cmd("highlight DapBreakpoint guifg=#FF0000 guibg=NONE")
+    -- Define signs for DAP
+    local signs = {
+      { name = "DapBreakpoint", text = "●", texthl = "DapBreakpoint" },
+      { name = "DapStopped", text = "▶", texthl = "DapStopped" },
+      {
+        name = "DapBreakpointRejected",
+        text = "◯",
+        texthl = "DapBreakpointRejected",
+      },
+      {
+        name = "DapBreakpointCondition",
+        text = "◆",
+        texthl = "DapBreakpointCondition",
+      },
+    }
+    for _, sign in ipairs(signs) do
+      vim.fn.sign_define(
+        sign.name,
+        { text = sign.text, texthl = sign.texthl, linehl = "", numhl = "" }
+      )
+    end
 
-    vim.fn.sign_define(
-      "DapStopped",
-      { text = "▶", texthl = "DapStopped", linehl = "", numhl = "" }
-    )
-    -- vim.cmd("highlight DapStopped guifg=#FFFF00 guibg=NONE")
-
-    vim.fn.sign_define("DapBreakpointRejected", {
-      text = "◯",
-      texthl = "DapBreakpointRejected",
-      linehl = "",
-      numhl = "",
-    })
-    -- vim.cmd("highlight DapBreakpointRejected guifg=#FF0000 guibg=NONE")
-
-    vim.fn.sign_define("DapBreakpointCondition", {
-      text = "◆",
-      texthl = "DapBreakpointCondition",
-      linehl = "",
-      numhl = "",
-    })
-    -- vim.cmd("highlight DapBreakpointCondition guifg=#FFA500 guibg=NONE")
-
-    vim.keymap.set("n", "q", function()
-      dap.close()
-      dapui.close()
-    end, {})
-    vim.keymap.set(
-      "n",
-      "<F5>",
-      dap.continue,
-      { desc = "Continue debug execution" }
-    )
-    vim.keymap.set(
-      "n",
-      "<F10>",
-      dap.step_over,
-      { desc = "Step over debug breaking point" }
-    )
-    vim.keymap.set(
-      "n",
-      "<F11>",
-      dap.step_into,
-      { desc = "Step into debug breaking point" }
-    )
-    vim.keymap.set(
-      "n",
-      "<F12>",
-      dap.step_out,
-      { desc = "Step out of debug breaking point" }
-    )
-    vim.keymap.set(
-      "n",
-      "<leader>b",
-      dap.toggle_breakpoint,
-      { desc = "Toggle debug breaking point" }
-    )
+    -- Keymaps
+    local keymaps = {
+      {
+        "n",
+        "q",
+        function()
+          dap.close()
+          dapui.close()
+        end,
+        {},
+      },
+      { "n", "<F5>", dap.continue, { desc = "Continue debug execution" } },
+      {
+        "n",
+        "<F10>",
+        dap.step_over,
+        { desc = "Step over debug breaking point" },
+      },
+      {
+        "n",
+        "<F11>",
+        dap.step_into,
+        { desc = "Step into debug breaking point" },
+      },
+      {
+        "n",
+        "<F12>",
+        dap.step_out,
+        { desc = "Step out of debug breaking point" },
+      },
+      {
+        "n",
+        "<leader>b",
+        dap.toggle_breakpoint,
+        { desc = "Toggle debug breaking point" },
+      },
+    }
+    for _, map in ipairs(keymaps) do
+      vim.keymap.set(unpack(map))
+    end
   end,
 }
