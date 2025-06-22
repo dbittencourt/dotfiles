@@ -37,39 +37,52 @@ return {
       )
     end
 
-    vim.keymap.set("n", "q", function()
-      dap.close()
-      dapui.close()
-    end, { desc = "Close all dap/dapui windows" })
-    vim.keymap.set(
-      "n",
-      "<F5>",
-      dap.continue,
-      { desc = "Continue debug execution" }
-    )
-    vim.keymap.set(
-      "n",
-      "<F10>",
-      dap.step_over,
-      { desc = "Step over debug breaking point" }
-    )
-    vim.keymap.set(
-      "n",
-      "<F11>",
-      dap.step_into,
-      { desc = "Step into debug breaking point" }
-    )
-    vim.keymap.set(
-      "n",
-      "<F12>",
-      dap.step_out,
-      { desc = "Step out of debug breaking point" }
-    )
     vim.keymap.set(
       "n",
       "<leader>b",
       dap.toggle_breakpoint,
       { desc = "Toggle debug breaking point" }
     )
+    vim.keymap.set(
+      "n",
+      "<F5>",
+      dap.continue,
+      { desc = "Continue debug execution" }
+    )
+
+    -- create autocommand to add include debugging keymappings
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = {
+        "dap-repl",
+        "dapui_watches",
+        "dapui_scopes",
+        "dapui_breakpoints",
+        "dapui_stacks",
+      },
+      callback = function(args)
+        vim.keymap.set("n", "q", function()
+          dap.close()
+          dapui.close()
+        end, { desc = "Close all dap/dapui windows" })
+        vim.keymap.set(
+          "n",
+          "<F10>",
+          dap.step_over,
+          { desc = "Step over debug breaking point" }
+        )
+        vim.keymap.set(
+          "n",
+          "<F11>",
+          dap.step_into,
+          { desc = "Step into debug breaking point" }
+        )
+        vim.keymap.set(
+          "n",
+          "<F12>",
+          dap.step_out,
+          { desc = "Step out of debug breaking point" }
+        )
+      end,
+    })
   end,
 }
