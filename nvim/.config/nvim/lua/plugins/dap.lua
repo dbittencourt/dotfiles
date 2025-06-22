@@ -37,20 +37,37 @@ return {
       )
     end
 
-    vim.keymap.set(
-      "n",
-      "<leader>b",
-      dap.toggle_breakpoint,
-      { desc = "Toggle debug breaking point" }
-    )
-    vim.keymap.set(
-      "n",
-      "<F5>",
-      dap.continue,
-      { desc = "Continue debug execution" }
-    )
+    local dap_keymaps = {
+      { "n", "<leader>b", dap.toggle_breakpoint, "Toggle breakpoint" },
+      { "n", "<F5>", dap.continue, "Continue" },
+      { "n", "<F10>", dap.step_over, "Step over" },
+      { "n", "<F11>", dap.step_into, "Step into" },
+      { "n", "<F12>", dap.step_out, "Step out" },
+      {
+        "n",
+        "<leader>B",
+        function()
+          dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+        end,
+        "Set conditional breakpoint",
+      },
+      { "n", "<leader>dr", dap.repl.toggle, "Toggle REPL" },
+      { "n", "<leader>dl", dap.run_last, "Run last debug session" },
+      { "n", "<leader>du", dapui.toggle, "Toggle DAP UI" },
+      {
+        "n",
+        "<leader>de",
+        function()
+          dapui.eval(nil, { enter = true })
+        end,
+        "Evaluate expression",
+      },
+    }
+    for _, map in ipairs(dap_keymaps) do
+      vim.keymap.set(map[1], map[2], map[3], { desc = "DAP: " .. map[4] })
+    end
 
-    -- create autocommand to add include debugging keymappings
+    -- "q" to quit in dapui/dap-repl windows
     vim.api.nvim_create_autocmd("FileType", {
       pattern = {
         "dap-repl",
@@ -61,27 +78,9 @@ return {
       },
       callback = function(args)
         vim.keymap.set("n", "q", function()
-          dap.close()
-          dapui.close()
-        end, { desc = "Close all dap/dapui windows" })
-        vim.keymap.set(
-          "n",
-          "<F10>",
-          dap.step_over,
-          { desc = "Step over debug breaking point" }
-        )
-        vim.keymap.set(
-          "n",
-          "<F11>",
-          dap.step_into,
-          { desc = "Step into debug breaking point" }
-        )
-        vim.keymap.set(
-          "n",
-          "<F12>",
-          dap.step_out,
-          { desc = "Step out of debug breaking point" }
-        )
+          pcall(dap.close)
+          pcall(dapui.close)
+        end, { buffer = args.buf, desc = "Close all DAP/DAPUI windows" })
       end,
     })
   end,
