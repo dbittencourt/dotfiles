@@ -80,7 +80,7 @@ return {
         vim.keymap.set("n", "q", function()
           pcall(dap.close)
           pcall(dapui.close)
-        end, { buffer = args.buf, desc = "Close all DAP/DAPUI windows" })
+        end, { desc = "Close all DAP/DAPUI windows" })
       end,
     })
   end,
