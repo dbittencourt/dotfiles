@@ -51,7 +51,7 @@
                         ]
                     },
                     {
-                        "description": "Map Option+1,2,3,4 to send ESC+1/2/3/4 only in terminal apps",
+                        "description": "Map Option+1,2,3 to send ESC+1/2/3 only in terminal apps",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -113,27 +113,6 @@
                                 "to": [
                                     { "key_code": "escape" },
                                     { "key_code": "3" }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^org\\.alacritty$",
-                                            "^com\\.googlecode\\.iterm2$",
-                                            "^com\\.apple\\.Terminal$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "4",
-                                    "modifiers": { "mandatory": ["option"] }
-                                },
-                                "to": [
-                                    { "key_code": "escape" },
-                                    { "key_code": "4" }
                                 ],
                                 "type": "basic"
                             }
