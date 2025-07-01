@@ -8,6 +8,7 @@ NPM_PACKAGES=(
   bash-language-server
   prettier
   sql-formatter
+  @google/gemini-cli
 )
 echo "Installing some packages globally with npm..."
 echo "Packages: ${NPM_PACKAGES[*]}"

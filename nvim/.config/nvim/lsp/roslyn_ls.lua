@@ -188,5 +188,12 @@ return {
     ["csharp|code_lens"] = {
       dotnet_enable_references_code_lens = true,
     },
+    ["csharp|document_analysis"] = {
+      dotnet_format_on_type = true,
+      dotnet_enable_pull_diagnostics = true,
+    },
+    ["editorconfig"] = {
+      enable = true,
+    },
   },
 }

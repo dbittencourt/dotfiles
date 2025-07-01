@@ -40,7 +40,8 @@ set -e
 
 tmux new-session -d -s "$session" -c "$dir" -n code 2>/dev/null
 tmux new-window -t "$session:" -n server -c "$dir" 2>/dev/null
-tmux new-window -t "$session:" -n whatever -c "$dir" 2>/dev/null
+tmux new-window -t "$session:" -n git -c "$dir" 2>/dev/null
+tmux new-window -t "$session:" -n ai -c "$dir" 2>/dev/null
 tmux select-window -t "$session:1" 2>/dev/null
 tmux switch-client -t "$session" 2>/dev/null
 exit 0

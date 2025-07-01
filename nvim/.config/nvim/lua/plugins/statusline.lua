@@ -20,6 +20,20 @@ return {
         },
         lualine_x = {
           {
+            "diagnostics",
+            sources = { "nvim_lsp" },
+            sections = { "error", "warn", "info", "hint" },
+            symbols = {
+              error = " ",
+              warn = " ",
+              info = " ",
+              hint = " ",
+            },
+            colored = true,
+            update_in_insert = false,
+            always_visible = false,
+          },
+          {
             lazy_status.updates,
             cond = lazy_status.has_updates,
             color = { fg = "#ff9e3b" },

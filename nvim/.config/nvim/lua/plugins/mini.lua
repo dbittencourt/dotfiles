@@ -47,6 +47,9 @@ return {
       -- text manipulation around selection
       require("mini.surround").setup()
 
+      -- advanced text objects
+      require("mini.ai").setup()
+
       -- automatic pair completion
       require("mini.pairs").setup({
         modes = { insert = true, command = true, terminal = false },

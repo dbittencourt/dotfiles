@@ -11,7 +11,7 @@ return {
     local dap = require("dap")
     dotnet.setup({ picker = "fzf" })
 
-    -- configure debug for dotnet. maybe I should move it o a different file
+    -- configure debug for dotnet. maybe I should move it to a different file
     local function rebuild_project(co, path)
       local spinner = require("easy-dotnet.ui-modules.spinner").new()
       spinner:start_spinner("Building")
