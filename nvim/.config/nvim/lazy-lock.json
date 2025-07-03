@@ -1,5 +1,6 @@
 {
   "blink.cmp": { "branch": "main", "commit": "9bcb14b43852a6f2bfd5ac9ef29cb5cf09b1b39b" },
+  "codecompanion.nvim": { "branch": "main", "commit": "ba140d819b817c2dbfd047a14fd151f5dc5279e0" },
   "conform.nvim": { "branch": "master", "commit": "973f3cb73887d510321653044791d7937c7ec0fa" },
   "easy-dotnet.nvim": { "branch": "main", "commit": "4b48f09025038779a473abf3b6c5583c7652ae43" },
   "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
