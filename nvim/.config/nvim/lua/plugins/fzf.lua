@@ -5,22 +5,31 @@ return {
     local keymap = vim.keymap
 
     fzf.setup({
-      -- disable icon rendering to improve performance
-      "max-perf",
+      "fzf-native",
       -- configure results format to name followed by directory
       defaults = {
         formatter = { "path.filename_first", 2 },
       },
-      -- disable highlights on directory data to avoid issues with disable ansi
-      hls = {
-        dir_part = false,
+      winopts = {
+        preview = {
+          layout = "vertical",
+          vertical = "down:60%",
+        },
       },
-      -- restricted buffers from cwd to avoid confusion when switching projects
+      -- restrict buffers from cwd to avoid confusion when switching projects
       oldfiles = {
         cwd_only = true,
+        winopts = {
+          preview = { hidden = true },
+        },
       },
-      -- send all grep result to quicklist
+      files = {
+        winopts = {
+          preview = { hidden = true },
+        },
+      },
       grep = {
+        -- send all grep results to quicklist
         actions = {
           ["ctrl-q"] = {
             fn = fzf.actions.file_edit_or_qf,
