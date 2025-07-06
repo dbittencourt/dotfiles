@@ -16,6 +16,7 @@
 #cpu,
 #memory,
 #clock,
+#custom-search,
 #idle_inhibitor,
 #custom-power {
   color: @foreground;
@@ -60,11 +61,8 @@
   padding: 0.5rem 1rem;
 }
 
-#idle_inhibitor {
-  padding-left: 0.4rem;
-  padding-right: 1rem;
-}
-
+#custom-search,
+#idle_inhibitor,
 #custom-power {
   padding: 0.5rem;
   padding-left: 1rem;

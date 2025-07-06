@@ -12,6 +12,7 @@
     "cpu",
     "memory",
     "clock",
+    "custom/search",
     "idle_inhibitor",
     "custom/power"
   ],
@@ -63,7 +64,12 @@
   "clock": {
     "format": " {0:%d/%m}  󰥔 {0:%H:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "on-click": "betterbird -calendar && hyprctl dispatch focuswindow 'title:^(Calendar - Betterbird)$'",
+    "on-click": "betterbird -calendar && hyprctl dispatch focuswindow 'title:^(Calendar - Betterbird)$'"
+ },
+  "custom/search": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "rofi -show drun"
   },
   "idle_inhibitor": {
     "format": "{icon}",
@@ -73,7 +79,7 @@
     },
   },
   "custom/power": {
-    "on-click": "~/.config/tofi/scripts/power.sh",
+    "on-click": "~/.config/rofi/scripts/power.sh",
     "format": " ",
     "tooltip": false
   }

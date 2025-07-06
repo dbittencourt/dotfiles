@@ -37,7 +37,7 @@ sudo pacman -S --needed --noconfirm git base-devel linux-firmware amd-ucode \
   xorg-font-util xorg-fonts-misc xorg-xinit noto-fonts noto-fonts-emoji \
   ttf-font-awesome ttf-nerd-fonts-symbols ttf-jetbrains-mono-nerd \
   qt6-wayland xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt6ct \
-  hyprland hyprlock hyprpaper hypridle waybar \
+  hyprland hyprlock hyprpaper hypridle waybar rofi \
   alacritty thunar gvfs chromium transmission-gtk discord qalculate-gtk \
   celluloid libreoffice-still calibre darktable zathura-pdf-mupdf obs-studio \
   wine mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon libva-mesa-driver \
@@ -53,7 +53,7 @@ sudo git clone https://aur.archlinux.org/yay-git.git
 sudo chown -R "${CURRENT_USER}":"${CURRENT_USER}" yay-git
 cd yay-git || exit
 makepkg -si --noconfirm
-yay -S --noconfirm --needed hyprshot hyprpicker-git tofi 1password brave-bin \
+yay -S --noconfirm --needed hyprshot hyprpicker-git 1password brave-bin \
   anki-bin betterbird-bin tidal-hifi-bin dmg2img protontricks protonup-qt \
   yubico-authenticator-bin
 
@@ -91,7 +91,7 @@ configs=(
   "nvim"
   "themes"
   "waybar"
-  "tofi"
+  "rofi"
   "solaar"
   "yazi"
   "gtk-3.0"
