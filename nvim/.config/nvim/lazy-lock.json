@@ -4,7 +4,7 @@
   "conform.nvim": { "branch": "master", "commit": "973f3cb73887d510321653044791d7937c7ec0fa" },
   "easy-dotnet.nvim": { "branch": "main", "commit": "be3749f72a899e2f6df9e613a68d17f43036610c" },
   "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
-  "fzf-lua": { "branch": "main", "commit": "797e87a11905cb231a24b7d9baed837451b94723" },
+  "fzf-lua": { "branch": "main", "commit": "9be1552e7de8d72fa280b87ede3642e8bfb4c998" },
   "hardtime.nvim": { "branch": "main", "commit": "b9a989191b3a97c9316a0efea02341c4cdab845a" },
   "harpoon": { "branch": "harpoon2", "commit": "ed1f853847ffd04b2b61c314865665e1dadf22c7" },
   "kanagawa.nvim": { "branch": "master", "commit": "debe91547d7fb1eef34ce26a5106f277fbfdd109" },

@@ -21,25 +21,30 @@ return {
               return hipatterns.compute_hex_color_group(hex, "bg")
             end,
             priority = 2000,
-            -- rgba(255, 255, 255, 0.5)
-            rgba_color = {
-              pattern = "rgba%(%d+, ?%d+, ?%d+, ?%d*%.?%d*%)",
-              group = function(_, match)
-                local red, green, blue, alpha =
-                  match:match("rgba%((%d+), ?(%d+), ?(%d+), ?(%d*%.?%d*)%)")
-                alpha = tonumber(alpha)
-                if alpha == nil or alpha < 0 or alpha > 1 then
-                  return false
-                end
-                local hex = string.format(
-                  "#%02x%02x%02x",
-                  red * alpha,
-                  green * alpha,
-                  blue * alpha
+          },
+          -- rgba(255, 255, 255, 0.5)
+          rgba_color = {
+            pattern = "rgba%(%d+, ?%d+, ?%d+, ?%d*%.?%d*%)",
+            group = function(_, match)
+              local r_str, g_str, b_str, a_str =
+                match:match("rgba%((%d+), ?(%d+), ?(%d+), ?(%d*%.?%d*)%)")
+              local alpha = tonumber(a_str)
+              if
+                not (
+                  tonumber(r_str)
+                  and tonumber(g_str)
+                  and tonumber(b_str)
+                  and alpha
+                  and alpha >= 0
+                  and alpha <= 1
                 )
-                return hipatterns.compute_hex_color_group(hex, "bg")
-              end,
-            },
+              then
+                return false
+              end
+              local hex = string.format("#%02x%02x%02x", r_str, g_str, b_str)
+              return hipatterns.compute_hex_color_group(hex, "bg")
+            end,
+            priority = 2000,
           },
         },
       })
@@ -50,23 +55,21 @@ return {
       -- advanced text objects
       local ai = require("mini.ai")
       ai.setup({
-        {
-          n_lines = 500,
-          custom_textobjects = {
-            o = ai.gen_spec.treesitter({ -- code block
-              a = { "@block.outer", "@conditional.outer", "@loop.outer" },
-              i = { "@block.inner", "@conditional.inner", "@loop.inner" },
-            }),
-            m = ai.gen_spec.treesitter({ -- method/function definition
-              a = "@function.outer",
-              i = "@function.inner",
-            }),
-            c = ai.gen_spec.treesitter({ -- class
-              a = "@class.outer",
-              i = "@class.inner",
-            }),
-            d = { "%f[%d]%d+" }, -- digits
-          },
+        n_lines = 500,
+        custom_textobjects = {
+          o = ai.gen_spec.treesitter({ -- code block
+            a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+            i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+          }),
+          m = ai.gen_spec.treesitter({ -- method/function definition
+            a = "@function.outer",
+            i = "@function.inner",
+          }),
+          c = ai.gen_spec.treesitter({ -- class
+            a = "@class.outer",
+            i = "@class.inner",
+          }),
+          d = { "%f[%d]%d+" }, -- digits
         },
       })
 
@@ -123,11 +126,12 @@ return {
           go_out_plus = "<tab>",
         },
       })
-      -- manually notify LSPs that a file got renamed as for now the plugin
+
+      -- manually notify LSPs that a file got modified as for now the plugin
       -- author has no intention to make it the default behaviour
       vim.api.nvim_create_autocmd("User", {
-        desc = "Notify LSPs that a file was renamed",
-        pattern = "MiniFilesActionRename",
+        desc = "Notify LSPs that a file was modified",
+        pattern = { "MiniFilesActionRename", "MiniFilesActionMove" },
         callback = function(args)
           local changes = {
             files = {
@@ -161,11 +165,57 @@ return {
           end
         end,
       })
+
       vim.keymap.set("n", "<leader>e", function()
         if not files.close() then
           files.open(vim.api.nvim_buf_get_name(0))
         end
       end, { desc = "Open file explorer" })
+
+      vim.api.nvim_create_autocmd("User", {
+        desc = "Add minifiles keymaps",
+        pattern = "MiniFilesBufferCreate",
+        callback = function(args)
+          local function open_in_new_view(create_view_func)
+            local state = files.get_explorer_state()
+            if
+              state.target_window == nil
+              or files.get_fs_entry().fs_type == "directory"
+            then
+              return
+            end
+
+            local new_view = vim.api.nvim_win_call(
+              state.target_window,
+              function()
+                create_view_func()
+                return vim.api.nvim_get_current_win()
+              end
+            )
+
+            files.set_target_window(new_view)
+            files.go_in({ close_on_file = true })
+          end
+
+          vim.keymap.set("n", "<C-t>", function()
+            open_in_new_view(function()
+              vim.cmd("tabnew")
+            end)
+          end, {
+            desc = "Open file in a new tab",
+            buffer = args.data.buf_id,
+          })
+
+          vim.keymap.set("n", "<C-w>v", function()
+            open_in_new_view(function()
+              vim.cmd("belowright vsplit")
+            end)
+          end, {
+            desc = "Open file in a new vertical split",
+            buffer = args.data.buf_id,
+          })
+        end,
+      })
     end,
   },
 }

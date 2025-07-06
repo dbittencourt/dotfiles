@@ -9,6 +9,10 @@ return {
       -- configure results format to name followed by directory
       defaults = {
         formatter = { "path.filename_first", 2 },
+        -- open selection in new tab with ctrl+t
+        actions = {
+          ["ctrl-t"] = fzf.actions.file_tabedit,
+        },
       },
       winopts = {
         preview = {
