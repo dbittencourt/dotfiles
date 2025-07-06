@@ -27,7 +27,7 @@ sudo pacman -S --needed --noconfirm git base-devel linux-firmware amd-ucode \
   sbctl brightnessctl network-manager-applet solaar dunst hyprpolkitagent \
   bluez bluez-utils blueman \
   pipewire pipewire-alsa pipewire-jack pipewire-pulse wireplumber pavucontrol \
-  gst-plugin-pipewire \
+  gst-plugin-pipewire playerctl \
   openssh libfido2 yubikey-manager \
   gnome-keyring seahorse \
   zsh tmux neovim stow ripgrep fd fzf bat unzip tree less man wget git-delta \
