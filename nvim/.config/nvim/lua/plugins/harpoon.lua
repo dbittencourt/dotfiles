@@ -5,30 +5,26 @@ return {
   event = "VeryLazy",
   config = function()
     local harpoon = require("harpoon")
-    harpoon:setup({})
+    harpoon:setup({
+      settings = {
+        save_on_toggle = true,
+      },
+    })
 
-    vim.keymap.set("n", "<leader>i", function()
+    vim.keymap.set("n", "<leader>H", function()
       harpoon:list():add()
-    end, { desc = "Add file to harpoon" })
+    end, { desc = "Add file to harpoon list" })
 
     vim.keymap.set("n", "<leader>h", function()
       harpoon.ui:toggle_quick_menu(harpoon:list())
     end, { desc = "List files on harpoon" })
 
-    vim.keymap.set("n", "<leader>7", function()
-      harpoon:list():select(1)
-    end, { desc = "Open harpoon 1st entry" })
-
-    vim.keymap.set("n", "<leader>8", function()
-      harpoon:list():select(2)
-    end, { desc = "Open harpoon 2nd entry" })
-
-    vim.keymap.set("n", "<leader>9", function()
-      harpoon:list():select(3)
-    end, { desc = "Open harpoon 3rd entry" })
-
-    vim.keymap.set("n", "<leader>0", function()
-      harpoon:list():select(4)
-    end, { desc = "Open harpoon 4th entry" })
+    -- map righthand numbers to 1..5 entries
+    local entries = { 6, 7, 8, 9, 0 }
+    for i, key in ipairs(entries) do
+      vim.keymap.set("n", "<leader>" .. key, function()
+        require("harpoon"):list():select(i)
+      end, { desc = "Harpoon to File " .. i })
+    end
   end,
 }
