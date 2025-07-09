@@ -51,6 +51,7 @@ return {
     default_angular_core_version,
   },
   filetypes = {
+    "typescript",
     "htmlangular",
   },
   root_markers = { "angular.json" },
