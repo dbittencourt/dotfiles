@@ -26,4 +26,4 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 vim.api.nvim_create_user_command("Todo", function()
   require("fzf-lua").grep({ search = [[TODO:|todo!\(.*\)]], no_esc = true })
-end, { desc = "Grep TODOs", nargs = 0 })
+end, { desc = "Show all todos", nargs = 0 })
