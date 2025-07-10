@@ -1,10 +1,12 @@
+vim.o.termguicolors = true
+
 -- shows absolute line number
 vim.o.number = true
 -- useful for navigating through lines using motions
 vim.o.relativenumber = true
 
 -- tab and indentation
-vim.o.tabstop = 2 -- prettier default
+vim.o.tabstop = 2
 vim.o.shiftwidth = 2 -- 2 spaces for indent width
 vim.o.expandtab = true -- expand tab to spaces
 vim.o.autoindent = true
@@ -16,7 +18,6 @@ vim.o.wrap = false
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
-vim.o.termguicolors = true
 -- highlight the current cursor line
 vim.o.cursorline = true
 
