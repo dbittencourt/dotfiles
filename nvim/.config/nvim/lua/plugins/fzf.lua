@@ -31,6 +31,10 @@ return {
         winopts = {
           preview = { hidden = true },
         },
+        actions = {
+          ["alt-i"] = { fzf.actions.toggle_ignore },
+          ["alt-h"] = { fzf.actions.toggle_hidden },
+        },
       },
       grep = {
         -- send all grep results to quicklist

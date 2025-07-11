@@ -21,13 +21,6 @@ return {
   root_dir = function(bufnr, cb)
     local fname = vim.uri_to_fname(vim.uri_from_bufnr(bufnr))
 
-    -- do not start vtsls in angular projects to avoid duplicate references
-    local angular_root =
-      vim.fs.find("angular.json", { upward = true, path = fname })[1]
-    if angular_root then
-      return nil
-    end
-
     local ts_root =
       vim.fs.find("tsconfig.json", { upward = true, path = fname })[1]
     local git_root = vim.fs.find(".git", { upward = true, path = fname })[1]
