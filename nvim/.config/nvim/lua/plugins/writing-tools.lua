@@ -30,7 +30,10 @@ return {
       vim.api.nvim_set_hl(0, "@markup.quote", { fg = "#F2CDCD" })
       vim.api.nvim_set_hl(0, "RenderMarkdownQuote", { fg = "#F2CDCD" })
 
-      require("render-markdown").setup({})
+      require("render-markdown").setup({
+        render_modes = { "n", "c", "t" },
+        completions = { blink = { enabled = true } },
+      })
     end,
   },
   {
