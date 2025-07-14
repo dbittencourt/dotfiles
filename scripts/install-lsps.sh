@@ -37,21 +37,26 @@ if [ -f "$HOME/.nuget/plugins/netcore/CredentialProvider.Microsoft/CredentialPro
 else
   curl -sSL https://aka.ms/install-artifacts-credprovider.sh | bash
 fi
+
+dotnet tool update -all -g
 if dotnet tool list -g | grep -q csharpier; then
   echo -e "csharpier is already installed."
 else
   dotnet tool install --global csharpier
 fi
+
 if dotnet tool list -g | grep -q dotnet-outdated-tool; then
   echo -e "dotnet-outdated-tool is already installed."
 else
   dotnet tool install --global dotnet-outdated-tool
 fi
+
 if dotnet tool list -g | grep -q dotnet-ef; then
   echo -e "dotnet-ef is already installed."
 else
   dotnet tool install --global dotnet-ef
 fi
+
 bash ~/dotfiles/scripts/install-roslyn.sh
 bash ~/dotfiles/scripts/install-netcoredbg.sh
 
