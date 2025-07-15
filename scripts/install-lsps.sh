@@ -4,7 +4,7 @@ set -e
 NPM_PACKAGES=(
   vscode-langservers-extracted
   @vtsls/language-server
-  @angular/language-server@16.0.0
+  @angular/language-server@16.2.0
   bash-language-server
   prettier
   sql-formatter
@@ -38,7 +38,7 @@ else
   curl -sSL https://aka.ms/install-artifacts-credprovider.sh | bash
 fi
 
-dotnet tool update -all -g
+dotnet tool update --all -g
 if dotnet tool list -g | grep -q csharpier; then
   echo -e "csharpier is already installed."
 else
