@@ -4,7 +4,7 @@ set -e
 NPM_PACKAGES=(
   vscode-langservers-extracted
   @vtsls/language-server
-  @angular/language-server@16.2.0
+  @angular/language-server@16.0.0
   bash-language-server
   prettier
   sql-formatter
