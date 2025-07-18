@@ -63,27 +63,29 @@ return {
     )
     keymap.set(
       "n",
-      "<leader>fr",
-      "<cmd>FzfLua oldfiles<cr>",
-      { desc = "Fuzzy find recent files" }
-    )
-    keymap.set(
-      "n",
       "<leader>fs",
       "<cmd>FzfLua live_grep<cr>",
       { desc = "Search string in cwd" }
     )
+    keymap.set("n", "<leader>fg", function()
+      vim.ui.input({
+        prompt = "File Pattern: ",
+        default = "*.",
+      }, function(pattern)
+        if not pattern or pattern == "" then
+          return
+        end
+
+        fzf.live_grep({
+          rg_opts = "-i --glob " .. vim.fn.shellescape(pattern),
+        })
+      end)
+    end, { desc = "Search string in specific filetypes within cwd" })
     keymap.set(
       "n",
       "<leader>fc",
       "<cmd>FzfLua grep_cword<cr>",
       { desc = "Search word under cursor in cwd" }
-    )
-    keymap.set(
-      "n",
-      "<leader>fl",
-      "<cmd>FzfLua blines<cr>",
-      { desc = "Fuzzy find in current buffer" }
     )
     keymap.set(
       "v",

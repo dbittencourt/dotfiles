@@ -38,7 +38,12 @@ local function on_attach(client, bufnr)
 
   -- code navigation
   keymap("n", "gd", "<cmd>FzfLua lsp_definitions<cr>", "Show lsp definitions")
-  keymap("n", "gD", "<cmd>FzfLua lsp_typedefs<cr>", "Show lsp type definitions")
+  keymap(
+    "n",
+    "grt",
+    "<cmd>FzfLua lsp_typedefs<cr>",
+    "Show lsp type definitions"
+  )
   keymap(
     "n",
     "gri",
@@ -54,13 +59,12 @@ local function on_attach(client, bufnr)
   )
   keymap(
     "n",
-    "grs",
+    "gO",
     "<cmd>FzfLua lsp_document_symbols<cr>",
     "Show document symbols"
   )
 
   -- override neovim default signature keymap to close blink if its open
-  -- borrowed from https://github.com/MariaSolOs/dotfiles
   if client:supports_method(methods.textDocument_signatureHelp) then
     keymap({ "n", "i", "s" }, "<C-S>", function()
       if require("blink.cmp.completion.windows.menu").win:is_open() then
@@ -71,16 +75,12 @@ local function on_attach(client, bufnr)
   end
 
   if client:supports_method(methods.textDocument_documentHighlight) then
-    local group =
-      vim.api.nvim_create_augroup("dan/cursor_highlights", { clear = false })
     vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave" }, {
-      group = group,
       desc = "Highlight references under the cursor",
       buffer = bufnr,
       callback = vim.lsp.buf.document_highlight,
     })
     vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter", "BufLeave" }, {
-      group = group,
       desc = "Clear highlight references",
       buffer = bufnr,
       callback = vim.lsp.buf.clear_references,
