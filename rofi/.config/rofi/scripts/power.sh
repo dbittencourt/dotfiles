@@ -1,6 +1,6 @@
 #!/bin/bash
 
-entries="Suspend\nReboot\nBios\nShutdown"
+entries="Lock\nSuspend\nReboot\nBios\nShutdown"
 
 # get the selected entry directly from rofi and convert to lowercase
 selected=$(echo -e "$entries" |
@@ -8,6 +8,9 @@ selected=$(echo -e "$entries" |
   tr '[:upper:]' '[:lower:]')
 
 case "$selected" in
+lock)
+  hyprlock
+  ;;
 suspend)
   systemctl suspend
   ;;

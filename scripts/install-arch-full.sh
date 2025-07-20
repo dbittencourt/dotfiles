@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# colors for pretty output
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 RED='\033[0;31m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
 print_status() {
   echo -e "${BLUE}[*]${NC} $1"
@@ -26,38 +25,33 @@ print_status "Installing packages..."
 sudo pacman -S --needed --noconfirm git base-devel linux-firmware amd-ucode \
   sbctl brightnessctl network-manager-applet solaar dunst hyprpolkitagent \
   bluez bluez-utils blueman \
-  pipewire pipewire-alsa pipewire-jack pipewire-pulse wireplumber pavucontrol \
-  gst-plugin-pipewire playerctl \
-  openssh libfido2 yubikey-manager \
-  gnome-keyring seahorse \
-  zsh tmux neovim stow ripgrep fd fzf bat unzip tree less man wget git-delta \
-  yazi btop curlie wireguard-tools fastfetch tree-sitter-cli rclone \
+  pipewire pipewire-alsa pipewire-jack pipewire-pulse wireplumber pavucontrol gst-plugin-pipewire \
+  playerctl \
+  openssh libfido2 yubikey-manager gnome-keyring seahorse \
+  zsh tmux neovim stow ripgrep fd fzf bat unzip tree less man wget git-delta yazi btop curlie \
+  wireguard-tools fastfetch tree-sitter-cli rclone docker \
   rust dotnet-sdk go cmake clang \
+  xorg-font-util xorg-fonts-misc xorg-xinit noto-fonts noto-fonts-emoji ttf-font-awesome \
+  ttf-nerd-fonts-symbols ttf-jetbrains-mono-nerd \
   texlive-luatex \
-  xorg-font-util xorg-fonts-misc xorg-xinit noto-fonts noto-fonts-emoji \
-  ttf-font-awesome ttf-nerd-fonts-symbols ttf-jetbrains-mono-nerd \
   qt6-wayland xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt6ct \
-  hyprland hyprlock hyprpaper hypridle waybar rofi \
-  alacritty thunar gvfs chromium transmission-gtk discord qalculate-gtk \
-  celluloid libreoffice-still calibre darktable zathura-pdf-mupdf obs-studio \
-  wine mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon libva-mesa-driver \
-  libva-utils steam gamemode gamescope lact radeontop lutris \
-  lib32-xcb-util-keysyms \
-  qemu-full qemu-img libvirt virt-install virt-manager virt-viewer edk2-ovmf \
-  dnsmasq swtpm guestfs-tools libosinfo tuned
+  hyprland hyprlock hyprpaper hypridle waybar rofi hyprpicker \
+  alacritty thunar gvfs chromium transmission-gtk discord qalculate-gtk celluloid calibre \
+  libreoffice-still darktable zathura-pdf-mupdf \
+  wine mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon libva-mesa-driver libva-utils steam \
+  gamemode lact radeontop lutris lib32-xcb-util-keysyms
 
-print_status "Intalling yay and extra packages..."
+print_status "Installing yay and extra packages..."
 CURRENT_USER=$(whoami)
 cd /opt/ || exit
 sudo git clone https://aur.archlinux.org/yay-git.git
 sudo chown -R "${CURRENT_USER}":"${CURRENT_USER}" yay-git
 cd yay-git || exit
 makepkg -si --noconfirm
-yay -S --noconfirm --needed hyprshot hyprpicker-git 1password brave-bin \
-  anki-bin betterbird-bin tidal-hifi-bin dmg2img protontricks protonup-qt \
-  yubico-authenticator-bin
+yay -S --noconfirm --needed hyprshot 1password brave-bin anki-bin betterbird-bin tidal-hifi-bin \
+  dmg2img protontricks protonup-qt yubico-authenticator-bin
 
-print_status "Installing nvm..."
+# install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
 # install adguard
@@ -68,17 +62,6 @@ sudo systemctl enable --now bluetooth.service
 sudo systemctl enable --now input-remapper
 # smart card daemon (yubikey)
 sudo systemctl enable --now pcscd.service
-
-# virtual machine services
-sudo systemctl enable --now libvirtd.service
-sudo systemctl enable --now tuned.service
-sudo tuned-adm profile virtual-host
-sudo usermod -aG libvirt "$USER"
-sudo setfacl -R -b /var/lib/libvirt/images/
-sudo setfacl -R -m "u:${USER}:rwX" /var/lib/libvirt/images/
-sudo setfacl -m "d:u:${USER}:rwx" /var/lib/libvirt/images/
-sudo virsh net-autostart default
-sudo virsh net-start default
 
 print_status "Setting up dotfiles..."
 cd "$HOME/dotfiles" || exit 1

@@ -1,6 +1,6 @@
 #!/bin/bash
-if hyprctl clients | grep -q "class: tmux-alacritty"; then
-    hyprctl dispatch focuswindow "class:tmux-alacritty"
+if hyprctl clients | grep -q "class: terminal-personal"; then
+  hyprctl dispatch focuswindow "class:terminal-personal"
 else
-    alacritty --class tmux-alacritty -e tmux new -A -D -s dotfiles
+  alacritty --class terminal-personal -e tmux new -A -D -s dotfiles
 fi
