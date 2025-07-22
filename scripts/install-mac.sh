@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# colors for pretty output
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 RED='\033[0;31m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
 print_status() {
   echo -e "${BLUE}[*]${NC} $1"
@@ -104,10 +103,10 @@ stow zsh || {
 }
 
 # update env variables
-source ~/.zshrc
+source "$HOME"/.zshrc
 
 # install node and npm
-nvm install 18.20
+nvm install 20
 
 # install lsps, linters, daps, etc
 bash ~/dotfiles/scripts/install-lsps.sh

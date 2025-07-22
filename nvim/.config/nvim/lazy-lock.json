@@ -1,15 +1,15 @@
 {
   "blink.cmp": { "branch": "main", "commit": "586ee87534f5bf65f1c8dea2d1da2a57e8cddd36" },
-  "codecompanion.nvim": { "branch": "main", "commit": "99448f47c3e23a06009ac176ba4c785e162d9c10" },
+  "codecompanion.nvim": { "branch": "main", "commit": "d067c846d4f7239c6d3524ea3535f459b18dfd99" },
   "conform.nvim": { "branch": "master", "commit": "973f3cb73887d510321653044791d7937c7ec0fa" },
   "easy-dotnet.nvim": { "branch": "main", "commit": "536471bc60d7b71ac03bb5db55be2c8a863c717d" },
   "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
-  "fzf-lua": { "branch": "main", "commit": "07326bb95827f1f4b7d7aead5e8094d844588d08" },
+  "fzf-lua": { "branch": "main", "commit": "3b45f14ac0f3f76782c107f13180eb87e96122fc" },
   "harpoon": { "branch": "harpoon2", "commit": "ed1f853847ffd04b2b61c314865665e1dadf22c7" },
   "kanagawa.nvim": { "branch": "master", "commit": "debe91547d7fb1eef34ce26a5106f277fbfdd109" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "lualine.nvim": { "branch": "master", "commit": "a94fc68960665e54408fe37dcf573193c4ce82c9" },
-  "mini.nvim": { "branch": "main", "commit": "5495dd5480843148b0e9ed57b42d32ea47ac2b52" },
+  "mini.nvim": { "branch": "main", "commit": "77e20cd6ed80fdf1738c116c35da81e7d9ad997e" },
   "nvim-dap": { "branch": "master", "commit": "5dd4d50f2e6a2eaf9e57fad023d294ef371bda35" },
   "nvim-dap-ui": { "branch": "master", "commit": "cf91d5e2d07c72903d052f5207511bf7ecdb7122" },
   "nvim-nio": { "branch": "master", "commit": "21f5324bfac14e22ba26553caf69ec76ae8a7662" },
@@ -18,7 +18,7 @@
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "89ebe73cd2836db80a22d9748999ace0241917a5" },
   "nvim-ts-autotag": { "branch": "main", "commit": "a1d526af391f6aebb25a8795cbc05351ed3620b5" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
-  "render-markdown.nvim": { "branch": "main", "commit": "7620d4e96eb5cf8d12e76c6fcaf1267628564ba9" },
+  "render-markdown.nvim": { "branch": "main", "commit": "b540997fbf7ccf3a39ce21162ce8957be2f67e37" },
   "vim-fugitive": { "branch": "master", "commit": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4" },
   "vimtex": { "branch": "master", "commit": "7f2633027c8f496a85284de0c11aa32f1e07e049" }
 }

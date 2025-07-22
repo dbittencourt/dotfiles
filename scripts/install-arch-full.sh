@@ -131,7 +131,7 @@ stow zsh || {
 }
 
 # install node and npm
-nvm install 18.20
+nvm install 20
 
 # install lsps, linters, daps, etc
 bash ~/dotfiles/scripts/install-lsps.sh
