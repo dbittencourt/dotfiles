@@ -9,6 +9,18 @@ map.set(
   "<cmd>nohl<cr>",
   { desc = "Clear search highlights" }
 )
+map.set(
+  "n",
+  "<C-d>",
+  "<C-d>zz",
+  { desc = "Center screen after going down one page" }
+)
+map.set(
+  "n",
+  "<C-u>",
+  "<C-u>zz",
+  { desc = "Center screen after going up one page" }
+)
 
 -- split management
 map.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
@@ -32,6 +44,14 @@ map.set(
 -- selection helpers
 map.set("n", "<leader>ya", "0ggvG$y", { desc = "Copy buffer content" })
 map.set("n", "<leader>yd", "0ggvG$d", { desc = "Delete buffer content" })
+map.set("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move selection down one line" })
+map.set("v", "K", ":m '>-2<cr>gv=gv", { desc = "Move selection up one line" })
+map.set(
+  "x",
+  "<leader>p",
+  '"_dP',
+  { desc = "Substitute selection with default register content" }
+)
 
 -- disable arrow keys to make life harder
 map.set({ "n", "v", "i" }, "<up>", "<nop>", { noremap = true })

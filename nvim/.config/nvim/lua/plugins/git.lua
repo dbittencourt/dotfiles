@@ -29,9 +29,9 @@ return {
 
     vim.keymap.set(
       "n",
-      "<leader>gg",
+      "<leader>gs",
       toggle_status,
-      { desc = "Toggle git status window" }
+      { desc = "Toggle git status" }
     )
 
     vim.keymap.set(

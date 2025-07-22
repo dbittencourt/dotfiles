@@ -55,18 +55,21 @@ return {
       "<cmd>FzfLua files<cr>",
       { desc = "Fuzzy find files in cwd" }
     )
+
     keymap.set(
       "n",
       "<leader>fb",
       "<cmd>FzfLua buffers<cr>",
       { desc = "Show open buffers" }
     )
+
     keymap.set(
       "n",
       "<leader>fs",
       "<cmd>FzfLua live_grep<cr>",
       { desc = "Search string in cwd" }
     )
+
     keymap.set("n", "<leader>fg", function()
       vim.ui.input({
         prompt = "File Pattern: ",
@@ -81,12 +84,7 @@ return {
         })
       end)
     end, { desc = "Search string in specific filetypes within cwd" })
-    keymap.set(
-      "n",
-      "<leader>fc",
-      "<cmd>FzfLua grep_cword<cr>",
-      { desc = "Search word under cursor in cwd" }
-    )
+
     keymap.set(
       "v",
       "<leader>fv",
