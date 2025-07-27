@@ -36,7 +36,7 @@ sudo pacman -S --needed --noconfirm git base-devel linux-firmware amd-ucode \
   texlive-luatex \
   qt6-wayland xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt6ct \
   hyprland hyprlock hyprpaper hypridle waybar rofi hyprpicker \
-  alacritty thunar gvfs chromium transmission-gtk discord qalculate-gtk celluloid calibre \
+  alacritty thunar gvfs chromium transmission-gtk discord qalculate-gtk celluloid calibre imv \
   libreoffice-still darktable zathura-pdf-mupdf firefox \
   wine mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon libva-mesa-driver libva-utils steam \
   gamemode lact radeontop lutris lib32-xcb-util-keysyms
