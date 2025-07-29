@@ -1,8 +1,8 @@
 {
   "blink.cmp": { "branch": "main", "commit": "bae4bae0eedd1fa55f34b685862e94a222d5c6f8" },
-  "codecompanion.nvim": { "branch": "main", "commit": "94acda8a9f785bf9ef892379132473a3e3c9eaa4" },
+  "codecompanion.nvim": { "branch": "main", "commit": "afa34ebe3c48d74dc7e1c8b26d74f7f3a02cb531" },
   "conform.nvim": { "branch": "master", "commit": "973f3cb73887d510321653044791d7937c7ec0fa" },
-  "easy-dotnet.nvim": { "branch": "main", "commit": "536471bc60d7b71ac03bb5db55be2c8a863c717d" },
+  "easy-dotnet.nvim": { "branch": "main", "commit": "1e138ba5f13b8200b3730de8f05573aac1c2a85d" },
   "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
   "fzf-lua": { "branch": "main", "commit": "c9a2deb7bf2d8deaf56a229ff9c7bfeffa8d7d53" },
   "harpoon": { "branch": "harpoon2", "commit": "ed1f853847ffd04b2b61c314865665e1dadf22c7" },
@@ -18,7 +18,7 @@
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "89ebe73cd2836db80a22d9748999ace0241917a5" },
   "nvim-ts-autotag": { "branch": "main", "commit": "a1d526af391f6aebb25a8795cbc05351ed3620b5" },
   "plenary.nvim": { "branch": "master", "commit": "b9fd5226c2f76c951fc8ed5923d85e4de065e509" },
-  "render-markdown.nvim": { "branch": "main", "commit": "5c0e241bdbd208b7ae546009378d6bc93c083ef3" },
+  "render-markdown.nvim": { "branch": "main", "commit": "9e51b7711c6159511e966dc42fafd58a9db9ad1d" },
   "undotree": { "branch": "master", "commit": "28f2f54a34baff90ea6f4a735ef1813ad875c743" },
   "vim-fugitive": { "branch": "master", "commit": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4" },
   "vimtex": { "branch": "master", "commit": "7f2633027c8f496a85284de0c11aa32f1e07e049" }

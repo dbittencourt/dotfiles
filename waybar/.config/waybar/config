@@ -3,7 +3,7 @@
   "position": "top", // Waybar position (top|bottom|left|right)
   // Choose the order of the modules
   "modules-left": ["hyprland/workspaces"],
-  "modules-center": ["custom/music"],
+  "modules-center": ["custom/obs", "custom/music"],
   "modules-right": [
     "tray",
     "wireplumber",
@@ -16,6 +16,12 @@
     "idle_inhibitor",
     "custom/power"
   ],
+  "custom/obs": {
+    "format": "{}",
+    "interval": 1,
+    "exec": "~/.config/obs-studio/scripts/waybar-obs.sh",
+    "return-type": "json"
+  },
   "custom/music": {
     "format": "  {}",
     "escape": true,

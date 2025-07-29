@@ -8,6 +8,7 @@
 
 #waybar,
 #workspaces,
+#custom-obs,
 #custom-music,
 #tray,
 #wireplumber,
@@ -50,6 +51,7 @@
   border-radius: 1rem;
 }
 
+#custom-obs,
 #custom-music,
 #wireplumber,
 #custom-brightness,
@@ -68,6 +70,19 @@
   padding-left: 1.2rem;
 }
 
+#custom-obs {
+  margin-right: 1rem;
+}
+
+#custom-obs.recording {
+  color: @red;
+}
+
+#custom-obs.idle {
+  color: @magenta;
+}
+
+#custom-obs,
 #custom-music,
 #tray {
   border-radius: 1rem;
