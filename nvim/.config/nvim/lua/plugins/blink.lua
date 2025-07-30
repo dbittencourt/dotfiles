@@ -11,8 +11,6 @@ return {
     },
     appearance = {
       use_nvim_cmp_as_default = false,
-      -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-      -- adjusts spacing to ensure icons are aligned
       nerd_font_variant = "mono",
     },
     sources = {
@@ -21,10 +19,10 @@ return {
         "path",
         "snippets",
         "buffer",
-        "omni",
-        "cmdline",
-        "markdown",
-        "easy-dotnet",
+      },
+      per_filetype = {
+        markdown = { inherit_defaults = true, "markdown" },
+        xml = { inherit_defaults = true, "easy-dotnet" },
       },
       providers = {
         markdown = {
@@ -40,43 +38,18 @@ return {
         },
       },
     },
-    -- disable auto-completion when scrolling through options
     completion = {
       list = {
         selection = {
           preselect = false,
-          auto_insert = false,
+          auto_insert = true,
         },
       },
-      -- automatically trigger snippets when trigger character is used
-      -- ps: trigger character is defined by lsps, like . or (
       trigger = {
         show_on_trigger_character = true,
+        show_on_insert_on_trigger_character = true,
       },
-      accept = {
-        -- experimental auto-brackets support
-        auto_brackets = {
-          enabled = true,
-        },
-      },
-      menu = {
-        draw = {
-          treesitter = { "lsp" },
-        },
-      },
-      documentation = {
-        auto_show = true,
-        auto_show_delay_ms = 200,
-      },
-      -- disable ghost text, kinda annoying
-      ghost_text = {
-        enabled = false,
-      },
-    },
-    cmdline = {
-      keymap = {
-        ["<CR>"] = { "accept", "fallback" },
-      },
+      documentation = { auto_show = true },
     },
     snippets = { preset = "default" },
   },
