@@ -34,23 +34,23 @@ map.set("n", "<C-k>", "<C-w>k", { desc = "Move to upper split" })
 -- tab management
 map.set("n", "<leader>to", "<cmd>tabnew<cr>", { desc = "Open new tab" })
 map.set("n", "<leader>tx", "<cmd>tabclose<cr>", { desc = "Close current tab" })
-map.set(
-  "n",
-  "<leader>tf",
-  "<cmd>tabnew %<cr>",
-  { desc = "Open current buffer in new tab" }
-)
 
 -- selection helpers
-map.set("n", "<leader>ya", "0ggvG$y", { desc = "Copy buffer content" })
-map.set("n", "<leader>yd", "0ggvG$d", { desc = "Delete buffer content" })
+map.set("n", "<leader>ya", "goVGy", { desc = "Copy buffer content" })
+map.set("n", "<leader>yd", "goVGd", { desc = "Delete buffer content" })
 map.set("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move selection down one line" })
-map.set("v", "K", ":m '>-2<cr>gv=gv", { desc = "Move selection up one line" })
+map.set("v", "K", ":m '<-2<cr>gv=gv", { desc = "Move selection up one line" })
 map.set(
   "x",
   "<leader>p",
   '"_dP',
-  { desc = "Substitute selection with default register content" }
+  { desc = "Replace selection with default register content" }
+)
+map.set(
+  "n",
+  "<leader>P",
+  "goVGP",
+  { desc = "Replace buffer with default register content" }
 )
 
 -- disable arrow keys to make life harder
