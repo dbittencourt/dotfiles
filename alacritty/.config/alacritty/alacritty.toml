@@ -1,0 +1,38 @@
+[env]
+TERM="xterm-256color"
+
+[mouse]
+hide_when_typing = true
+
+[window]
+dynamic_padding = true
+decorations = "full"
+opacity = 0.9
+
+[font]
+size = 13
+normal = { family = "JetBrainsMono Nerd Font", style = "Medium" }
+bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
+bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
+
+[font.offset]
+x = 0
+y = 0
+
+[font.glyph_offset]
+x = 0
+y = 2
+
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>"
+save_to_clipboard = true
+
+[cursor]
+style = "Block"
+vi_mode_style = "Beam"
+unfocused_hollow = true
+
+[general]
+live_config_reload = true
+import = ["./kanagawa.toml"]
