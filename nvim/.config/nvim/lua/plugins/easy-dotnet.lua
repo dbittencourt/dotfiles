@@ -5,10 +5,9 @@ return {
 		"ibhagwan/fzf-lua",
 		"mfussenegger/nvim-dap",
 	},
-	ft = { "cs", "csproj", "sln", "slnx", "props", "csx", "targets" },
 	config = function()
 		local dotnet = require("easy-dotnet")
-		local dap = require("nvim.config.nvim.lua.plugins.nvim-dap")
+		local dap = require("dap")
 		dotnet.setup({ picker = "fzf" })
 
 		-- configure debug for dotnet. maybe I should move it to a different file

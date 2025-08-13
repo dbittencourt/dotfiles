@@ -37,6 +37,7 @@ return {
 				"c_sharp",
 				"c",
 				"cpp",
+				"fish",
 			},
 			incremental_selection = {
 				enable = true,

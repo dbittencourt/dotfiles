@@ -28,6 +28,7 @@ return {
 				bash = { "shfmt", "shellcheck" },
 				zsh = { "shfmt", "shellcheck" },
 				sh = { "shfmt", "shellcheck" },
+				fish = { "fish_indent", "fish_lint" },
 				cs = { "csharpier" },
 				c = { "clang-format" },
 				cpp = { "clang-format" },
@@ -35,6 +36,11 @@ return {
 				pgsql = { "sql_formatter" },
 			},
 			formatters = {
+				fish_lint = {
+					command = "fish",
+					args = { "--no-execute", "$FILENAME" },
+					stdin = false,
+				},
 				csharpier = {
 					command = "csharpier",
 					args = { "format", "$FILENAME" },
