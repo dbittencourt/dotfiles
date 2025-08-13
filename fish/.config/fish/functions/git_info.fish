@@ -5,14 +5,13 @@ function git_info
         return
     end
 
+    # branch name, commits ahead/behind and stashs
     set -l git_status (git status --porcelain=v2 --branch 2>/dev/null)
-
-    # branch name and commits ahead/behind
     set -l commits (string match -r --groups '.*# branch.ab \+(\d+) -(\d+).*' -- "$git_status")
-
     set -l ahead (test -n "$commits[1]"; and test "$commits[1]" -gt 0; and echo " ↑$commits[1]")
     set -l behind (test -n "$commits[2]"; and test "$commits[2]" -gt 0; and echo " ↓$commits[2]")
-    set -l branch (printf '%s%s' (set_color green) (printf '%s%s%s' $git_prompt $ahead $behind))
+    set -l stash (set -l c (git stash list | wc -l); and test $c -gt 0; and echo " *$c")
+    set -l branch (printf '%s%s' (set_color green) (printf '%s%s%s%s' $git_prompt $ahead $behind $stash))
 
     # diffs
     set -l staged (set -l c (count (string match -ra '^1 [^.]' $git_status));
