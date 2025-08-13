@@ -1,10 +1,17 @@
 -- install with: npm install -g @angular/language-server
 
--- angular requires a node_modules directory to probe for in order to use
--- your projects configured versions.
-local root_dir = vim.fn.getcwd()
-local node_modules_dir = vim.fs.find("node_modules", { path = root_dir, upward = true })[1]
-local project_root = node_modules_dir and vim.fs.dirname(node_modules_dir) or "?"
+-- find the project root by looking for 'angular.json' first.
+local angular_json_path = vim.fs.find("angular.json", {
+	path = vim.fn.getcwd(),
+	upward = true,
+	type = "file",
+})[1]
+
+if not angular_json_path then
+	return {}
+end
+
+local project_root = vim.fs.dirname(angular_json_path)
 
 local function get_probe_dir()
 	return project_root and (project_root .. "/node_modules") or ""
