@@ -29,16 +29,19 @@ You can find my configuration for Alacritty
 I'm by no means an advanced tmux user and my usage is very basic. This is also
 the case for my [configuration](./tmux/.tmux.conf).
 
-#### zsh
+#### [fish](https://fishshell.com)
 
-I absolutely **LOVE** zsh bundled with [Oh My Zsh](https://ohmyz.sh).
-Add [PowerLevel10k](https://github.com/romkatv/powerlevel10k) on top of it and
-BANG!
+I've always used zsh as my shell but I never really liked how I had to configure it.
+The configuration was ugly and convoluted and I also had to rely on plugins with massive
+configuration files I had no idea what they were doing.
 
-Arnold Schwarzenegger describes the feeling perfectly
-[here](https://www.youtube.com/watch?v=hrJ5s_0mylg). Yeah Arnold, I feel it too.
+One day I decided to try fish and really liked. Its pretty amazing out-of-the-box: it comes with
+syntax-highlighting, auto-completion and suggestions, a script formatter, etc.
 
-You can find my setup [here](/zsh/.zshrc).
+But more importantly, configuring it is a 100 times easier. My configuration is small and written
+by ME and I can actually understand what it does. Pretty dope.
+
+You can find my setup [here](/fish/.config/fish/config.fish).
 
 ### Git
 
