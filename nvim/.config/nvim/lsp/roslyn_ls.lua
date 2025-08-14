@@ -3,14 +3,12 @@ local uv = vim.uv
 local fs = vim.fs
 
 local function on_init_sln(client, target)
-	vim.notify("Initializing: " .. target, vim.log.levels.INFO, { title = "roslyn_ls" })
 	client:notify("solution/open", {
 		solution = vim.uri_from_fname(target),
 	})
 end
 
 local function on_init_project(client, project_files)
-	vim.notify("Initializing: projects", vim.log.levels.INFO, { title = "roslyn_ls" })
 	client:notify("project/open", {
 		projects = vim.tbl_map(function(file)
 			return vim.uri_from_fname(file)
@@ -21,8 +19,6 @@ end
 local function roslyn_handlers()
 	return {
 		["workspace/projectInitializationComplete"] = function(_, _, ctx)
-			vim.notify("Roslyn project initialization complete", vim.log.levels.INFO, { title = "roslyn_ls" })
-
 			local buffers = vim.lsp.get_buffers_by_client_id(ctx.client_id)
 			for _, buf in ipairs(buffers) do
 				vim.lsp.util._refresh("textDocument/diagnostic", { bufnr = buf })
@@ -97,7 +93,6 @@ return {
 	on_init = {
 		function(client)
 			local root_dir = client.config.root_dir
-
 			-- try load first solution we find
 			for entry, type in fs.dir(root_dir) do
 				if type == "file" and vim.endswith(entry, ".sln") then

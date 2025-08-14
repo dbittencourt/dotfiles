@@ -1,10 +1,6 @@
-local build_command = table.concat({
-	"dotnet clean --nologo -v quiet",
-	"&& dotnet build --nologo -clp:NoSummary;GenerateFullPaths=true",
-}, " ")
-
-vim.opt.makeprg = build_command
-vim.opt.errorformat = "%f(%l,%c): %t %n: %m"
+vim.cmd("compiler dotnet")
+vim.g.dotnet_errors_only = true
+vim.g.dotnet_show_project_file = false
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
