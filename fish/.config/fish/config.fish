@@ -1,13 +1,16 @@
 status is-interactive; or exit
 
+# remove the gretting message
+set -U fish_greeting
+
 set -g fish_color_command green
 # disable path abbreviation
 set -g fish_prompt_pwd_dir_length 0
 
-set -x EDITOR nvim
-set -x BAT_THEME kanagawa
-set -x NODE_OPTIONS "--max-old-space-size=8192" # for large JS projects
-set -x ELECTRON_OZONE_PLATFORM_HINT auto
+set -gx EDITOR nvim
+set -gx BAT_THEME kanagawa
+set -gx NODE_OPTIONS "--max-old-space-size=8192" # for large JS projects
+set -gx ELECTRON_OZONE_PLATFORM_HINT auto
 
 if test -d "$HOME/.cargo/bin"
     set -p PATH "$HOME/.cargo/bin"
