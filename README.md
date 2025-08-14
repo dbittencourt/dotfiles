@@ -6,7 +6,7 @@ To help manage those files, I use [Stow](https://www.gnu.org/software/stow).
 
 ### Terminal
 
-My setup is very basic: alacritty + zsh + tmux.
+Three words: alacritty, fish and tmux.
 
 #### [Alacritty](https://github.com/alacritty/alacritty)
 
