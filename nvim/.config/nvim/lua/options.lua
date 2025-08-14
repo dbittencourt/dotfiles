@@ -1,44 +1,38 @@
 vim.o.termguicolors = true
+vim.o.swapfile = false
 
--- shows absolute line number
-vim.o.number = true
--- useful for navigating through lines using motions
-vim.o.relativenumber = true
-
--- tab and indentation
-vim.o.tabstop = 2
-vim.o.shiftwidth = 2 -- 2 spaces for indent width
-vim.o.expandtab = true -- expand tab to spaces
-vim.o.autoindent = true
+-- save undo history
+vim.o.undofile = true
 
 -- disable line wrapping
 vim.o.wrap = false
+
+-- shows absolute and relative line numbers
+vim.o.number = true
+vim.o.relativenumber = true
+
+-- highlight the current cursor line
+vim.o.cursorline = true
+
+-- tab and indentation
+vim.o.autoindent = true
+vim.o.shiftwidth = 2 -- << and >> use 2 spaces
+vim.o.expandtab = true -- tab turns into spaces
+vim.o.tabstop = 2 -- tab equals 2 spaces
+
+-- split window behaviour
+vim.o.splitright = true
+vim.o.splitbelow = true
 
 -- search settings
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
--- highlight the current cursor line
-vim.o.cursorline = true
-
--- allow backspace on indent, end of line or insert mode start position
+-- makes backspace work more like it does in a typical text editor
 vim.o.backspace = "indent,eol,start"
 
 -- use system clipboard as default register
 vim.o.clipboard = "unnamedplus"
-
--- save undo history
-vim.o.undofile = true
-
--- split vertical window to the right
-vim.o.splitright = true
--- split horizontal window to the bottom
-vim.o.splitbelow = true
-
--- turn off swapfile
-vim.o.swapfile = false
-
-vim.o.spelllang = "en_us"
 
 -- fold configuration
 vim.o.foldmethod = "expr"
@@ -51,4 +45,3 @@ vim.o.sessionoptions = "blank,buffers,curdir,folds,tabpages,winsize,winpos,termi
 
 -- time required to trigger CursorHold
 vim.o.updatetime = 1000
-
