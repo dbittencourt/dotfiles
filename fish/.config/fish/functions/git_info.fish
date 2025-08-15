@@ -19,7 +19,7 @@ function git_info
     end
 
     set -l git_status (git status --porcelain=v2 --branch 2>/dev/null)
-    set -l commits (string match -r --groups '.*# branch.ab +(\\d+) -(\\d+).*' -- "$git_status")
+    set -l commits (string match -r --groups '.*# branch.ab \+(\d+) -(\d+).*' -- "$git_status")
     set -l ahead (test -n "$commits[1]"; and test "$commits[1]" -gt 0; and echo " ↑$commits[1]")
     set -l behind (test -n "$commits[2]"; and test "$commits[2]" -gt 0; and echo " ↓$commits[2]")
     set -l stash_file "$git_root/.git/logs/refs/stash"
