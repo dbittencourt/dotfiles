@@ -1,5 +1,3 @@
-local M = {}
-
 local methods = vim.lsp.protocol.Methods
 local function on_attach(client, bufnr)
 	local function keymap(mode, lhs, rhs, desc, noremap)
@@ -16,18 +14,14 @@ local function on_attach(client, bufnr)
 		vim.cmd("edit")
 	end, "Restart lsp")
 
-	-- diagnostics
-	keymap("n", "<leader>d", vim.diagnostic.open_float, "Show line diagnostics")
-	keymap("n", "<leader>D", "<cmd>FzfLua diagnostics_document<cr>", "Show buffer diagnostics")
-	keymap("n", "<leader>qd", vim.diagnostic.setqflist, "Send diagnostics to quickfix")
-
+	local fzf = require("fzf-lua")
 	-- code navigation
-	keymap("n", "gd", "<cmd>FzfLua lsp_definitions<cr>", "Show lsp definitions")
-	keymap("n", "grt", "<cmd>FzfLua lsp_typedefs<cr>", "Show lsp type definitions")
-	keymap("n", "gri", "<cmd>FzfLua lsp_implementations<cr>", "Show lsp implementations")
-	keymap("n", "grr", "<cmd>FzfLua lsp_references<cr>", "Show lsp references")
-	keymap("n", "grc", "<cmd>FzfLua lsp_incoming_calls<cr>", "Show lsp incoming calls")
-	keymap("n", "gO", "<cmd>FzfLua lsp_document_symbols<cr>", "Show document symbols")
+	keymap("n", "gd", fzf.lsp_definitions, "Show lsp definitions")
+	keymap("n", "grt", fzf.lsp_typedefs, "Show lsp type definitions")
+	keymap("n", "gri", fzf.lsp_implementations, "Show lsp implementations")
+	keymap("n", "grr", fzf.lsp_references, "Show lsp references")
+	keymap("n", "grc", fzf.lsp_incoming_calls, "Show lsp incoming calls")
+	keymap("n", "gO", fzf.lsp_document_symbols, "Show document symbols")
 
 	-- override neovim default signature keymap to close blink if its open
 	if client:supports_method(methods.textDocument_signatureHelp) then
@@ -56,20 +50,20 @@ end
 -- make sure inlay hints are disabled, I'm definitely not a fan
 vim.g.inlay_hints = false
 
--- set diagnostic symbols in the sign column
-local diagnostic_icons = {
-	[vim.diagnostic.severity.ERROR] = " ",
-	[vim.diagnostic.severity.WARN] = " ",
-	[vim.diagnostic.severity.INFO] = " ",
-	[vim.diagnostic.severity.HINT] = " ",
-}
 vim.diagnostic.config({
 	float = {
 		source = "if_many",
 	},
 	signs = {
-		text = diagnostic_icons,
+		text = {
+			[vim.diagnostic.severity.ERROR] = "",
+			[vim.diagnostic.severity.WARN] = "",
+			[vim.diagnostic.severity.INFO] = "",
+			[vim.diagnostic.severity.HINT] = "",
+		},
 	},
+	virtual_lines = { current_line = true },
+	severity_sort = true,
 })
 
 -- update mappings when registering dynamic capabilities
@@ -110,5 +104,3 @@ vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
 		vim.lsp.enable(server_configs)
 	end,
 })
-
-return M

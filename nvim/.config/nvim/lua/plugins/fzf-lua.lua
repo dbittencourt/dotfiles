@@ -2,15 +2,19 @@ return {
 	"ibhagwan/fzf-lua",
 	config = function()
 		local fzf = require("fzf-lua")
-		local keymap = vim.keymap
 
 		fzf.setup({
-			"fzf-native",
-			-- configure results format to name followed by directory
 			defaults = {
+				-- configure results format to name followed by directory
 				formatter = { "path.filename_first", 2 },
-				-- open selection in new tab with ctrl+t
+				keymap = {
+					fzf = {
+						-- send all current search results to quickfix list
+						["ctrl-q"] = "select-all+accept",
+					},
+				},
 				actions = {
+					-- open selection in new tab with ctrl+t
 					["ctrl-t"] = fzf.actions.file_tabedit,
 				},
 			},
@@ -20,8 +24,8 @@ return {
 					vertical = "down:60%",
 				},
 			},
-			-- restrict buffers from cwd to avoid confusion when switching projects
 			oldfiles = {
+				-- restrict buffers from cwd to avoid confusion when switching projects
 				cwd_only = true,
 				winopts = {
 					preview = { hidden = true },
@@ -32,30 +36,25 @@ return {
 					preview = { hidden = true },
 				},
 				actions = {
-					["alt-i"] = { fzf.actions.toggle_ignore },
-					["alt-h"] = { fzf.actions.toggle_hidden },
+					["ctrl-i"] = fzf.actions.toggle_ignore,
+					["ctrl-h"] = fzf.actions.toggle_hidden,
 				},
 			},
-			grep = {
-				-- send all grep results to quicklist
-				actions = {
-					["ctrl-q"] = {
-						fn = fzf.actions.file_edit_or_qf,
-						prefix = "select-all+",
-					},
-				},
+			diagnostics = {
+				multiline = 1,
 			},
 		})
 
 		fzf.register_ui_select()
 
-		keymap.set("n", "<leader>ff", "<cmd>FzfLua files<cr>", { desc = "Fuzzy find files in cwd" })
-
-		keymap.set("n", "<leader>fb", "<cmd>FzfLua buffers<cr>", { desc = "Show open buffers" })
-
-		keymap.set("n", "<leader>fs", "<cmd>FzfLua live_grep<cr>", { desc = "Search string in cwd" })
-
-		keymap.set("n", "<leader>fg", function()
+		local set = vim.keymap.set
+		set("n", "<leader>fd", fzf.diagnostics_document, { desc = "Show document diagnostics" })
+		set("n", "<leader>ff", fzf.files, { desc = "Search file in cwd" })
+		set("n", "<leader>fb", fzf.buffers, { desc = "Show open buffers" })
+		set("n", "<leader>fs", fzf.live_grep, { desc = "Live search string in cwd" })
+		set("n", "<leader>fg", fzf.grep, { desc = "Search string in cwd" })
+		set("v", "<leader>fv", fzf.grep_visual, { desc = "Search selection in cwd" })
+		set("n", "<leader>fp", function()
 			vim.ui.input({
 				prompt = "File Pattern: ",
 				default = "*.",
@@ -64,12 +63,8 @@ return {
 					return
 				end
 
-				fzf.live_grep({
-					rg_opts = "-i --glob " .. vim.fn.shellescape(pattern),
-				})
+				fzf.live_grep({ rg_opts = "-i --glob " .. vim.fn.shellescape(pattern) })
 			end)
 		end, { desc = "Search string in specific filetypes within cwd" })
-
-		keymap.set("v", "<leader>fv", "<cmd>FzfLua grep_visual<cr>", { desc = "Search selection in cwd" })
 	end,
 }

@@ -5,10 +5,10 @@ return {
 		"nvim-neotest/nvim-nio",
 	},
 	config = function()
-		local dap = require("dap")
 		local dapui = require("dapui")
-
 		dapui.setup()
+
+		local dap = require("dap")
 		for _, event in ipairs({ "attach", "launch" }) do
 			dap.listeners.before[event].dapui_config = dapui.open
 		end
@@ -16,53 +16,28 @@ return {
 			dap.listeners.before[event].dapui_config = dapui.close
 		end
 
-		local signs = {
-			{ name = "DapBreakpoint", text = "●", texthl = "DapBreakpoint" },
-			{ name = "DapStopped", text = "▶", texthl = "DapStopped" },
-			{
-				name = "DapBreakpointRejected",
-				text = "◯",
-				texthl = "DapBreakpointRejected",
-			},
-			{
-				name = "DapBreakpointCondition",
-				text = "◆",
-				texthl = "DapBreakpointCondition",
-			},
-		}
-		for _, sign in ipairs(signs) do
-			vim.fn.sign_define(sign.name, { text = sign.text, texthl = sign.texthl, linehl = "", numhl = "" })
-		end
+		-- linehl = "", numhl = ""
+		-- change breakpoint related symbols
+		local sign = vim.fn.sign_define
+		sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint" })
+		sign("DapStopped", { text = "▶", texthl = "DapStopped" })
+		sign("DapBreakpointRejected", { text = "◯", texthl = "DapBreakpointRejected" })
+		sign("DapBreakpointCondition", { text = "◆", texthl = "DapBreakpointCondition" })
 
-		local dap_keymaps = {
-			{ "n", "<leader>b", dap.toggle_breakpoint, "Toggle breakpoint" },
-			{ "n", "<F5>", dap.continue, "Continue" },
-			{ "n", "<F10>", dap.step_over, "Step over" },
-			{ "n", "<F11>", dap.step_into, "Step into" },
-			{ "n", "<F12>", dap.step_out, "Step out" },
-			{
-				"n",
-				"<leader>B",
-				function()
-					dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-				end,
-				"Set conditional breakpoint",
-			},
-			{ "n", "<leader>dr", dap.repl.toggle, "Toggle REPL" },
-			{ "n", "<leader>dl", dap.run_last, "Run last debug session" },
-			{ "n", "<leader>du", dapui.toggle, "Toggle DAP UI" },
-			{
-				"n",
-				"<leader>de",
-				function()
-					dapui.eval(nil, { enter = true })
-				end,
-				"Evaluate expression",
-			},
-		}
-		for _, map in ipairs(dap_keymaps) do
-			vim.keymap.set(map[1], map[2], map[3], { desc = "DAP: " .. map[4] })
-		end
+		local set = vim.keymap.set
+		set("n", "<F5>", dap.continue, { desc = "Continue" })
+		set("n", "<F10>", dap.step_over, { desc = "Step over" })
+		set("n", "<F11>", dap.step_into, { desc = "Step into" })
+		set("n", "<F12>", dap.step_out, { desc = "Step out" })
+		set("n", "<leader>du", dapui.toggle, { desc = "Toggle dap ui" })
+		set("n", "<leader>dr", dap.repl.toggle, { desc = "Toggle repl" })
+		set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
+		set("n", "<leader>dB", function()
+			dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+		end, { desc = "Set conditional breakpoint" })
+		set("n", "<leader>de", function()
+			dapui.eval(nil, { enter = true })
+		end, { desc = "Evaluate expression" })
 
 		-- "q" to quit in dapui/dap-repl windows
 		vim.api.nvim_create_autocmd("FileType", {
@@ -73,7 +48,7 @@ return {
 				"dapui_breakpoints",
 				"dapui_stacks",
 			},
-			callback = function(args)
+			callback = function()
 				vim.keymap.set("n", "q", function()
 					pcall(dap.close)
 					pcall(dapui.close)
