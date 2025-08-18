@@ -5,10 +5,11 @@ return {
 		"nvim-neotest/nvim-nio",
 	},
 	config = function()
+		local dap = require("dap")
+		local dap_utils = require("dap.utils")
 		local dapui = require("dapui")
 		dapui.setup()
 
-		local dap = require("dap")
 		for _, event in ipairs({ "attach", "launch" }) do
 			dap.listeners.before[event].dapui_config = dapui.open
 		end
@@ -16,8 +17,27 @@ return {
 			dap.listeners.before[event].dapui_config = dapui.close
 		end
 
-		-- linehl = "", numhl = ""
-		-- change breakpoint related symbols
+		dap.adapters.coreclr = {
+			type = "executable",
+			command = os.getenv("HOME") .. "/.dotnet/tools/netcoredbg/netcoredbg",
+			args = { "--interpreter=vscode" },
+		}
+
+		dap.configurations.cs = {
+			{
+				type = "coreclr",
+				name = "Attach",
+				request = "attach",
+				processId = function()
+					return dap_utils.pick_process({
+						filter = function(proc)
+							return proc.name:match(".*/Debug/.*") and not proc.name:find("vstest.console.dll")
+						end,
+					})
+				end,
+			},
+		}
+
 		local sign = vim.fn.sign_define
 		sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint" })
 		sign("DapStopped", { text = "▶", texthl = "DapStopped" })

@@ -20,18 +20,14 @@ return {
 				end
 			end
 
-			-- if no fugitive window was found and closed, open it
 			if not fugitive_open then
 				vim.cmd("Git")
 			end
 		end
 
 		vim.keymap.set("n", "<leader>gs", toggle_status, { desc = "Toggle git status" })
-
 		vim.keymap.set("n", "<leader>gb", "<cmd>Git blame<cr>", { desc = "Toggle git blame on buffer" })
-
 		vim.keymap.set("n", "<leader>gd", "<cmd>Gdiffsplit<cr>", { desc = "Open a horizontal diff split" })
-
 		vim.keymap.set("n", "<leader>gh", "<cmd>0Gllog<cr>", { desc = "Open file git history" })
 	end,
 }

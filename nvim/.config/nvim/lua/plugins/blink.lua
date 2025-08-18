@@ -22,19 +22,12 @@ return {
 			},
 			per_filetype = {
 				markdown = { inherit_defaults = true, "markdown" },
-				xml = { inherit_defaults = true, "easy-dotnet" },
 			},
 			providers = {
 				markdown = {
 					name = "RenderMarkdown",
 					module = "render-markdown.integ.blink",
 					fallbacks = { "lsp" },
-				},
-				["easy-dotnet"] = {
-					name = "easy-dotnet",
-					module = "easy-dotnet.completion.blink",
-					score_offset = 10000,
-					async = true,
 				},
 			},
 		},
