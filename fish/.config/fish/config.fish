@@ -3,7 +3,6 @@ status is-interactive; or exit
 # remove the gretting message
 set -U fish_greeting
 
-set -g fish_color_command green
 # disable path abbreviation
 set -g fish_prompt_pwd_dir_length 0
 
