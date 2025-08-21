@@ -1,6 +1,4 @@
 -- install with script install-roslyn.sh
-local uv = vim.uv
-local fs = vim.fs
 
 local function on_init_sln(client, target)
 	client:notify("solution/open", {
@@ -20,8 +18,10 @@ local function roslyn_handlers()
 	return {
 		["workspace/projectInitializationComplete"] = function(_, _, ctx)
 			local buffers = vim.lsp.get_buffers_by_client_id(ctx.client_id)
+			local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
 			for _, buf in ipairs(buffers) do
-				vim.lsp.util._refresh("textDocument/diagnostic", { bufnr = buf })
+				local params = { textDocument = vim.lsp.util.make_text_document_params(buf) }
+				client:request(vim.lsp.protocol.Methods.textDocument_diagnostic, params, nil, buf)
 			end
 		end,
 		["workspace/_roslyn_projectHasUnresolvedDependencies"] = function()
@@ -33,14 +33,9 @@ local function roslyn_handlers()
 		["workspace/_roslyn_projectNeedsRestore"] = function(_, result, ctx)
 			local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
 
-			client:request("workspace/_roslyn_restore", result, function(err, response)
+			client:request("workspace/_roslyn_restore", result, function(err, _)
 				if err then
 					vim.notify(err.message, vim.log.levels.ERROR, { title = "roslyn_ls" })
-				end
-				if response then
-					for _, v in ipairs(response) do
-						vim.notify(v.message, vim.log.levels.INFO, { title = "roslyn_ls" })
-					end
 				end
 			end)
 
@@ -63,7 +58,7 @@ return {
 		"--logLevel",
 		"Information",
 		"--extensionLogDirectory",
-		fs.joinpath(uv.os_tmpdir(), "roslyn_ls/logs"),
+		vim.fs.joinpath(vim.uv.os_tmpdir(), "roslyn_ls/logs"),
 		"--stdio",
 	},
 	filetypes = { "cs" },
@@ -72,15 +67,15 @@ return {
 		local bufname = vim.api.nvim_buf_get_name(bufnr)
 		-- don't try to find sln or csproj for files from libraries
 		-- outside of the project
-		if not bufname:match("^" .. fs.joinpath("/tmp/MetadataAsSource/")) then
+		if not bufname:match("^" .. vim.fs.joinpath("/tmp/MetadataAsSource/")) then
 			-- try find solutions root first
-			local root_dir = fs.root(bufnr, function(fname, _)
+			local root_dir = vim.fs.root(bufnr, function(fname, _)
 				return fname:match("%.sln$") ~= nil
 			end)
 
 			if not root_dir then
 				-- try find projects root
-				root_dir = fs.root(bufnr, function(fname, _)
+				root_dir = vim.fs.root(bufnr, function(fname, _)
 					return fname:match("%.csproj$") ~= nil
 				end)
 			end
@@ -93,18 +88,19 @@ return {
 	on_init = {
 		function(client)
 			local root_dir = client.config.root_dir
+
 			-- try load first solution we find
-			for entry, type in fs.dir(root_dir) do
+			for entry, type in vim.fs.dir(root_dir) do
 				if type == "file" and vim.endswith(entry, ".sln") then
-					on_init_sln(client, fs.joinpath(root_dir, entry))
+					on_init_sln(client, vim.fs.joinpath(root_dir, entry))
 					return
 				end
 			end
 
 			-- if no solution is found load project
-			for entry, type in fs.dir(root_dir) do
+			for entry, type in vim.fs.dir(root_dir) do
 				if type == "file" and vim.endswith(entry, ".csproj") then
-					on_init_project(client, { fs.joinpath(root_dir, entry) })
+					on_init_project(client, { vim.fs.joinpath(root_dir, entry) })
 				end
 			end
 		end,
