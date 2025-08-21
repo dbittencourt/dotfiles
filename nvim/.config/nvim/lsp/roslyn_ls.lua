@@ -1,6 +1,6 @@
 -- install with script install-roslyn.sh
 
-local roslyn_command = {
+local roslyn_executable = {
 	"Microsoft.CodeAnalysis.LanguageServer",
 	"--logLevel",
 	"Information",
@@ -83,11 +83,130 @@ local function roslyn_handlers()
 	}
 end
 
+local function apply_resolved_action(client, resolved)
+	if resolved and resolved.edit then
+		vim.lsp.util.apply_workspace_edit(resolved.edit, client.offset_encoding or "utf-16")
+	end
+	if resolved and resolved.command then
+		vim.lsp.buf.execute_command(resolved.command)
+	end
+end
+
+local function build_nested_action_list(nested)
+	local out = {}
+	for _, it in ipairs(nested or {}) do
+		local data = it.data or {}
+		local path = data.CodeActionPath or {}
+		local title
+		if #path == 1 then
+			title = path[1]
+		else
+			title = table.concat(path, " -> ", 2)
+		end
+		if data.FixAllFlavors then
+			title = string.format("Fix All: %s", title)
+		end
+		table.insert(out, { title = title, code_action = it })
+	end
+	return out
+end
+
+local function handle_fix_all_code_action(client, data)
+	local arg = (data and data.arguments and data.arguments[1]) or {}
+	local flavors = arg.FixAllFlavors or {}
+	if #flavors == 0 then
+		vim.notify("No Fix All scopes available for this action.", vim.log.levels.WARN, { title = "roslyn_ls" })
+		return
+	end
+
+	vim.ui.select(flavors, { prompt = "Pick a Fix All scope:" }, function(flavor)
+		if not flavor then
+			return
+		end
+		local params = {
+			title = data.title,
+			data = arg,
+			scope = flavor,
+		}
+		client:request("codeAction/resolveFixAll", params, function(err, resolved)
+			if err then
+				vim.notify(err.message or vim.inspect(err), vim.log.levels.ERROR, { title = "roslyn_ls" })
+				return
+			end
+			apply_resolved_action(client, resolved)
+		end)
+	end)
+end
+
+local function roslyn_commands()
+	return {
+		["roslyn.client.fixAllCodeAction"] = function(data, ctx)
+			local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
+			handle_fix_all_code_action(client, data)
+		end,
+
+		-- handles nested code actions (some of which may be Fix All)
+		["roslyn.client.nestedCodeAction"] = function(data, ctx)
+			local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
+			local args = (data and data.arguments and data.arguments[1]) or {}
+			local list = build_nested_action_list(args.NestedCodeActions or {})
+
+			if #list == 0 then
+				vim.notify("No nested code actions available.", vim.log.levels.WARN, { title = "roslyn_ls" })
+				return
+			end
+
+			local titles = {}
+			for _, it in ipairs(list) do
+				table.insert(titles, it.title)
+			end
+
+			vim.ui.select(titles, { prompt = args.UniqueIdentifier or "Select action" }, function(selected)
+				if not selected then
+					return
+				end
+
+				local chosen
+				for _, it in ipairs(list) do
+					if it.title == selected then
+						chosen = it
+						break
+					end
+				end
+				if not chosen then
+					return
+				end
+
+				local is_fix_all = chosen.code_action
+					and chosen.code_action.data
+					and chosen.code_action.data.FixAllFlavors
+				if is_fix_all then
+					handle_fix_all_code_action(client, chosen.code_action.command or {
+						title = chosen.code_action.title,
+						arguments = { chosen.code_action.data },
+					})
+					return
+				end
+
+				client:request("codeAction/resolve", {
+					title = chosen.code_action.title,
+					data = chosen.code_action.data,
+				}, function(err, resolved)
+					if err then
+						vim.notify(err.message or vim.inspect(err), vim.log.levels.ERROR, { title = "roslyn_ls" })
+						return
+					end
+					apply_resolved_action(client, resolved)
+				end)
+			end)
+		end,
+	}
+end
+
 local function get_root_dir(bufnr, cb)
 	local bufname = vim.api.nvim_buf_get_name(bufnr)
 	-- don't try to find sln or csproj for files from libraries outside of the project
 	if not bufname:match("^" .. vim.fs.joinpath("/tmp/MetadataAsSource/")) then
-		-- try find solutions root first
 		local root = vim.fs.root(bufnr, function(fname, _)
 			return fname:match("%.sln$") ~= nil
 		end)
@@ -146,6 +265,7 @@ local capabilities = {
 			dynamicRegistration = true,
 		},
 	},
+	offsetEncoding = { "utf-16" },
 }
 
 local roslyn_settings = {
@@ -189,10 +309,11 @@ local roslyn_settings = {
 
 return {
 	name = "roslyn",
-	cmd = roslyn_command,
+	cmd = roslyn_executable,
 	cmd_env = roslyn_env,
 	filetypes = { "cs" },
 	handlers = roslyn_handlers(),
+	commands = roslyn_commands(),
 	root_dir = get_root_dir,
 	on_init = on_init,
 	capabilities = capabilities,
