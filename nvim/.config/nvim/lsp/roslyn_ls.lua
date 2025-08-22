@@ -1,17 +1,12 @@
 -- install with script install-roslyn.sh
 
-local roslyn_executable = {
+local cmd = {
 	"Microsoft.CodeAnalysis.LanguageServer",
 	"--logLevel",
 	"Information",
 	"--extensionLogDirectory",
-	vim.fs.joinpath(vim.uv.os_tmpdir(), "roslyn_ls/logs"),
+	"/tmp/roslyn_ls/logs",
 	"--stdio",
-}
-
-local roslyn_env = {
-	-- todo: figure out how to configure secrets
-	Configuration = vim.env.Configuration or "Debug",
 }
 
 local function roslyn_handlers()
@@ -85,7 +80,7 @@ end
 
 local function apply_resolved_action(client, resolved)
 	if resolved and resolved.edit then
-		vim.lsp.util.apply_workspace_edit(resolved.edit, client.offset_encoding or "utf-16")
+		vim.lsp.util.apply_workspace_edit(resolved.edit, client.offset_encoding)
 	end
 	if resolved and resolved.command then
 		vim.lsp.buf.execute_command(resolved.command)
@@ -224,38 +219,38 @@ local function get_root_dir(bufnr, cb)
 	end
 end
 
-local on_init = function(client)
-	local root_dir = client.config.root_dir
-	if not root_dir then
-		return
-	end
+local on_init = {
+	function(client)
+		local root_dir = client.config.root_dir
+		if not root_dir then
+			return
+		end
 
-	local sln_files = vim.fs.find("*.sln", { path = root_dir, limit = 1, type = "file" })
-	if #sln_files > 0 then
-		client:notify("solution/open", {
-			solution = vim.uri_from_fname(sln_files[1]),
-		})
-		return
-	end
+		local sln_files = vim.fs.find("*.sln", { path = root_dir, limit = 1, type = "file" })
+		if #sln_files > 0 then
+			client:notify("solution/open", {
+				solution = vim.uri_from_fname(sln_files[1]),
+			})
+			return
+		end
 
-	local csproj_files = vim.fs.find("*.csproj", { path = root_dir, type = "file" })
-	if #csproj_files > 0 then
-		client:notify("project/open", {
-			projects = vim.tbl_map(function(file)
-				return vim.uri_from_fname(file)
-			end, csproj_files),
-		})
-	end
-end
+		local csproj_files = vim.fs.find("*.csproj", { path = root_dir, type = "file" })
+		if #csproj_files > 0 then
+			client:notify("project/open", {
+				projects = vim.tbl_map(function(file)
+					return vim.uri_from_fname(file)
+				end, csproj_files),
+			})
+		end
+	end,
+}
 
 local capabilities = {
-	-- HACK: Doesn't show any diagnostics if we do not set this to true
 	textDocument = {
 		diagnostic = {
 			dynamicRegistration = true,
 		},
 	},
-	offsetEncoding = { "utf-16" },
 }
 
 local roslyn_settings = {
@@ -298,9 +293,9 @@ local roslyn_settings = {
 }
 
 return {
-	name = "roslyn",
-	cmd = roslyn_executable,
-	cmd_env = roslyn_env,
+	name = "roslyn_ls",
+	offset_encoding = "utf-8",
+	cmd = cmd,
 	filetypes = { "cs" },
 	handlers = roslyn_handlers(),
 	commands = roslyn_commands(),
