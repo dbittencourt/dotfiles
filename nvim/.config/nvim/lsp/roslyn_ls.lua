@@ -222,25 +222,26 @@ end
 local on_init = {
 	function(client)
 		local root_dir = client.config.root_dir
-		if not root_dir then
-			return
+
+		-- try load first solution we find
+		for entry, type in vim.fs.dir(root_dir) do
+			if type == "file" and (vim.endswith(entry, ".sln") or vim.endswith(entry, ".slnx")) then
+				client:notify("solution/open", {
+					solution = vim.uri_from_fname(vim.fs.joinpath(root_dir, entry)),
+				})
+				return
+			end
 		end
 
-		local sln_files = vim.fs.find("*.sln", { path = root_dir, limit = 1, type = "file" })
-		if #sln_files > 0 then
-			client:notify("solution/open", {
-				solution = vim.uri_from_fname(sln_files[1]),
-			})
-			return
-		end
-
-		local csproj_files = vim.fs.find("*.csproj", { path = root_dir, type = "file" })
-		if #csproj_files > 0 then
-			client:notify("project/open", {
-				projects = vim.tbl_map(function(file)
-					return vim.uri_from_fname(file)
-				end, csproj_files),
-			})
+		-- if no solution is found load project
+		for entry, type in vim.fs.dir(root_dir) do
+			if type == "file" and vim.endswith(entry, ".csproj") then
+				client:notify("project/open", {
+					projects = vim.tbl_map(function(file)
+						return vim.uri_from_fname(file)
+					end, { vim.fs.joinpath(root_dir, entry) }),
+				})
+			end
 		end
 	end,
 }
