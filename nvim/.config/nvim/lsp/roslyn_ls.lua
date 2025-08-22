@@ -224,39 +224,29 @@ local function get_root_dir(bufnr, cb)
 	end
 end
 
-local on_init = {
-	function(client)
-		local root_dir = client.config.root_dir
-		local sln_file
-		local csproj_files = {}
+local on_init = function(client)
+	local root_dir = client.config.root_dir
+	if not root_dir then
+		return
+	end
 
-		for entry, type in vim.fs.dir(root_dir) do
-			if type == "file" then
-				if vim.endswith(entry, ".sln") then
-					sln_file = entry
-					break
-				elseif vim.endswith(entry, ".csproj") then
-					table.insert(csproj_files, entry)
-				end
-			end
-		end
+	local sln_files = vim.fs.find("*.sln", { path = root_dir, limit = 1, type = "file" })
+	if #sln_files > 0 then
+		client:notify("solution/open", {
+			solution = vim.uri_from_fname(sln_files[1]),
+		})
+		return
+	end
 
-		if sln_file then
-			client:notify("solution/open", {
-				solution = vim.uri_from_fname(vim.fs.joinpath(root_dir, sln_file)),
-			})
-			return
-		end
-
-		if #csproj_files > 0 then
-			client:notify("project/open", {
-				projects = vim.tbl_map(function(file)
-					return vim.uri_from_fname(vim.fs.joinpath(root_dir, file))
-				end, csproj_files),
-			})
-		end
-	end,
-}
+	local csproj_files = vim.fs.find("*.csproj", { path = root_dir, type = "file" })
+	if #csproj_files > 0 then
+		client:notify("project/open", {
+			projects = vim.tbl_map(function(file)
+				return vim.uri_from_fname(file)
+			end, csproj_files),
+		})
+	end
+end
 
 local capabilities = {
 	-- HACK: Doesn't show any diagnostics if we do not set this to true
