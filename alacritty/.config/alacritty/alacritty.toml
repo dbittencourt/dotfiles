@@ -6,7 +6,7 @@ hide_when_typing = true
 
 [window]
 dynamic_padding = true
-decorations = "full"
+decorations = "none"
 opacity = 0.9
 
 [font]

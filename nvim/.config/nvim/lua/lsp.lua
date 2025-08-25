@@ -5,16 +5,8 @@ local function on_attach(client, bufnr)
 		vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc, noremap = noremap })
 	end
 
-	-- default neovim keymaps
-	-- grn: smart rename
-	-- gra: show code actions
-
-	keymap("n", "<leader>lr", function()
-		vim.lsp.stop_client(vim.lsp.get_clients())
-		vim.cmd("edit")
-	end, "Restart lsp")
-
 	local fzf = require("fzf-lua")
+
 	-- code navigation
 	keymap("n", "gd", fzf.lsp_definitions, "Show lsp definitions")
 	keymap("n", "grt", fzf.lsp_typedefs, "Show lsp type definitions")

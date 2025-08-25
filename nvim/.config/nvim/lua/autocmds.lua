@@ -1,23 +1,4 @@
 vim.api.nvim_create_autocmd("FileType", {
-	group = vim.api.nvim_create_augroup("dbitt/max_column", { clear = true }),
-	desc = "Set a ruler at column 100",
-	pattern = "*",
-	callback = function()
-		if
-			not vim.tbl_contains({
-				"help",
-				"terminal",
-				"lazy",
-				"qf",
-				"checkhealth",
-			}, vim.bo.filetype)
-		then
-			vim.opt.colorcolumn = "100"
-		end
-	end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("dbitt/quick_close", { clear = true }),
 	desc = "Close with <q>",
 	pattern = { "help", "man", "qf", "scratch" },

@@ -1,6 +1,8 @@
 vim.o.termguicolors = true
 vim.o.swapfile = false
 
+-- set a ruler at column 100
+vim.opt.colorcolumn = "100"
 -- save undo history
 vim.o.undofile = true
 
