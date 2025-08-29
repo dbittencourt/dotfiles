@@ -9,6 +9,10 @@ local function on_attach(client, bufnr)
 
 	-- code navigation
 	keymap("n", "gd", fzf.lsp_definitions, "Show lsp definitions")
+	keymap("n", "gD", function()
+		vim.cmd("tab split")
+		vim.lsp.buf.definition()
+	end, "Show lsp definition in new tab")
 	keymap("n", "grt", fzf.lsp_typedefs, "Show lsp type definitions")
 	keymap("n", "gri", fzf.lsp_implementations, "Show lsp implementations")
 	keymap("n", "grr", fzf.lsp_references, "Show lsp references")

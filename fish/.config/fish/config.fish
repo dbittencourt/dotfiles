@@ -10,6 +10,7 @@ set -gx EDITOR nvim
 set -gx BAT_THEME kanagawa
 set -gx NODE_OPTIONS "--max-old-space-size=8192" # for large JS projects
 set -gx ELECTRON_OZONE_PLATFORM_HINT auto
+set -gx MSBUILDDISABLENODEREUSE 1 # prevent dotnet build zombie processes
 
 if test -d "$HOME/.cargo/bin"
     set -p PATH "$HOME/.cargo/bin"

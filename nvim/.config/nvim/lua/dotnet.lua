@@ -83,19 +83,35 @@ local function run_dotnet_test()
 	})
 end
 
-vim.api.nvim_create_autocmd("VimEnter", {
-	group = vim.api.nvim_create_augroup("dbitt/dotnet", { clear = true }),
-	callback = function()
-		if get_project_root() then
-			vim.cmd("compiler dotnet")
-			vim.g.dotnet_errors_only = true
-			vim.g.dotnet_show_project_file = false
+local setup_compiler = function()
+	vim.cmd("compiler dotnet")
+	-- normal dotnet build behavior spins a lot of processes every time you trigger a build
+	-- if you dont set MSBUILDDISABLENODEREUSE=1 environment variable, uncomment line bellow
+	-- vim.o.makeprg = "dotnet build /nodeReuse:false"
+	vim.g.dotnet_errors_only = true
+	vim.g.dotnet_show_project_file = false
+end
 
+local dotnet_group = vim.api.nvim_create_augroup("dbitt/dotnet", { clear = true })
+
+vim.api.nvim_create_autocmd("VimEnter", {
+	group = dotnet_group,
+	callback = function()
+		setup_compiler()
+		if get_project_root() then
 			vim.keymap.set("n", "<leader>td", run_dotnet_test, {
 				noremap = true,
 				silent = true,
 				desc = "Run dotnet test and populate quickfix",
 			})
 		end
+	end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	group = dotnet_group,
+	pattern = "cs",
+	callback = function()
+		setup_compiler()
 	end,
 })
