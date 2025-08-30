@@ -1,4 +1,5 @@
 require("autocmds")
+require("diagnostics")
 require("dotnet")
 require("keymaps")
 require("lsp")
