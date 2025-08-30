@@ -30,7 +30,7 @@ set("n", "<leader>P", "goVGP", { desc = "Replace buffer with default register co
 
 -- programming
 set("n", "<leader>b", "<cmd>make<cr>", { desc = "Build project" })
-set("n", "<leader>Q", vim.diagnostic.setqflist, { desc = "Send diagnostics to quickfix" })
+set("n", "<leader>D", vim.diagnostic.setqflist, { desc = "Send diagnostics to quickfix" })
 set("n", "<leader>q", function()
 	local qf_open = false
 	for _, win in ipairs(vim.api.nvim_list_wins()) do
