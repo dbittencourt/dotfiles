@@ -13,6 +13,7 @@ set -gx ELECTRON_OZONE_PLATFORM_HINT auto
 set -gx MSBUILDDISABLENODEREUSE 1 # prevent dotnet build zombie processes
 
 if test -d "$HOME/.cargo/bin"
+    source "$HOME/.cargo/env.fish"
     set -p PATH "$HOME/.cargo/bin"
 end
 if test -d "$HOME/.dotnet/tools"

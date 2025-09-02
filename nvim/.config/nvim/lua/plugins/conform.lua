@@ -34,6 +34,7 @@ return {
 				cpp = { "clang-format" },
 				sql = { "sql_formatter" },
 				pgsql = { "sql_formatter" },
+				rust = { "rust_analyzer" },
 			},
 			formatters = {
 				fish_lint = {
