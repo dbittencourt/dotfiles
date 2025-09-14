@@ -11,9 +11,6 @@
   pager = delta
   excludesfile = ~/.gitignore
 
-[init]
-  defaultBranch = main
-
 [fetch]
   prune = true
 
