@@ -1,5 +1,6 @@
 # rebelot/kanagawa.nvim theme colors
 # https://github.com/rebelot/kanagawa.nvim
+
 [colors.primary]
 background = "0x16161D"
 foreground = "0xC8C093"

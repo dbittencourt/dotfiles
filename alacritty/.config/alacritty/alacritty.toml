@@ -1,39 +1,22 @@
 [env]
-TERM="xterm-256color"
-
-[mouse]
-hide_when_typing = true
+TERM="xterm-256color" # tmux compatibility
 
 [window]
-dynamic_padding = true
-decorations = "none"
-opacity = 0.9
-option_as_alt = "Both"
+decorations = "none" # remove top bar
+option_as_alt = "both" # enable keybindings with alt in macos
 
 [font]
 size = 13
-normal = { family = "JetBrainsMono Nerd Font", style = "Medium" }
-bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
-italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
-bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
+normal = { family = "JetBrainsMono Nerd Font" }
+bold = { style = "Bold" }
+italic = { style = "Italic" }
+bold_italic = { style = "Bold Italic" }
 
 [font.offset]
-x = 0
-y = 0
-
-[font.glyph_offset]
-x = 0
-y = 2
+y = 2 # remove extra padding at the bottom
 
 [selection]
-semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 save_to_clipboard = true
 
-[cursor]
-style = "Block"
-vi_mode_style = "Beam"
-unfocused_hollow = true
-
 [general]
-live_config_reload = true
 import = ["./kanagawa.toml"]
