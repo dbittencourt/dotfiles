@@ -22,5 +22,6 @@ if test -x /opt/homebrew/bin/brew
     /opt/homebrew/bin/brew shellenv | source
 end
 
-# fzf keybindings and completions
 fzf --fish | source
+
+fnm env --use-on-cd --shell fish | source
