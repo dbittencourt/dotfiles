@@ -1,4 +1,0 @@
-# This file contains fish universal variable definitions.
-# VERSION: 3.0
-SETUVAR __fish_initialized:3800
-SETUVAR fish_user_paths:/Users/dan/\x2edotnet/tools
