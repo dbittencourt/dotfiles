@@ -2,6 +2,7 @@
 TERM="xterm-256color" # tmux compatibility
 
 [window]
+dynamic_padding = true
 decorations = "none" # remove top bar
 option_as_alt = "both" # enable keybindings with alt in macos
 
