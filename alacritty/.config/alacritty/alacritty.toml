@@ -8,6 +8,7 @@ hide_when_typing = true
 dynamic_padding = true
 decorations = "none"
 opacity = 0.9
+option_as_alt = "Both"
 
 [font]
 size = 13
