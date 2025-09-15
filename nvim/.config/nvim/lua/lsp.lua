@@ -1,4 +1,5 @@
 local methods = vim.lsp.protocol.Methods
+
 local function on_attach(client, bufnr)
 	local function keymap(mode, lhs, rhs, desc, noremap)
 		noremap = noremap or false
@@ -41,20 +42,6 @@ local function on_attach(client, bufnr)
 			callback = vim.lsp.buf.clear_references,
 		})
 	end
-end
-
--- update mappings when registering dynamic capabilities
--- borrowed from https://github.com/MariaSolOs/dotfiles
-local register_capability = vim.lsp.handlers[methods.client_registerCapability]
-vim.lsp.handlers[methods.client_registerCapability] = function(err, res, ctx)
-	local client = vim.lsp.get_client_by_id(ctx.client_id)
-	if not client then
-		return
-	end
-
-	on_attach(client, vim.api.nvim_get_current_buf())
-
-	return register_capability(err, res, ctx)
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
