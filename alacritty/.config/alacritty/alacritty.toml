@@ -8,13 +8,11 @@ option_as_alt = "both" # enable keybindings with alt in macos
 
 [font]
 size = 13
+offset = { y = 2 } # remove extra padding at the bottom
 normal = { family = "JetBrainsMono Nerd Font" }
 bold = { style = "Bold" }
 italic = { style = "Italic" }
 bold_italic = { style = "Bold Italic" }
-
-[font.offset]
-y = 2 # remove extra padding at the bottom
 
 [selection]
 save_to_clipboard = true
