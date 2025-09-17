@@ -1,5 +1,5 @@
-[env]
-TERM="xterm-256color" # tmux compatibility
+[general]
+import = ["./kanagawa.toml"]
 
 [window]
 dynamic_padding = true
@@ -8,14 +8,11 @@ option_as_alt = "both" # enable keybindings with alt in macos
 
 [font]
 size = 13
+normal = { family = "JetBrainsMono Nerd Font", style = "Medium" }
 offset = { y = 2 } # remove extra padding at the bottom
-normal = { family = "JetBrainsMono Nerd Font" }
-bold = { style = "Bold" }
-italic = { style = "Italic" }
-bold_italic = { style = "Bold Italic" }
 
 [selection]
 save_to_clipboard = true
 
-[general]
-import = ["./kanagawa.toml"]
+[mouse]
+hide_when_typing = true
