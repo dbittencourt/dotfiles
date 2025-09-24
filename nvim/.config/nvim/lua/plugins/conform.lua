@@ -31,6 +31,7 @@ return {
 				fish = { "fish_indent", "fish_lint" },
 				cs = { "csharpier" },
 				c = { "clang-format" },
+				csharp = { "csharpier" },
 				cpp = { "clang-format" },
 				sql = { "sql_formatter" },
 				pgsql = { "sql_formatter" },
@@ -40,12 +41,6 @@ return {
 				fish_lint = {
 					command = "fish",
 					args = { "--no-execute", "$FILENAME" },
-					stdin = false,
-				},
-				csharpier = {
-					command = "csharpier",
-					args = { "format", "$FILENAME" },
-					-- csharpier expects a file path argument rather than stdin
 					stdin = false,
 				},
 				sql_formatter = {

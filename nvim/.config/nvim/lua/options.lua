@@ -22,6 +22,10 @@ vim.o.shiftwidth = 2 -- << and >> use 2 spaces
 vim.o.expandtab = true -- tab turns into spaces
 vim.o.tabstop = 2 -- tab equals 2 spaces
 
+-- show whitespace
+vim.o.list = true
+vim.opt.listchars = { tab = "» ", trail = "·" }
+
 -- split window behaviour
 vim.o.splitright = true
 vim.o.splitbelow = true
