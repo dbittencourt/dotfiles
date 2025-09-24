@@ -5,6 +5,7 @@ font-feature = -calt, -liga, -dlig
 
 window-padding-x = 0
 window-padding-y = 0
+window-padding-color = extend
 window-save-state = always
 window-new-tab-position = end
 
@@ -14,3 +15,4 @@ confirm-close-surface = false
 
 config-file = kanagawa-dragon.conf
 config-file = ?config-macos
+config-file = ?config-linux

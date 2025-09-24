@@ -1,0 +1,3 @@
+gtk-tabs-location = bottom
+gtk-wide-tabs = false
+gtk-custom-css = "tabs.css"
