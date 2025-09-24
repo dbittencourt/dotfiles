@@ -1,0 +1,48 @@
+[include]
+  # include personal details
+  path = .gitconfig-personal
+
+[includeIf "gitdir:~/work/"]
+  # configure work details
+  path = .gitconfig-work
+
+[core]
+  editor = nvim
+  pager = delta
+  excludesfile = ~/.gitignore
+
+[fetch]
+  prune = true
+
+[pull]
+  ff = only
+
+[diff]
+  colorMoved = default
+
+[commit]
+  gpgsign = true
+
+[tag]
+  gpgsign = true
+
+[merge]
+  conflictstyle = diff3
+
+[interactive]
+  diffFilter = delta --color-only
+
+[pager]
+  blame  = delta
+  diff   = delta
+  reflog = delta
+  show   = delta
+
+[delta]
+  # use n and N to move between diff sections
+  navigate = true
+  true-color = always
+  keep-plus-minus-markers = false
+
+[gpg]
+  format = ssh

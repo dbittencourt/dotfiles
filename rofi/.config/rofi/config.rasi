@@ -1,0 +1,54 @@
+configuration {
+  modi: "drun,run,window,ssh";
+  font: "JetBrainsMono Nerd Font 20";
+}
+
+* {
+  bg: #181616;
+  fg: #c5c9c5;
+  active: #c4746e;
+
+  background-color: transparent;
+  text-color: @fg;
+  padding: 0.2em;
+}
+
+window {
+  background-color: #000A;
+  border-color: @bg;
+  border-radius: 8px;
+  width: 30em;
+}
+
+inputbar {
+  children: [prompt, entry];
+}
+
+prompt {
+  text-color: @fg;
+}
+
+entry {
+  text-color: @fg;
+  placeholder: "Search";
+}
+
+listview {
+  scrollbar: false;
+  dynamic: true;
+  border-color: #000A;
+}
+
+element normal normal, element alternate normal {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element selected normal, element selected active {
+    background-color:   transparent;
+}
+
+element-text selected {
+  background-color: transparent;
+  text-color: @active;
+}

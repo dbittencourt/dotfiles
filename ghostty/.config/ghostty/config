@@ -1,0 +1,15 @@
+font-family = JetBrainsMono Nerd Font
+font-style = Medium
+font-size = 13
+
+window-padding-x = 0
+window-padding-y = 0
+
+mouse-hide-while-typing = true
+copy-on-select = clipboard
+confirm-close-surface = false
+
+macos-option-as-alt = true
+macos-titlebar-style = tabs
+
+config-file = kanagawa-dragon.conf

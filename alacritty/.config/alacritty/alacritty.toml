@@ -1,0 +1,17 @@
+[general]
+import = ["./kanagawa.toml"]
+
+[window]
+dynamic_padding = true
+decorations = "none" # remove top bar
+option_as_alt = "both" # enable keybindings with alt in macos
+
+[font]
+size = 13
+normal = { family = "JetBrainsMono Nerd Font", style = "Medium" }
+
+[selection]
+save_to_clipboard = true
+
+[mouse]
+hide_when_typing = true

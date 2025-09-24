@@ -1,0 +1,101 @@
+@import "../themes/kanagawa.css";
+
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 16px;
+  min-height: 0;
+}
+
+#waybar,
+#workspaces,
+#custom-obs,
+#custom-music,
+#tray,
+#wireplumber,
+#custom-brightness,
+#temperature,
+#cpu,
+#memory,
+#clock,
+#custom-search,
+#idle_inhibitor,
+#custom-power {
+  color: @foreground;
+  background-color: @background;
+  margin-top: 0.2rem;
+}
+
+#waybar {
+  background: transparent;
+  margin: 0.2rem;
+}
+
+#workspaces {
+  border-radius: 1rem;
+  margin-left: 0.2rem;
+}
+
+#workspaces button {
+  color: @foreground;
+  border-radius: 1rem;
+  padding: 0.5rem;
+}
+
+#workspaces button.active {
+  color: @sapphire;
+  border-radius: 1rem;
+}
+
+#workspaces button:hover {
+  color: @background;
+  border-radius: 1rem;
+}
+
+#custom-obs,
+#custom-music,
+#wireplumber,
+#custom-brightness,
+#temperature,
+#cpu,
+#memory,
+#tray,
+#clock,
+#custom-search,
+#idle_inhibitor {
+  padding: 0.5rem 1rem;
+}
+
+#custom-power {
+  padding: 0.5rem;
+  padding-left: 1.2rem;
+}
+
+#custom-obs {
+  margin-right: 1rem;
+}
+
+#custom-obs.recording {
+  color: @red;
+}
+
+#custom-obs.idle {
+  color: @magenta;
+}
+
+#custom-obs,
+#custom-music,
+#tray {
+  border-radius: 1rem;
+}
+
+#wireplumber,
+#clock {
+  border-radius: 1rem 0px 0px 1rem;
+  margin-left: 1rem;
+}
+
+#memory,
+#custom-power {
+  border-radius: 0px 1rem 1rem 0px;
+  margin-right: 0.2rem;
+}
