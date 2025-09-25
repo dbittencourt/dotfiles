@@ -4,6 +4,7 @@ require("dotnet")
 require("keymaps")
 require("lsp")
 require("options")
+require("terminal")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

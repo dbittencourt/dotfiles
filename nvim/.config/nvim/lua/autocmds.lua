@@ -23,11 +23,3 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		vim.opt_local.spell = true
 	end,
 })
-
-vim.api.nvim_create_autocmd("TermOpen", {
-	group = vim.api.nvim_create_augroup("dbitt/terminal_escape", { clear = true }),
-	desc = "Map <esc> to exit terminal mode",
-	callback = function(args)
-		vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { buffer = args.buf, nowait = true })
-	end,
-})

@@ -24,7 +24,7 @@ vim.o.tabstop = 2 -- tab equals 2 spaces
 
 -- show whitespace
 vim.o.list = true
-vim.opt.listchars = { tab = "» ", trail = "·" }
+vim.opt.listchars = { tab = "  ", trail = "·" }
 
 -- split window behaviour
 vim.o.splitright = true
