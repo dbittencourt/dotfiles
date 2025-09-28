@@ -1,16 +1,21 @@
 local function get_term(name)
 	local buf = vim.fn.bufnr(name)
 	if buf > 0 and vim.api.nvim_buf_get_option(buf, "buftype") == "terminal" then
-		local win = vim.fn.bufwinid(buf)
-		if win > 0 then
+		local wins = vim.fn.win_findbuf(buf)
+		if #wins > 0 then
+			local win = wins[1]
+			local tab = vim.api.nvim_win_get_tabpage(win)
+			vim.api.nvim_set_current_tabpage(tab)
 			vim.api.nvim_set_current_win(win)
-		else
-			vim.cmd.sbuffer(buf)
+			return
 		end
+
+		vim.cmd("tab sbuffer " .. buf)
 	else
 		if buf > 0 then
 			vim.cmd.bdelete({ bang = true, buf })
 		end
+		vim.cmd.tabnew()
 		vim.cmd.terminal()
 		vim.cmd.file(name)
 	end

@@ -19,6 +19,9 @@ set("n", "<C-k>", "<C-w>k", { desc = "Move to upper split" })
 -- tab management
 set("n", "<leader>to", "<cmd>tabnew<cr>", { desc = "Open new tab" })
 set("n", "<leader>tx", "<cmd>tabclose<cr>", { desc = "Close current tab" })
+for i = 1, 9 do
+	set("n", "<leader>" .. i, "<cmd>tabnext " .. i .. "<cr>", { desc = "Go to tab " .. i })
+end
 
 -- selection helpers
 set("n", "<leader>ya", "goVGy", { desc = "Copy buffer content" })
