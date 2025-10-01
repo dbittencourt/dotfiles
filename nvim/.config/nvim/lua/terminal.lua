@@ -13,7 +13,7 @@ local function get_term(name)
 		vim.cmd("tab sbuffer " .. buf)
 	else
 		if buf > 0 then
-			vim.cmd.bdelete({ bang = true, buf })
+			pcall(vim.cmd.bdelete, { bang = true, buf })
 		end
 		vim.cmd.tabnew()
 		vim.cmd.terminal()
