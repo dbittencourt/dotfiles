@@ -1,5 +1,3 @@
-local methods = vim.lsp.protocol.Methods
-
 local function on_attach(client, bufnr)
 	local function keymap(mode, lhs, rhs, desc, noremap)
 		noremap = noremap or false
@@ -21,7 +19,7 @@ local function on_attach(client, bufnr)
 	keymap("n", "gO", fzf.lsp_document_symbols, "Show document symbols")
 
 	-- override neovim default signature keymap to close blink if its open
-	if client:supports_method(methods.textDocument_signatureHelp) then
+	if client:supports_method("textDocument/signatureHelp") then
 		keymap({ "n", "i", "s" }, "<C-S>", function()
 			if require("blink.cmp.completion.windows.menu").win:is_open() then
 				require("blink.cmp").hide()
@@ -30,7 +28,7 @@ local function on_attach(client, bufnr)
 		end, "Show signature", true)
 	end
 
-	if client:supports_method(methods.textDocument_documentHighlight) then
+	if client:supports_method("textDocument/documentHighlight") then
 		vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave" }, {
 			desc = "Highlight references under the cursor",
 			buffer = bufnr,

@@ -1,6 +1,7 @@
 macos-option-as-alt = true
 macos-titlebar-style = tabs
 quit-after-last-window-closed = true
+window-save-state = always
 
 # make keybindings same as linux
 keybind = alt+one=goto_tab:1
