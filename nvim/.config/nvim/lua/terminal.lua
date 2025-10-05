@@ -16,7 +16,7 @@ local function get_term(name)
 			pcall(vim.cmd.bdelete, { bang = true, buf })
 		end
 		vim.cmd.tabnew()
-		vim.cmd.terminal()
+		vim.cmd.terminal("fish")
 		vim.cmd.file(name)
 	end
 end
