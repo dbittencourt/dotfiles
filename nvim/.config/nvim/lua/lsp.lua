@@ -1,7 +1,6 @@
 local function on_attach(client, bufnr)
-	local function keymap(mode, lhs, rhs, desc, noremap)
-		noremap = noremap or false
-		vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc, noremap = noremap })
+	local function keymap(mode, lhs, rhs, desc)
+		vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
 	end
 
 	local fzf = require("fzf-lua")
@@ -17,16 +16,6 @@ local function on_attach(client, bufnr)
 	keymap("n", "grr", fzf.lsp_references, "Show lsp references")
 	keymap("n", "grc", fzf.lsp_incoming_calls, "Show lsp incoming calls")
 	keymap("n", "gO", fzf.lsp_document_symbols, "Show document symbols")
-
-	-- override neovim default signature keymap to close blink if its open
-	if client:supports_method("textDocument/signatureHelp") then
-		keymap({ "n", "i", "s" }, "<C-S>", function()
-			if require("blink.cmp.completion.windows.menu").win:is_open() then
-				require("blink.cmp").hide()
-			end
-			vim.lsp.buf.signature_help()
-		end, "Show signature", true)
-	end
 
 	if client:supports_method("textDocument/documentHighlight") then
 		vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave" }, {
