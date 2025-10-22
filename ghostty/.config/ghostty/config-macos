@@ -1,0 +1,14 @@
+macos-option-as-alt = true
+macos-titlebar-style = tabs
+quit-after-last-window-closed = true
+window-save-state = always
+
+# make keybindings same as linux
+keybind = alt+one=goto_tab:1
+keybind = alt+two=goto_tab:2
+keybind = alt+three=goto_tab:3
+keybind = alt+four=goto_tab:4
+keybind = alt+five=goto_tab:5
+keybind = ctrl+shift+t=new_tab
+keybind = ctrl+shift+w=close_tab
+keybind = ctrl+shift+comma=reload_config

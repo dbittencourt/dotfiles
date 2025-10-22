@@ -1,0 +1,15 @@
+font-size = 13
+font-feature = -calt, -liga, -dlig
+
+window-padding-x = 0
+window-padding-y = 0
+window-padding-color = extend
+window-new-tab-position = end
+
+mouse-hide-while-typing = true
+copy-on-select = clipboard
+confirm-close-surface = false
+
+config-file = kanagawa-dragon.conf
+config-file = ?config-macos
+config-file = ?config-linux

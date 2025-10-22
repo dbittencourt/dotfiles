@@ -1,0 +1,10 @@
+tabbar tabbox {
+  min-height: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+tabbar tabbox tab {
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,5 @@
+**/.DS_Store
+
+# make sure we don't leak any sensitive information :)
+**/.gitconfig-personal
+**/.gitconfig-work

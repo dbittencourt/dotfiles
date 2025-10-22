@@ -1,0 +1,93 @@
+{
+  "layer": "top", // Waybar at top layer
+  "position": "top", // Waybar position (top|bottom|left|right)
+  // Choose the order of the modules
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["custom/obs", "custom/music"],
+  "modules-right": [
+    "tray",
+    "wireplumber",
+    "custom/brightness",
+    "temperature",
+    "cpu",
+    "memory",
+    "clock",
+    "custom/search",
+    "idle_inhibitor",
+    "custom/power"
+  ],
+  "custom/obs": {
+    "format": "{}",
+    "interval": 1,
+    "exec": "~/.config/obs-studio/scripts/waybar-obs.sh",
+    "return-type": "json"
+  },
+  "custom/music": {
+    "format": "  {}",
+    "escape": true,
+    "interval": 5,
+    "tooltip": false,
+    "exec": "playerctl metadata --format='{{ title }}'",
+    "on-click": "playerctl play-pause",
+    "max-length": 50
+  },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
+  },
+  "wireplumber": {
+    "format": "{icon} {volume}%",
+    "format-muted": "",
+    "format-icons": {
+      "default": ["", "", " "]
+    },
+    "on-click": "pavucontrol"
+  },
+  "custom/brightness": {
+    "format": " {percentage}%",
+    "tooltip": false,
+    "interval": 1,
+    "exec": "~/.config/waybar/scripts/brightness.sh",
+    "return-type": "json",
+    "on-scroll-up": "asdbctl up",
+    "on-scroll-down": "asdbctl down",
+  },
+  "temperature": {
+    "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+    "critical-threshold": 80,
+    "format": "{icon} {temperatureC}°C",
+    "format-icons": ["", "", ""],
+    "tooltip": false
+  },
+  "cpu": {
+    "format": "{icon} {usage}%",
+    "format-icons": [""],
+  },
+  "memory": {
+    "format": "{icon} {used:0.1f}G",
+    "format-icons": [""],
+    "tooltip": false
+  },
+  "clock": {
+    "format": " {0:%d/%m}  󰥔 {0:%H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "on-click": "betterbird -calendar && hyprctl dispatch focuswindow 'title:^(Calendar - Betterbird)$'"
+ },
+  "custom/search": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "rofi -show drun"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    },
+  },
+  "custom/power": {
+    "on-click": "~/.config/waybar/scripts/power.sh",
+    "format": " ",
+    "tooltip": false
+  }
+}
