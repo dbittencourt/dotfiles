@@ -71,7 +71,7 @@
   "clock": {
     "format": " {0:%d/%m}  󰥔 {0:%H:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "on-click": "betterbird -calendar && hyprctl dispatch focuswindow 'title:^(Calendar - Betterbird)$'"
+    "on-click": "thunderbird -calendar && hyprctl dispatch focuswindow 'title:^(Calendar - Mozilla Thunderbird)$'"
  },
   "custom/search": {
     "format": "",
