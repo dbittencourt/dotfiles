@@ -43,11 +43,4 @@ return {
 		},
 		snippets = { preset = "default" },
 	},
-	config = function(_, opts)
-		local blink = require("blink.cmp")
-		blink.setup(opts)
-
-		-- extend neovim completion capabilities
-		vim.lsp.config("*", { capabilities = blink.get_lsp_capabilities(nil, true) })
-	end,
 }
