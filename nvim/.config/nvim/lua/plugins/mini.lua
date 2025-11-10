@@ -159,7 +159,13 @@ return {
 
 			vim.keymap.set("n", "<leader>e", function()
 				if not files.close() then
-					files.open(vim.api.nvim_buf_get_name(0))
+					local path
+					if vim.bo.buftype == "terminal" then
+						path = vim.fn.getcwd()
+					else
+						path = vim.api.nvim_buf_get_name(0)
+					end
+					files.open(path)
 				end
 			end, { desc = "Open file explorer" })
 
