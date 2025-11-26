@@ -21,7 +21,6 @@ local function get_term(name, cmd)
 			vim.cmd("tab sbuffer " .. buf)
 		end
 
-		vim.cmd.startinsert()
 		return
 	end
 
@@ -34,14 +33,17 @@ local function get_term(name, cmd)
 	buf = vim.api.nvim_get_current_buf()
 	vim.fn.termopen(cmd or "fish")
 	vim.cmd.file(name)
-	vim.cmd.startinsert()
 end
 
-vim.keymap.set("n", "<leader>ta", function()
+vim.keymap.set("n", "<leader>t6", function()
+	get_term("term-git")
+end, { desc = "Open git terminal" })
+
+vim.keymap.set("n", "<leader>t7", function()
 	get_term("term-ai")
 end, { desc = "Open AI terminal" })
 
-vim.keymap.set("n", "<leader>ts", function()
+vim.keymap.set("n", "<leader>t8", function()
 	get_term("term-server")
 end, { desc = "Open server terminal" })
 
