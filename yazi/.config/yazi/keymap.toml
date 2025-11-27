@@ -15,7 +15,6 @@ keymap = [
 	# Hopping
 	{ on = "k", run = "arrow prev", desc = "Previous file" },
 	{ on = "j", run = "arrow next", desc = "Next file" },
-
 	{ on = "<Up>",   run = "arrow prev", desc = "Previous file" },
 	{ on = "<Down>", run = "arrow next", desc = "Next file" },
 
@@ -127,6 +126,7 @@ keymap = [
 	{ on = [ "g", "h" ],       run = "cd ~",             desc = "Go home" },
 	{ on = [ "g", "c" ],       run = "cd ~/.config",     desc = "Go ~/.config" },
 	{ on = [ "g", "d" ],       run = "cd ~/Downloads",   desc = "Go ~/Downloads" },
+  { on = [ "g", "t"],        run = "cd ~/.local/share/Trash", desc = "Go to trash" },
 	{ on = [ "g", "<Space>" ], run = "cd --interactive", desc = "Jump interactively" },
 	{ on = [ "g", "f" ],       run = "follow",           desc = "Follow hovered symlink" },
 
