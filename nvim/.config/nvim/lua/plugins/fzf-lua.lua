@@ -43,11 +43,18 @@ return {
 			diagnostics = {
 				multiline = 1,
 			},
+			{
+				undotree =
+					-- use git-delta diff
+					{ previewer = "undotree_native" },
+			},
 		})
 
 		fzf.register_ui_select()
 
 		local set = vim.keymap.set
+		set("n", "<leader>u", fzf.undotree, { desc = "Show Undo tree" })
+		set("n", "<leader>fd", fzf.diagnostics_document, { desc = "Show document diagnostics" })
 		set("n", "<leader>fd", fzf.diagnostics_document, { desc = "Show document diagnostics" })
 		set("n", "<leader>ff", fzf.files, { desc = "Search file in cwd" })
 		set("n", "<leader>fb", fzf.buffers, { desc = "Show open buffers" })

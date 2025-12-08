@@ -46,6 +46,3 @@ require("lazy").setup("plugins", {
 		},
 	},
 })
-
--- uncomment after nvim 0.12
--- vim.cmd.packadd("nvim.undotree")
