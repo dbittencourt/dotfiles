@@ -12,7 +12,7 @@ m3u_player = [
 
 [open]
 rules = [
-    { mime = "text/*", use = ["editor", "open"] },
     { url = "*.m3u", use = ["m3u_player", "open"] },
+    { mime = "text/*", use = ["editor", "open"] },
     { url = "*", use = ["open"] },
 ]
