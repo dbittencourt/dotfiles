@@ -3,6 +3,7 @@ vim.g.maplocalleader = " "
 
 local set = vim.keymap.set
 
+set("n", "<leader>U", "<cmd>lua vim.pack.update()<cr>", { desc = "Update plugins" })
 set("n", "<leader>nh", "<cmd>nohl<cr>", { desc = "Clear search highlights" })
 set("n", "<C-d>", "<C-d>zz", { desc = "Center screen after going down one page" })
 set("n", "<C-u>", "<C-u>zz", { desc = "Center screen after going up one page" })
