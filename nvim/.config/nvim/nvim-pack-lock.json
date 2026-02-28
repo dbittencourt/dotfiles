@@ -10,7 +10,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "fzf-lua": {
-      "rev": "d637241b34f2cb012309baebb2e35e440a946d8b",
+      "rev": "29ee11c06e1b8c354cc5a3212e6d24c9b8ed4f22",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "kanagawa.nvim": {

@@ -9,6 +9,7 @@ window-new-tab-position = end
 mouse-hide-while-typing = true
 copy-on-select = clipboard
 confirm-close-surface = false
+custom-shader = cursor-warp.glsl
 
 config-file = kanagawa-dragon.conf
 config-file = ?config-macos
