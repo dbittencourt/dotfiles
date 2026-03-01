@@ -1,7 +1,5 @@
 vim.pack.add({ { src = "https://github.com/tpope/vim-fugitive" } })
 
-vim.opt.fillchars = vim.opt.fillchars + "diff:╱"
-
 local toggle_status = function()
 	local fugitive_open = false
 	-- iterate over all windows

@@ -1,10 +1,8 @@
 require("autocmds")
 require("diagnostics")
-require("dotnet")
 require("keymaps")
 require("lsp")
 require("options")
-require("terminal")
 require("plugins")
 
 -- disable built-in plugins

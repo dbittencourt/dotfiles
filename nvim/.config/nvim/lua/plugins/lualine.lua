@@ -1,7 +1,5 @@
 vim.pack.add({ { src = "https://github.com/nvim-lualine/lualine.nvim" } })
 
--- mock nvim-web-devicons to use mini.icons instead
-require("mini.icons").mock_nvim_web_devicons()
 require("lualine").setup({
 	options = {
 		theme = "auto",

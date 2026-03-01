@@ -10,7 +10,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "fzf-lua": {
-      "rev": "29ee11c06e1b8c354cc5a3212e6d24c9b8ed4f22",
+      "rev": "fc42c4c9552c6c0d691a16858f3bd65745fef13f",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "kanagawa.nvim": {
@@ -21,9 +21,33 @@
       "rev": "47f91c416daef12db467145e16bed5bbfe00add8",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
-    "mini.nvim": {
-      "rev": "a95dc67ecff78de138543a20c20f29f47111b122",
-      "src": "https://github.com/nvim-mini/mini.nvim"
+    "mini.ai": {
+      "rev": "4b0a6207341d895b6cfe9bcb1e4d3e8607bfe4f4",
+      "src": "https://github.com/nvim-mini/mini.ai"
+    },
+    "mini.files": {
+      "rev": "57eb96a828f80efb8095a611e3aafcfa43548f8b",
+      "src": "https://github.com/nvim-mini/mini.files"
+    },
+    "mini.hipatterns": {
+      "rev": "2c5dce6dc7443de814d16f7470549811ee86e664",
+      "src": "https://github.com/nvim-mini/mini.hipatterns"
+    },
+    "mini.icons": {
+      "rev": "5b9076dae1bfbe47ba4a14bc8b967cde0ab5d77e",
+      "src": "https://github.com/nvim-mini/mini.icons"
+    },
+    "mini.pairs": {
+      "rev": "b7fde3719340946feb75017ef9d75edebdeb0566",
+      "src": "https://github.com/nvim-mini/mini.pairs"
+    },
+    "mini.sessions": {
+      "rev": "408477bc3e1d76e5c57adebd2b688f05a0ef9bb4",
+      "src": "https://github.com/nvim-mini/mini.sessions"
+    },
+    "mini.surround": {
+      "rev": "d205d1741d1fcc1f3117b4e839bf00f74ad72fa2",
+      "src": "https://github.com/nvim-mini/mini.surround"
     },
     "nvim-dap": {
       "rev": "b516f20b487b0ac6a281e376dfac1d16b5040041",
@@ -38,7 +62,7 @@
       "src": "https://github.com/nvim-neotest/nvim-nio"
     },
     "nvim-treesitter": {
-      "rev": "ae2081cfcd3719d74b600f8377e4a99d1ec19c4a",
+      "rev": "6bc51d020a5e06b7e20ea82dbc47196d3d3027c7",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-context": {

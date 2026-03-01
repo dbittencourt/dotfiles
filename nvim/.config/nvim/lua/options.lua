@@ -26,6 +26,8 @@ vim.o.tabstop = 2 -- tab equals 2 spaces
 vim.o.list = true
 vim.opt.listchars = { tab = "  ", trail = "·" }
 
+vim.opt.fillchars = vim.opt.fillchars + "diff:╱"
+
 -- split window behaviour
 vim.o.splitright = true
 vim.o.splitbelow = true
