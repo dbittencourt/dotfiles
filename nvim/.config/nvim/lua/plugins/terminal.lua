@@ -63,10 +63,16 @@ vim.keymap.set("n", "<leader>ta", function()
 end, { desc = "Toggle AI terminal" })
 
 vim.keymap.set("x", "<leader>av", function()
+	local buf = vim.fn.bufnr("term-ai")
+	if buf == -1 or not is_job_alive(buf) then
+		vim.notify("AI terminal is not running", vim.log.levels.ERROR)
+		return
+	end
+
 	local lines = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."), { type = vim.fn.visualmode() })
 	local text = table.concat(lines, "\n") .. "\n"
 
-	local job_id = get_term("term-ai", "copilot", true)
+	local job_id = get_term("term-ai")
 	vim.api.nvim_chan_send(job_id, text)
 	vim.cmd("startinsert")
 end, { desc = "Send selection to AI terminal" })
