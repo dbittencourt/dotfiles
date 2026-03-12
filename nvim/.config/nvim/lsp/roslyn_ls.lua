@@ -98,12 +98,23 @@ local function roslyn_handlers()
 	}
 end
 
+---@param bufname string
+---@return boolean
+local function is_decompiled(bufname)
+	local _, endpos = bufname:find("[/\\]MetadataAsSource[/\\]")
+	if endpos == nil then
+		return false
+	end
+	return vim.fn.finddir(bufname:sub(1, endpos), uv.os_tmpdir()) ~= ""
+end
+
 ---@type vim.lsp.Config
 return {
 	name = "roslyn_ls",
 	offset_encoding = "utf-8",
 	cmd = {
-		"Microsoft.CodeAnalysis.LanguageServer",
+		vim.fn.executable("Microsoft.CodeAnalysis.LanguageServer") == 1 and "Microsoft.CodeAnalysis.LanguageServer"
+			or "roslyn-language-server",
 		"--logLevel",
 		"Information",
 		"--extensionLogDirectory",
@@ -146,7 +157,7 @@ return {
 		local bufname = vim.api.nvim_buf_get_name(bufnr)
 		-- don't try to find sln or csproj for files from libraries
 		-- outside of the project
-		if not bufname:match("^" .. fs.joinpath("/tmp/MetadataAsSource/")) then
+		if not is_decompiled(bufname) then
 			-- try find solutions root first
 			local root_dir = fs.root(bufnr, function(fname, _)
 				return fname:match("%.sln[x]?$") ~= nil
