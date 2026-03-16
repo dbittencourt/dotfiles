@@ -10,6 +10,7 @@ fzf.setup({
 			fzf = {
 				-- send all current search results to quickfix list
 				["ctrl-q"] = "select-all+accept",
+				["esc"] = "abort",
 			},
 		},
 		actions = {
@@ -53,7 +54,6 @@ fzf.register_ui_select()
 
 local set = vim.keymap.set
 set("n", "<leader>u", fzf.undotree, { desc = "Show Undo tree" })
-set("n", "<leader>fd", fzf.diagnostics_document, { desc = "Show document diagnostics" })
 set("n", "<leader>fd", fzf.diagnostics_document, { desc = "Show document diagnostics" })
 set("n", "<leader>ff", fzf.files, { desc = "Search file in cwd" })
 set("n", "<leader>fb", fzf.buffers, { desc = "Show open buffers" })

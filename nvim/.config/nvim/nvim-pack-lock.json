@@ -1,7 +1,7 @@
 {
   "plugins": {
     "blink.cmp": {
-      "rev": "4b18c32adef2898f95cdef6192cbd5796c1a332d",
+      "rev": "451168851e8e2466bc97ee3e026c3dcb9141ce07",
       "src": "https://github.com/Saghen/blink.cmp",
       "version": ">=0.0.0"
     },
@@ -10,7 +10,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "fzf-lua": {
-      "rev": "30ba09afbc0eac5fc5ec8823418d1e45d0712b9f",
+      "rev": "6e41ba7505f35a6f054ca682b043aa0cea36c2ef",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "kanagawa.nvim": {
@@ -54,11 +54,11 @@
       "src": "https://github.com/nvim-neotest/nvim-nio"
     },
     "nvim-treesitter": {
-      "rev": "493890b87a81dfe6a7e577dbc364ae33fa482da9",
+      "rev": "ebc3201290b8372df2b3a1c23b71b9f007d972ff",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-context": {
-      "rev": "529ee357b8c03d76ff71233afed68fd0f5fe10b1",
+      "rev": "9a8e39993e3b895601bf8227124a48ea8268149e",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
     "nvim-treesitter-textobjects": {

@@ -43,6 +43,12 @@ local function get_term(name, cmd, split, toggle)
 	if not alive then
 		vim.fn.termopen(cmd or "fish")
 		vim.cmd.file(name)
+
+		buf = vim.api.nvim_get_current_buf()
+		vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { buffer = buf, nowait = true })
+		vim.keymap.set("t", "<C-\\>", function()
+			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+		end, { buffer = buf, desc = "Feed esc in terminal mode using <C-\\>" })
 	end
 
 	return vim.b[0].terminal_job_id
@@ -77,22 +83,8 @@ vim.keymap.set("x", "<leader>av", function()
 	vim.cmd("startinsert")
 end, { desc = "Send selection to AI terminal" })
 
-local term_group = vim.api.nvim_create_augroup("dbitt/terminal", { clear = true })
-
-vim.api.nvim_create_autocmd("TermOpen", {
-	group = term_group,
-	desc = "Map <esc> to exit terminal mode",
-	callback = function(args)
-		vim.keymap.set("t", "<C-\\>", function()
-			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
-		end, { desc = "Feed esc in terminal mode using <C-\\>" })
-
-		vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { buffer = args.buf, nowait = true })
-	end,
-})
-
 vim.api.nvim_create_autocmd("TermLeave", {
-	group = term_group,
+	group = vim.api.nvim_create_augroup("dbitt/terminal", { clear = true }),
 	desc = "Reload buffers when leaving terminal",
 	pattern = "*",
 	callback = function()
