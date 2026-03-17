@@ -11,6 +11,9 @@ copy-on-select = clipboard
 confirm-close-surface = false
 custom-shader = cursor-warp.glsl
 
+keybind = ctrl+shift+u=scroll_page_up
+keybind = ctrl+shift+d=scroll_page_down
+
 config-file = kanagawa-dragon.conf
 config-file = ?config-macos
 config-file = ?config-linux
