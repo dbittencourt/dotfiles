@@ -9,4 +9,3 @@ function livegrep
         --delimiter ':' \
         --bind 'enter:execute(nvim {1} +{2})'
 end
-
