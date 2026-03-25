@@ -20,7 +20,7 @@ end
 
 # claude code uses this path
 if test -d "$HOME/.local/bin"
-    source "$HOME/.local/bin"
+    fish_add_path "$HOME/.local/bin"
 end
 
 if test -x /opt/homebrew/bin/brew
