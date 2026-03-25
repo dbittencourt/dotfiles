@@ -10,7 +10,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "fzf-lua": {
-      "rev": "8a79ee54d6216d10b2f153921a12b152be0c1a20",
+      "rev": "14e2ebc7ed4cef90ffb4fd192ca28c33741818eb",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "kanagawa.nvim": {
@@ -42,7 +42,7 @@
       "src": "https://github.com/mfussenegger/nvim-dap"
     },
     "nvim-dap-ui": {
-      "rev": "cf91d5e2d07c72903d052f5207511bf7ecdb7122",
+      "rev": "f5b6673f374626515401c5bc51b005f784a4f252",
       "src": "https://github.com/rcarriga/nvim-dap-ui"
     },
     "nvim-nio": {
@@ -50,7 +50,7 @@
       "src": "https://github.com/nvim-neotest/nvim-nio"
     },
     "nvim-treesitter": {
-      "rev": "875515255192864c33981c3ed66ad94e561b904a",
+      "rev": "6620ae1c44dfa8623b22d0cbf873a9e8d073b849",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-context": {

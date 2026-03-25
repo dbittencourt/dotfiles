@@ -18,6 +18,11 @@ if test -d "$HOME/.dotnet/tools"
     fish_add_path "$HOME/.dotnet/tools"
 end
 
+# claude code uses this path
+if test -d "$HOME/.local/bin"
+    source "$HOME/.local/bin"
+end
+
 if test -x /opt/homebrew/bin/brew
     /opt/homebrew/bin/brew shellenv | source
 end
