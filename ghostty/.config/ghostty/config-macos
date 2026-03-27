@@ -1,3 +1,4 @@
+font-size = 16
 macos-option-as-alt = true
 macos-titlebar-style = tabs
 quit-after-last-window-closed = true
