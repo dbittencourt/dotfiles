@@ -71,67 +71,48 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.foldmethod = "expr"
 		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
-		vim.keymap.set({ "x", "o" }, "ac", function()
-			select.select_textobject("@class.outer", "textobjects")
-		end, { buffer = ev.buf })
-		vim.keymap.set({ "x", "o" }, "ic", function()
-			select.select_textobject("@class.inner", "textobjects")
-		end, { buffer = ev.buf })
-		vim.keymap.set({ "x", "o" }, "am", function()
-			select.select_textobject("@function.outer", "textobjects")
-		end, { buffer = ev.buf })
-		vim.keymap.set({ "x", "o" }, "im", function()
-			select.select_textobject("@function.inner", "textobjects")
-		end, { buffer = ev.buf })
-		vim.keymap.set({ "x", "o" }, "ao", function()
-			select.select_textobject("@block.outer", "textobjects")
-		end, { buffer = ev.buf })
-		vim.keymap.set({ "x", "o" }, "io", function()
-			select.select_textobject("@block.inner", "textobjects")
-		end, { buffer = ev.buf })
+		local selects = {
+			{ "ac", "@class.outer" },
+			{ "ic", "@class.inner" },
+			{ "am", "@function.outer" },
+			{ "im", "@function.inner" },
+			{ "ao", "@block.outer" },
+			{ "io", "@block.inner" },
+		}
+		for _, s in ipairs(selects) do
+			vim.keymap.set({ "x", "o" }, s[1], function()
+				select.select_textobject(s[2], "textobjects")
+			end, { buffer = ev.buf })
+		end
 
-		vim.keymap.set("n", "<leader>na", function()
-			swap.swap_next("@parameter.inner")
-		end, { buffer = ev.buf, desc = "Swap parameters/argument with next" })
-		vim.keymap.set("n", "<leader>pa", function()
-			swap.swap_previous("@parameter.inner")
-		end, { buffer = ev.buf, desc = "Swap parameters/argument with prev" })
-		vim.keymap.set("n", "<leader>np", function()
-			swap.swap_next("@property.outer")
-		end, { buffer = ev.buf, desc = "Swap object property with next" })
-		vim.keymap.set("n", "<leader>pp", function()
-			swap.swap_previous("@property.outer")
-		end, { buffer = ev.buf, desc = "Swap object property with prev" })
-		vim.keymap.set("n", "<leader>nm", function()
-			swap.swap_next("@function.outer")
-		end, { buffer = ev.buf, desc = "Swap function with next" })
-		vim.keymap.set("n", "<leader>pm", function()
-			swap.swap_previous("@function.outer")
-		end, { buffer = ev.buf, desc = "Swap function with previous" })
+		local swaps = {
+			{ "<leader>na", "swap_next", "@parameter.inner", "Swap param with next" },
+			{ "<leader>pa", "swap_previous", "@parameter.inner", "Swap param with prev" },
+			{ "<leader>np", "swap_next", "@property.outer", "Swap property with next" },
+			{ "<leader>pp", "swap_previous", "@property.outer", "Swap property with prev" },
+			{ "<leader>nm", "swap_next", "@function.outer", "Swap function with next" },
+			{ "<leader>pm", "swap_previous", "@function.outer", "Swap function with prev" },
+		}
+		for _, s in ipairs(swaps) do
+			vim.keymap.set("n", s[1], function()
+				swap[s[2]](s[3])
+			end, { buffer = ev.buf, desc = s[4] })
+		end
 
-		vim.keymap.set({ "n", "x", "o" }, "]m", function()
-			move.goto_next_start("@function.outer", "textobjects")
-		end, { buffer = ev.buf, desc = "Next method/function def start" })
-		vim.keymap.set({ "n", "x", "o" }, "]M", function()
-			move.goto_next_end("@function.outer", "textobjects")
-		end, { buffer = ev.buf, desc = "Next method/function def end" })
-		vim.keymap.set({ "n", "x", "o" }, "[m", function()
-			move.goto_previous_start("@function.outer", "textobjects")
-		end, { buffer = ev.buf, desc = "Prev method/function def start" })
-		vim.keymap.set({ "n", "x", "o" }, "[M", function()
-			move.goto_previous_end("@function.outer", "textobjects")
-		end, { buffer = ev.buf, desc = "Prev method/function def end" })
-		vim.keymap.set({ "n", "x", "o" }, "]i", function()
-			move.goto_next_start("@conditional.outer", "textobjects")
-		end, { buffer = ev.buf, desc = "Next conditional start" })
-		vim.keymap.set({ "n", "x", "o" }, "]I", function()
-			move.goto_next_end("@conditional.outer", "textobjects")
-		end, { buffer = ev.buf, desc = "Next conditional end" })
-		vim.keymap.set({ "n", "x", "o" }, "[i", function()
-			move.goto_previous_start("@conditional.outer", "textobjects")
-		end, { buffer = ev.buf, desc = "Prev conditional start" })
-		vim.keymap.set({ "n", "x", "o" }, "[I", function()
-			move.goto_previous_end("@conditional.outer", "textobjects")
-		end, { buffer = ev.buf, desc = "Prev conditional end" })
+		local moves = {
+			{ "]m", "goto_next_start", "@function.outer", "Next function start" },
+			{ "]M", "goto_next_end", "@function.outer", "Next function end" },
+			{ "[m", "goto_previous_start", "@function.outer", "Prev function start" },
+			{ "[M", "goto_previous_end", "@function.outer", "Prev function end" },
+			{ "]i", "goto_next_start", "@conditional.outer", "Next conditional start" },
+			{ "]I", "goto_next_end", "@conditional.outer", "Next conditional end" },
+			{ "[i", "goto_previous_start", "@conditional.outer", "Prev conditional start" },
+			{ "[I", "goto_previous_end", "@conditional.outer", "Prev conditional end" },
+		}
+		for _, m in ipairs(moves) do
+			vim.keymap.set({ "n", "x", "o" }, m[1], function()
+				move[m[2]](m[3], "textobjects")
+			end, { buffer = ev.buf, desc = m[4] })
+		end
 	end,
 })

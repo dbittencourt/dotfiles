@@ -5,6 +5,9 @@ require("lsp")
 require("options")
 require("plugins")
 
+-- enable new experimental ui2, so you don't get the annoying "press any key" warning
+require("vim._core.ui2").enable({})
+
 -- disable built-in plugins
 local disabled_plugins = {
 	"gzip",
