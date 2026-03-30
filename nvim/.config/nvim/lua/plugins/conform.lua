@@ -4,14 +4,6 @@ vim.pack.add({
 
 local conform = require("conform")
 
-local format_file = function()
-	conform.format({
-		lsp_fallback = true,
-		async = false,
-		timeout_ms = 1000,
-	})
-end
-
 conform.setup({
 	formatters_by_ft = {
 		javascript = { "prettier" },
@@ -48,9 +40,13 @@ conform.setup({
 			stdin = true,
 		},
 	},
-	format_on_save = function()
-		format_file()
-	end,
+	format_on_save = { lsp_fallback = true, timeout_ms = 1000 },
 })
 
-vim.keymap.set({ "n", "v" }, "<leader>mp", format_file, { desc = "Format file or range (in visual mode)" })
+vim.keymap.set({ "n", "v" }, "<leader>mp", function()
+	conform.format({
+		lsp_fallback = true,
+		async = false,
+		timeout_ms = 1000,
+	})
+end, { desc = "Format file or range (in visual mode)" })

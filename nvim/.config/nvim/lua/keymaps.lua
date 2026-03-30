@@ -38,7 +38,7 @@ set("n", "<leader>D", vim.diagnostic.setqflist, { desc = "Send diagnostics to qu
 set("n", "<leader>q", function()
 	local qf_open = false
 	for _, win in ipairs(vim.api.nvim_list_wins()) do
-		if vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(win), "buftype") == "quickfix" then
+		if vim.bo[vim.api.nvim_win_get_buf(win)].buftype == "quickfix" then
 			qf_open = true
 			break
 		end

@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("BufEnter", {
+vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("dbitt/spell_on", { clear = true }),
 	desc = "Turn on spell check for markdown and text files",
 	pattern = { "text", "tex", "markdown", "gitcommit" },

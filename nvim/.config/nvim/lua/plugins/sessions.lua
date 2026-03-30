@@ -17,7 +17,7 @@ end, { desc = "Save session for current directory" })
 
 vim.keymap.set("n", "<leader>rs", function()
 	local path = get_session_path()
-	if vim.loop.fs_stat(path) then
+	if vim.uv.fs_stat(path) then
 		vim.cmd("source " .. vim.fn.fnameescape(path))
 		vim.notify("Session restored")
 	else

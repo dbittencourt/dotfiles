@@ -1,4 +1,3 @@
-vim.o.termguicolors = true
 vim.o.swapfile = false
 
 -- set a ruler at column 100
@@ -17,7 +16,6 @@ vim.o.relativenumber = true
 vim.o.cursorline = true
 
 -- tab and indentation
-vim.o.autoindent = true
 vim.o.shiftwidth = 2 -- << and >> use 2 spaces
 vim.o.expandtab = true -- tab turns into spaces
 vim.o.tabstop = 2 -- tab equals 2 spaces
@@ -35,9 +33,6 @@ vim.o.splitbelow = true
 -- search settings
 vim.o.ignorecase = true
 vim.o.smartcase = true
-
--- makes backspace work more like it does in a typical text editor
-vim.o.backspace = "indent,eol,start"
 
 -- use system clipboard as default register
 vim.o.clipboard = "unnamedplus"

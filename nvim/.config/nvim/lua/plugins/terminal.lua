@@ -41,7 +41,7 @@ local function get_term(name, cmd, split, toggle)
 	end
 
 	if not alive then
-		vim.fn.termopen(cmd or "fish")
+		vim.fn.jobstart(cmd or "fish", { term = true })
 		vim.cmd.file(name)
 
 		buf = vim.api.nvim_get_current_buf()
@@ -63,7 +63,7 @@ vim.keymap.set("n", "<leader>ts", function()
 end, { desc = "Open server terminal" })
 
 vim.keymap.set("n", "<leader>ta", function()
-	if get_term("term-ai", "copilot", true, true) then
+	if get_term("term-ai", "claude", true, true) then
 		vim.cmd("startinsert")
 	end
 end, { desc = "Toggle AI terminal" })
@@ -75,7 +75,11 @@ vim.keymap.set("x", "<leader>av", function()
 		return
 	end
 
-	local lines = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."), { type = vim.fn.visualmode() })
+	local mode = vim.fn.visualmode()
+	if mode == "" then
+		return
+	end
+	local lines = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."), { type = mode })
 	local text = table.concat(lines, "\n") .. "\n"
 
 	local job_id = get_term("term-ai")
