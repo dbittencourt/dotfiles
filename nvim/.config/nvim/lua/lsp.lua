@@ -18,7 +18,6 @@ local function on_attach(client, bufnr)
 	keymap("n", "gO", fzf.lsp_document_symbols, "Show document symbols")
 
 	if client:supports_method("textDocument/documentColor") then
-		vim.lsp.document_color.enable(true, bufnr)
 		keymap({ "n", "x" }, "grp", function()
 			vim.lsp.document_color.color_presentation()
 		end, "Pick a different representation for the color under cursor")
