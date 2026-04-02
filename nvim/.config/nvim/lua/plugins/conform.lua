@@ -27,6 +27,7 @@ conform.setup({
 		sql = { "sql_formatter" },
 		pgsql = { "sql_formatter" },
 		rust = { "rustfmt" },
+		swift = { "swift_format" },
 	},
 	formatters = {
 		fish_lint = {
