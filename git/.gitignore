@@ -1,18 +1,38 @@
-# Node
-npm-debug.log
-
-# Mac
+# os
 .DS_Store
-
-# Windows
 Thumbs.db
 
-# WebStorm
+# editors
 .idea/
-
-# vi
+.vs/
+.vscode/
+*.swp
+*.swo
 *~
 
-# General
+# node
+node_modules/
+npm-debug.log
+yarn-error.log
+.pnpm-debug.log
+
+# rust
+target/
+Cargo.lock
+
+# .net
+bin/
+obj/
+*.user
+*.suo
+
+# python
+__pycache__/
+*.pyc
+.venv/
+
+# general
 log/
 *.log
+*.bak
+*.tmp

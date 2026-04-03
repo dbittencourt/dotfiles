@@ -17,32 +17,28 @@
 [pull]
   ff = only
 
-[diff]
-  colorMoved = default
-
-[commit]
-  gpgsign = true
-
-[tag]
-  gpgsign = true
-
 [merge]
-  conflictstyle = diff3
+  conflictstyle = zdiff3
+
+[diff]
+  algorithm = histogram
+  colorMoved = default
 
 [interactive]
   diffFilter = delta --color-only
-
-[pager]
-  blame  = delta
-  diff   = delta
-  reflog = delta
-  show   = delta
 
 [delta]
   # use n and N to move between diff sections
   navigate = true
   true-color = always
   keep-plus-minus-markers = false
+  hyperlinks = true
 
 [gpg]
   format = ssh
+
+[commit]
+  gpgsign = true
+
+[tag]
+  gpgsign = true
