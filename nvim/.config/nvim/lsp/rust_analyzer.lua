@@ -148,6 +148,11 @@ return {
 	---@type lspconfig.settings.rust_analyzer
 	settings = {
 		["rust-analyzer"] = {
+			checkOnSave = {
+				allTargets = true,
+				command = "clippy",
+				enable = true,
+			},
 			lens = {
 				debug = { enable = true },
 				enable = true,
