@@ -42,6 +42,7 @@ fzf.setup({
 	},
 	diagnostics = {
 		multiline = 1,
+		severity_limit = vim.diagnostic.severity.WARN,
 	},
 	{
 		undotree =
@@ -55,6 +56,7 @@ fzf.register_ui_select()
 local set = vim.keymap.set
 set("n", "<leader>u", fzf.undotree, { desc = "Show Undo tree" })
 set("n", "<leader>fd", fzf.diagnostics_document, { desc = "Show document diagnostics" })
+set("n", "<leader>fD", fzf.diagnostics_workspace, { desc = "Show workspace diagnostics" })
 set("n", "<leader>ff", fzf.files, { desc = "Search file in cwd" })
 set("n", "<leader>fb", fzf.buffers, { desc = "Show open buffers" })
 set("n", "<leader>fs", fzf.live_grep, { desc = "Live search string in cwd" })
