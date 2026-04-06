@@ -1,27 +1,21 @@
 vim.pack.add({ { src = "https://github.com/tpope/vim-fugitive" } })
 
 local toggle_status = function()
-	local fugitive_open = false
-	-- iterate over all windows
-	for _, winid in ipairs(vim.api.nvim_list_wins()) do
-		local bufnr = vim.api.nvim_win_get_buf(winid)
-		-- check for the fugitive_status buffer variable
-		local success, is_fugitive_status = pcall(vim.api.nvim_buf_get_var, bufnr, "fugitive_status")
-
-		if success and is_fugitive_status then
-			-- if it is the fugitive window, close it
-			vim.api.nvim_win_close(winid, false)
-			fugitive_open = true
-			break
-		end
-	end
-
-	if not fugitive_open then
+	local win = vim.iter(vim.api.nvim_list_wins()):find(function(w)
+		local ok, v = pcall(vim.api.nvim_buf_get_var, vim.api.nvim_win_get_buf(w), "fugitive_status")
+		return ok and v
+	end)
+	if win then
+		vim.api.nvim_win_close(win, false)
+	else
 		vim.cmd("Git")
 	end
 end
 
 vim.keymap.set("n", "<leader>gs", toggle_status, { desc = "Toggle git status" })
 vim.keymap.set("n", "<leader>gb", "<cmd>Git blame<cr>", { desc = "Toggle git blame on buffer" })
-vim.keymap.set("n", "<leader>gd", "<cmd>Gdiffsplit<cr>", { desc = "Open a horizontal diff split" })
-vim.keymap.set("n", "<leader>gh", "<cmd>0Gllog<cr>", { desc = "Open file git history" })
+vim.keymap.set("n", "<leader>gd", "<cmd>Gvdiffsplit<cr>", { desc = "Open a diff view" })
+vim.keymap.set("n", "<leader>gD", "<cmd>diffoff | only<cr>", { desc = "Close diff view" })
+vim.keymap.set("n", "<leader>gl", "<cmd>0Gllog<cr>", { desc = "Open file git history" })
+vim.keymap.set("n", "<leader>go", "<cmd>diffget //2<cr>", { desc = "Select ours version in git conflict" })
+vim.keymap.set("n", "<leader>gt", "<cmd>diffget //3<cr>", { desc = "Select theirs version in git conflict" })
