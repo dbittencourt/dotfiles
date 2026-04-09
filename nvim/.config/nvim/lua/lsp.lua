@@ -49,19 +49,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- enable lsp servers from lsp directory
-vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
-	once = true,
-	callback = function()
-		-- extend neovim lsp capabilities with blink implementation
-		vim.lsp.config("*", { capabilities = require("blink.cmp").get_lsp_capabilities(nil, true) })
+-- extend neovim lsp capabilities with blink implementation
+vim.lsp.config("*", { capabilities = require("blink.cmp").get_lsp_capabilities(nil, true) })
 
-		-- load all lsp configs
-		local servers = vim.iter(vim.api.nvim_get_runtime_file("lsp/*.lua", true))
-			:map(function(file)
-				return vim.fn.fnamemodify(file, ":t:r")
-			end)
-			:totable()
-		vim.lsp.enable(servers)
-	end,
-})
+-- enable all lsp configs from the lsp directory
+local servers = vim.iter(vim.api.nvim_get_runtime_file("lsp/*.lua", true))
+	:map(function(file)
+		return vim.fn.fnamemodify(file, ":t:r")
+	end)
+	:totable()
+vim.lsp.enable(servers)

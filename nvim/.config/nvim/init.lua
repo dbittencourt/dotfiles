@@ -1,9 +1,9 @@
 require("autocmds")
 require("diagnostics")
 require("keymaps")
-require("lsp")
 require("options")
 require("plugins")
+require("lsp")
 
 -- enable new experimental ui2, so you don't get the annoying "press any key" warning
 require("vim._core.ui2").enable({})

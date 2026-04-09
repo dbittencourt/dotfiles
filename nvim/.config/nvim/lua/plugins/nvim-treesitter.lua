@@ -64,6 +64,7 @@ local move = require("nvim-treesitter-textobjects.move")
 
 -- enable syntax highlighting, folding, indentation and keymaps
 vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("dbitt/treesitter_ft", { clear = true }),
 	pattern = languages,
 	callback = function(ev)
 		vim.treesitter.start()

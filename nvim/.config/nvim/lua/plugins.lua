@@ -6,12 +6,15 @@ mini_icons.setup()
 mini_icons.mock_nvim_web_devicons()
 
 -- load all plugins under plugins directory
-local plugins_dir = vim.fn.stdpath("config") .. "/lua/plugins"
-local files = vim.fn.readdir(plugins_dir)
+local plugins_dir = vim.fs.joinpath(vim.fn.stdpath("config"), "lua/plugins")
 
-for _, file in ipairs(files) do
-	if file:match("%.lua$") then
-		local plugin = file:sub(1, -5)
-		require("plugins." .. plugin)
-	end
-end
+vim.iter(vim.fs.dir(plugins_dir))
+	:map(function(name)
+		return name:match("^(.*)%.lua$")
+	end)
+	:filter(function(name)
+		return name ~= nil
+	end)
+	:each(function(name)
+		require("plugins." .. name)
+	end)
