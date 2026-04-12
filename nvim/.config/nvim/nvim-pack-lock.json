@@ -10,7 +10,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "fzf-lua": {
-      "rev": "4deeecf611c0beba6455e6cf06e2c051a6169dd4",
+      "rev": "657c1bbb7357c61e26a20d868b53a460b05c18c0",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "kanagawa.nvim": {
@@ -22,7 +22,7 @@
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mini.files": {
-      "rev": "ced297546b8fdb8e215d416d4753a735514a2fe0",
+      "rev": "e8db416c9f5dbce70f5501da28263d45c0a4df6b",
       "src": "https://github.com/nvim-mini/mini.files"
     },
     "mini.icons": {
