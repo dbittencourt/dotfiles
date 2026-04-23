@@ -6,11 +6,11 @@
       "version": ">=0.0.0"
     },
     "conform.nvim": {
-      "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
+      "rev": "dca1a190aa85f9065979ef35802fb77131911106",
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "fzf-lua": {
-      "rev": "fcabe3cb7cfa6bd5148ffac0188997196401937d",
+      "rev": "8223eb24a7adf72c4b24e04b751486b492775414",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "kanagawa.nvim": {
