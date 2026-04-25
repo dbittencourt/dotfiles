@@ -5,8 +5,9 @@ vim.opt.colorcolumn = "100"
 -- save undo history
 vim.o.undofile = true
 
--- disable line wrapping
-vim.o.wrap = false
+-- smart line wrap
+vim.o.linebreak = true
+vim.o.breakindent = true
 
 -- shows absolute and relative line numbers
 vim.o.number = true
@@ -24,7 +25,14 @@ vim.o.tabstop = 2 -- tab equals 2 spaces
 vim.o.list = true
 vim.opt.listchars = { tab = "  ", trail = "·" }
 
-vim.opt.fillchars = vim.opt.fillchars + "diff:╱"
+vim.opt.diffopt:append({
+	"algorithm:histogram",
+	"indent-heuristic",
+	"linematch:60",
+	"followwrap",
+	"context:99",
+})
+vim.opt.fillchars:append({ diff = " " })
 
 -- split window behaviour
 vim.o.splitright = true
