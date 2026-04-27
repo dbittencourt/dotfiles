@@ -10,7 +10,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "fzf-lua": {
-      "rev": "ffa44ee9470743a7697d28df3a1a216fdfe2b09d",
+      "rev": "2e29d5f233defe3c5587df0e4dd29af2bd95a5a7",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "kanagawa.nvim": {
@@ -22,7 +22,7 @@
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mini.files": {
-      "rev": "34299f5dc9433b3e2f8efd316fff70982d4e0072",
+      "rev": "3e247eb12ca8c05622ceb8745f9004f761b22ef8",
       "src": "https://github.com/nvim-mini/mini.files"
     },
     "mini.icons": {
@@ -66,7 +66,7 @@
       "src": "https://github.com/windwp/nvim-ts-autotag"
     },
     "render-markdown.nvim": {
-      "rev": "d67113f11384c0dad96fced2f7b91f1fc811e97f",
+      "rev": "3f3eea97b80839f629c951ca660ffd125bfa5b34",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "vim-fugitive": {

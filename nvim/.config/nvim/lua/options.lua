@@ -25,13 +25,7 @@ vim.o.tabstop = 2 -- tab equals 2 spaces
 vim.o.list = true
 vim.opt.listchars = { tab = "  ", trail = "·" }
 
-vim.opt.diffopt:append({
-	"algorithm:histogram",
-	"indent-heuristic",
-	"linematch:60",
-	"followwrap",
-	"context:99",
-})
+vim.opt.diffopt:append({ "followwrap", "context:99" })
 vim.opt.fillchars:append({ diff = " " })
 
 -- split window behaviour
