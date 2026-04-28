@@ -12,10 +12,15 @@ local toggle_status = function()
 	end
 end
 
+local open_file_history = function()
+	vim.cmd("0Gllog")
+	vim.cmd("lopen")
+end
+
 vim.keymap.set("n", "<leader>gs", toggle_status, { desc = "Toggle git status" })
 vim.keymap.set("n", "<leader>gb", "<cmd>Git blame<cr>", { desc = "Toggle git blame on buffer" })
 vim.keymap.set("n", "<leader>gd", "<cmd>Gvdiffsplit<cr>", { desc = "Open a diff view" })
 vim.keymap.set("n", "<leader>gD", "<cmd>diffoff | only<cr>", { desc = "Close diff view" })
-vim.keymap.set("n", "<leader>gl", "<cmd>0Gllog<cr>", { desc = "Open file git history" })
+vim.keymap.set("n", "<leader>gl", open_file_history, { desc = "Open file git history" })
 vim.keymap.set("n", "<leader>go", "<cmd>diffget //2<cr>", { desc = "Select ours version in git conflict" })
 vim.keymap.set("n", "<leader>gt", "<cmd>diffget //3<cr>", { desc = "Select theirs version in git conflict" })
