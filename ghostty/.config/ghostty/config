@@ -9,6 +9,7 @@ window-new-tab-position = end
 mouse-hide-while-typing = true
 copy-on-select = clipboard
 confirm-close-surface = false
+scroll-to-bottom = no-keystroke,no-output
 
 keybind = ctrl+shift+u=scroll_page_up
 keybind = ctrl+shift+d=scroll_page_down
