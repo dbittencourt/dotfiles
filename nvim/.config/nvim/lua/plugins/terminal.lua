@@ -63,7 +63,7 @@ vim.keymap.set("n", "<leader>ts", function()
 end, { desc = "Open server terminal" })
 
 vim.keymap.set("n", "<leader>ta", function()
-	if get_term("term-ai", "claude", true, true) then
+	if get_term("term-ai", "codex", true, true) then
 		vim.cmd("startinsert")
 	end
 end, { desc = "Toggle AI terminal" })
