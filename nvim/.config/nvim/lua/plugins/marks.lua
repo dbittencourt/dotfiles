@@ -144,10 +144,18 @@ local function jump_project_mark(slot)
 		return
 	end
 
+	local row = mark.row
+	local col = mark.col
+	local last_position = vim.api.nvim_buf_get_mark(0, '"')
+	if last_position[1] > 0 then
+		row = last_position[1]
+		col = last_position[2]
+	end
+
 	local last_row = vim.api.nvim_buf_line_count(0)
-	local row = math.max(1, math.min(math.floor(mark.row), last_row))
+	row = math.max(1, math.min(math.floor(row), last_row))
 	local line = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1] or ""
-	local col = math.max(0, math.min(math.floor(mark.col), #line))
+	col = math.max(0, math.min(math.floor(col), #line))
 	vim.api.nvim_win_set_cursor(0, { row, col })
 end
 
