@@ -77,9 +77,7 @@ vim.keymap.set("n", "<leader>ts", function()
 end, { desc = "Toggle server terminal" })
 
 vim.keymap.set("n", "<leader>ta", function()
-	if get_term("term-ai", "codex", true) then
-		vim.api.nvim_cmd({ cmd = "startinsert" }, {})
-	end
+	get_term("term-ai", "codex", true)
 end, { desc = "Toggle AI terminal" })
 
 vim.keymap.set("x", "<leader>av", function()
