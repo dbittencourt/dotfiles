@@ -3,7 +3,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	desc = "Close with <q>",
 	pattern = { "help", "man", "qf", "scratch" },
 	callback = function(args)
-		vim.keymap.set("n", "q", "<cmd>quit<cr>", { buffer = args.buf })
+		vim.keymap.set("n", "q", "<cmd>quit<cr>", { buf = args.buf })
 	end,
 })
 

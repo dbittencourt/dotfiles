@@ -12,14 +12,29 @@ local function root_pattern(bufnr, patterns)
 	end
 end
 
+local function root_suffix(bufnr, suffixes)
+	local fname = vim.api.nvim_buf_get_name(bufnr)
+	local match = vim.fs.find(function(name)
+		for _, suffix in ipairs(suffixes) do
+			if name:sub(-#suffix) == suffix then
+				return true
+			end
+		end
+		return false
+	end, { path = fname, upward = true, type = "directory" })[1]
+	if match then
+		return vim.fs.dirname(match)
+	end
+end
+
 ---@type vim.lsp.Config
 return {
 	cmd = { "sourcekit-lsp" },
 	filetypes = { "swift", "objc", "objcpp", "c", "cpp" },
 	root_dir = function(bufnr, on_dir)
 		on_dir(
-			root_pattern(bufnr, { "buildServer.json", ".bsp" })
-				or root_pattern(bufnr, { "*.xcodeproj", "*.xcworkspace" })
+			root_pattern(bufnr, { "buildServer.json" })
+				or root_suffix(bufnr, { ".bsp", ".xcodeproj", ".xcworkspace" })
 				-- better to keep it at the end, because some modularized apps contain multiple Package.swift files
 				or root_pattern(bufnr, { "compile_commands.json", "Package.swift" })
 				or root_pattern(bufnr, { ".git" })

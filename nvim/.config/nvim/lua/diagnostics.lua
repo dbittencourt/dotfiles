@@ -1,6 +1,3 @@
--- make sure inlay hints are disabled, I'm definitely not a fan
-vim.g.inlay_hints = false
-
 vim.diagnostic.config({
 	float = {
 		source = "if_many",

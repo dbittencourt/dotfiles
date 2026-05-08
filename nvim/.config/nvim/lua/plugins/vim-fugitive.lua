@@ -9,6 +9,7 @@ local toggle_status = function()
 		vim.api.nvim_win_close(win, false)
 	else
 		vim.cmd("Git")
+		vim.api.nvim_win_set_height(0, math.max(8, math.floor(vim.o.lines / 3)))
 	end
 end
 

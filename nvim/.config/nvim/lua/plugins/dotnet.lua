@@ -1,17 +1,18 @@
 local function get_project_root()
-	local start_dir = vim.fn.getcwd()
+	local start_dir = vim.uv.cwd() or vim.fn.getcwd()
 
-	local sln_files = vim.fn.glob(start_dir .. "/*.sln", true, true)
-	if sln_files and #sln_files > 0 then
-		return vim.fs.dirname(sln_files[1])
+	local sln = vim.fs.find(function(name)
+		return name:match("%.sln$") ~= nil
+	end, { path = start_dir, upward = true, type = "file" })[1]
+	if sln then
+		return vim.fs.dirname(sln)
 	end
 
-	local csproj_files = vim.fn.glob(start_dir .. "/*.csproj", true, true)
-	if csproj_files and #csproj_files > 0 then
-		return vim.fs.dirname(csproj_files[1])
-	end
+	local csproj = vim.fs.find(function(name)
+		return name:match("%.csproj$") ~= nil
+	end, { path = start_dir, upward = true, type = "file" })[1]
 
-	return nil
+	return csproj and vim.fs.dirname(csproj) or nil
 end
 
 local function run_dotnet_test()
@@ -24,25 +25,18 @@ local function run_dotnet_test()
 	print("Running dotnet test from: " .. project_root)
 
 	local command = { "dotnet", "test", "--logger", "console;verbosity=normal" }
-	local test_output = {}
-
-	vim.fn.jobstart(command, {
+	vim.system(command, {
 		cwd = project_root,
-		on_stdout = function(_, data, _)
-			for _, line in ipairs(data) do
-				table.insert(test_output, line)
-			end
-		end,
-		on_stderr = function(_, data, _)
-			for _, line in ipairs(data) do
-				table.insert(test_output, line)
-			end
-		end,
-		on_exit = function(_, exit_code, _)
-			if exit_code == 0 then
+		text = true,
+	}, function(result)
+		vim.schedule(function()
+			if result.code == 0 then
 				print("Dotnet test successful! No errors found.")
 				return
 			end
+
+			local output = table.concat({ result.stdout or "", result.stderr or "" }, "\n")
+			local test_output = vim.split(output, "\n", { plain = true, trimempty = true })
 
 			local quickfix_items = {}
 			local last_test_name = nil
@@ -79,8 +73,8 @@ local function run_dotnet_test()
 
 			print("Found " .. #quickfix_items .. " test failures.")
 			vim.cmd("copen")
-		end,
-	})
+		end)
+	end)
 end
 
 local setup_compiler = function()

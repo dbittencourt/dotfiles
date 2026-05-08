@@ -50,7 +50,7 @@ vim.api.nvim_create_autocmd("User", {
 			end)
 		end, {
 			desc = "Open file in a new tab",
-			buffer = args.data.buf_id,
+			buf = args.data.buf_id,
 		})
 
 		vim.keymap.set("n", "<C-w>v", function()
@@ -59,7 +59,7 @@ vim.api.nvim_create_autocmd("User", {
 			end)
 		end, {
 			desc = "Open file in a new vertical split",
-			buffer = args.data.buf_id,
+			buf = args.data.buf_id,
 		})
 	end,
 })

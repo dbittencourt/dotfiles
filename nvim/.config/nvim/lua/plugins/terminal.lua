@@ -57,11 +57,11 @@ local function get_term(name, cmd, toggle)
 		vim.api.nvim_buf_set_name(0, name)
 
 		buf = vim.api.nvim_get_current_buf()
-		vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { buffer = buf, nowait = true })
+		vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { buf = buf, nowait = true })
 		vim.keymap.set("t", "<C-\\>", function()
 			local esc = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
 			vim.api.nvim_feedkeys(esc, "n", false)
-		end, { buffer = buf, desc = "Feed esc in terminal mode using <C-\\>" })
+		end, { buf = buf, desc = "Feed esc in terminal mode using <C-\\>" })
 	end
 
 	pcall(vim.api.nvim_win_set_height, 0, math.max(8, math.floor(vim.o.lines / 3)))

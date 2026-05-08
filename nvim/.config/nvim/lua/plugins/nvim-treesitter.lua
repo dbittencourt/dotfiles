@@ -83,7 +83,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		for _, s in ipairs(selects) do
 			vim.keymap.set({ "x", "o" }, s[1], function()
 				select.select_textobject(s[2], "textobjects")
-			end, { buffer = ev.buf })
+			end, { buf = ev.buf })
 		end
 
 		local swaps = {
@@ -97,7 +97,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		for _, s in ipairs(swaps) do
 			vim.keymap.set("n", s[1], function()
 				swap[s[2]](s[3])
-			end, { buffer = ev.buf, desc = s[4] })
+			end, { buf = ev.buf, desc = s[4] })
 		end
 
 		local moves = {
@@ -113,7 +113,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		for _, m in ipairs(moves) do
 			vim.keymap.set({ "n", "x", "o" }, m[1], function()
 				move[m[2]](m[3], "textobjects")
-			end, { buffer = ev.buf, desc = m[4] })
+			end, { buf = ev.buf, desc = m[4] })
 		end
 	end,
 })

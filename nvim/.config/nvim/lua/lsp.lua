@@ -1,6 +1,6 @@
 local function on_attach(client, bufnr)
 	local function keymap(mode, lhs, rhs, desc)
-		vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
+		vim.keymap.set(mode, lhs, rhs, { buf = bufnr, desc = desc })
 	end
 
 	local fzf = require("fzf-lua")
@@ -17,21 +17,21 @@ local function on_attach(client, bufnr)
 	keymap("n", "grc", fzf.lsp_incoming_calls, "Show lsp incoming calls")
 	keymap("n", "gO", fzf.lsp_document_symbols, "Show document symbols")
 
-	if client:supports_method("textDocument/documentColor") then
+	if client:supports_method("textDocument/documentColor", bufnr) then
 		keymap({ "n", "x" }, "grp", function()
 			vim.lsp.document_color.color_presentation()
 		end, "Pick a different representation for the color under cursor")
 	end
 
-	if client:supports_method("textDocument/documentHighlight") then
+	if client:supports_method("textDocument/documentHighlight", bufnr) then
 		vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave" }, {
 			desc = "Highlight references under the cursor",
-			buffer = bufnr,
+			buf = bufnr,
 			callback = vim.lsp.buf.document_highlight,
 		})
 		vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter", "BufLeave" }, {
 			desc = "Clear highlight references",
-			buffer = bufnr,
+			buf = bufnr,
 			callback = vim.lsp.buf.clear_references,
 		})
 	end

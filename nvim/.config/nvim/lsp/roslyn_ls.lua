@@ -324,13 +324,13 @@ return {
 
 	on_attach = function(client, bufnr)
 		-- avoid duplicate autocmds for same buffer
-		if vim.api.nvim_get_autocmds({ buffer = bufnr, group = group })[1] then
+		if vim.api.nvim_get_autocmds({ buf = bufnr, group = group })[1] then
 			return
 		end
 
 		vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
 			group = group,
-			buffer = bufnr,
+			buf = bufnr,
 			callback = function()
 				refresh_diagnostics(client)
 			end,
