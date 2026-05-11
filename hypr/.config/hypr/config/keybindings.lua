@@ -1,11 +1,15 @@
 local main_mod = "SUPER"
 local hyper = "SUPER + SHIFT + CTRL + ALT"
 
+-- special actions
 hl.bind(main_mod .. " + q", hl.dsp.window.close())
 hl.bind(main_mod .. " + m", hl.dsp.exit())
 hl.bind(main_mod .. " + v", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(main_mod .. " + f", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 hl.bind(main_mod .. " + space", hl.dsp.exec_cmd("rofi -show drun"))
+hl.bind(main_mod .. " + SHIFT + a", hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/toggle-audio.sh"))
+hl.bind(main_mod .. " + SHIFT + q", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(main_mod .. " + SHIFT + s", hl.dsp.exec_cmd('hyprshot -z -m region -o "$HOME/Screenshots"'))
 
 -- app shortcuts
 hl.bind(hyper .. " + T", function()
@@ -25,29 +29,26 @@ hl.bind(hyper .. " + F", hl.dsp.exec_cmd("ghostty --class=yazi.ghostty -e yazi")
 hl.bind(hyper .. " + A", hl.dsp.exec_cmd("ghostty --class=btop.ghostty -e btop"))
 hl.bind(hyper .. " + P", hl.dsp.exec_cmd("hyprpicker"))
 
--- move focus with main_mod plus arrow keys
-hl.bind(main_mod .. " + left", hl.dsp.focus({ direction = "l" }))
-hl.bind(main_mod .. " + h", hl.dsp.focus({ direction = "l" }))
-hl.bind(main_mod .. " + right", hl.dsp.focus({ direction = "r" }))
-hl.bind(main_mod .. " + l", hl.dsp.focus({ direction = "r" }))
-hl.bind(main_mod .. " + up", hl.dsp.focus({ direction = "u" }))
-hl.bind(main_mod .. " + k", hl.dsp.focus({ direction = "u" }))
-hl.bind(main_mod .. " + down", hl.dsp.focus({ direction = "d" }))
-hl.bind(main_mod .. " + j", hl.dsp.focus({ direction = "d" }))
+local directions = {
+	{ key = "left", direction = "l" },
+	{ key = "h", direction = "l" },
+	{ key = "right", direction = "r" },
+	{ key = "l", direction = "r" },
+	{ key = "up", direction = "u" },
+	{ key = "k", direction = "u" },
+	{ key = "down", direction = "d" },
+	{ key = "j", direction = "d" },
+}
+for _, bind in ipairs(directions) do
+	-- move focus with main_mod + arrow keys
+	hl.bind(main_mod .. " + " .. bind.key, hl.dsp.focus({ direction = bind.direction }))
+	-- move window with main_mod + shift + arrow keys
+	hl.bind(main_mod .. " + SHIFT + " .. bind.key, hl.dsp.window.move({ direction = bind.direction }))
+end
 
 -- window split ratio with main_mod plus minus or equal
 hl.bind(main_mod .. " + minus", hl.dsp.layout("splitratio -0.1"), { repeating = true })
 hl.bind(main_mod .. " + equal", hl.dsp.layout("splitratio +0.1"), { repeating = true })
-
--- move windows with main_mod plus shift and arrow keys
-hl.bind(main_mod .. " + SHIFT + left", hl.dsp.window.move({ direction = "l" }))
-hl.bind(main_mod .. " + SHIFT + h", hl.dsp.window.move({ direction = "l" }))
-hl.bind(main_mod .. " + SHIFT + right", hl.dsp.window.move({ direction = "r" }))
-hl.bind(main_mod .. " + SHIFT + l", hl.dsp.window.move({ direction = "r" }))
-hl.bind(main_mod .. " + SHIFT + up", hl.dsp.window.move({ direction = "u" }))
-hl.bind(main_mod .. " + SHIFT + k", hl.dsp.window.move({ direction = "u" }))
-hl.bind(main_mod .. " + SHIFT + down", hl.dsp.window.move({ direction = "d" }))
-hl.bind(main_mod .. " + SHIFT + j", hl.dsp.window.move({ direction = "d" }))
 
 -- switch workspaces and move active windows with main_mod plus numbers
 for ws = 1, 10 do
@@ -56,11 +57,6 @@ for ws = 1, 10 do
 	hl.bind(main_mod .. " + " .. key, hl.dsp.focus({ workspace = ws }))
 	hl.bind(main_mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = ws }))
 end
-
--- special actions
-hl.bind(main_mod .. " + SHIFT + a", hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/toggle-audio.sh"))
-hl.bind(main_mod .. " + SHIFT + q", hl.dsp.exec_cmd("hyprlock"))
-hl.bind(main_mod .. " + SHIFT + s", hl.dsp.exec_cmd('hyprshot -z -m region -o "$HOME/Screenshots"'))
 
 -- scroll through existing workspaces with main_mod plus scroll
 hl.bind(main_mod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
@@ -71,37 +67,38 @@ hl.bind(main_mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(main_mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- multimedia keys
-hl.bind(
-	"XF86AudioRaiseVolume",
-	hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"),
-	{ locked = true, repeating = true }
-)
-hl.bind(
-	"XF86AudioLowerVolume",
-	hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
-	{ locked = true, repeating = true }
-)
-hl.bind(
-	"XF86AudioMute",
-	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
-	{ locked = true, repeating = true }
-)
-hl.bind(
-	"XF86AudioMicMute",
-	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
-	{ locked = true, repeating = true }
-)
-hl.bind(
-	"XF86MonBrightnessUp",
-	hl.dsp.exec_cmd("$HOME/dotfiles/scripts/brightness.sh up"),
-	{ locked = true, repeating = true }
-)
-hl.bind(
-	"XF86MonBrightnessDown",
-	hl.dsp.exec_cmd("$HOME/dotfiles/scripts/brightness.sh down"),
-	{ locked = true, repeating = true }
-)
-hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
-hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
+local media_binds = {
+	{
+		key = "XF86AudioRaiseVolume",
+		cmd = "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+",
+		repeating = true,
+	},
+	{
+		key = "XF86AudioLowerVolume",
+		cmd = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+		repeating = true,
+	},
+	{ key = "XF86AudioMute", cmd = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle" },
+	{ key = "XF86AudioMicMute", cmd = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle" },
+	{
+		key = "XF86MonBrightnessUp",
+		cmd = "$HOME/dotfiles/scripts/brightness.sh up",
+		repeating = true,
+	},
+	{
+		key = "XF86MonBrightnessDown",
+		cmd = "$HOME/dotfiles/scripts/brightness.sh down",
+		repeating = true,
+	},
+	{ key = "XF86AudioNext", cmd = "playerctl next" },
+	{ key = "XF86AudioPause", cmd = "playerctl play-pause" },
+	{ key = "XF86AudioPlay", cmd = "playerctl play-pause" },
+	{ key = "XF86AudioPrev", cmd = "playerctl previous" },
+}
+
+for _, bind in ipairs(media_binds) do
+	hl.bind(bind.key, hl.dsp.exec_cmd(bind.cmd), {
+		locked = true,
+		repeating = bind.repeating == true,
+	})
+end
