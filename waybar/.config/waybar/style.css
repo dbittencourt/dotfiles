@@ -9,7 +9,7 @@
 #waybar,
 #workspaces,
 #custom-obs,
-#custom-music,
+#mpris,
 #tray,
 #wireplumber,
 #custom-brightness,
@@ -52,7 +52,7 @@
 }
 
 #custom-obs,
-#custom-music,
+#mpris,
 #wireplumber,
 #custom-brightness,
 #temperature,
@@ -83,7 +83,7 @@
 }
 
 #custom-obs,
-#custom-music,
+#mpris,
 #tray {
   border-radius: 1rem;
 }

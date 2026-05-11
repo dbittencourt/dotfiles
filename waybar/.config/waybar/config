@@ -2,8 +2,8 @@
   "layer": "top", // Waybar at top layer
   "position": "top", // Waybar position (top|bottom|left|right)
   // Choose the order of the modules
-  "modules-left": ["hyprland/workspaces"],
-  "modules-center": ["custom/obs", "custom/music"],
+  "modules-left": ["ext/workspaces"],
+  "modules-center": ["custom/obs", "mpris"],
   "modules-right": [
     "tray",
     "wireplumber",
@@ -18,18 +18,18 @@
   ],
   "custom/obs": {
     "format": "{}",
-    "interval": 1,
+    "interval": 5,
     "exec": "~/.config/obs-studio/scripts/waybar-obs.sh",
     "return-type": "json"
   },
-  "custom/music": {
-    "format": "  {}",
-    "escape": true,
-    "interval": 5,
+  "mpris": {
+    "format": "  {dynamic}",
+    "dynamic-order": ["title"],
+    "dynamic-len": 50,
     "tooltip": false,
-    "exec": "playerctl metadata --format='{{ title }}'",
-    "on-click": "playerctl play-pause",
-    "max-length": 50
+  },
+  "ext/workspaces": {
+    "on-click": "activate"
   },
   "tray": {
     "icon-size": 21,
@@ -48,6 +48,7 @@
     "tooltip": false,
     "interval": "once",
     "signal": 4,
+    "exec-on-event": false,
     "exec": "$HOME/dotfiles/scripts/brightness.sh get",
     "on-scroll-up": "$HOME/dotfiles/scripts/brightness.sh up",
     "on-scroll-down": "$HOME/dotfiles/scripts/brightness.sh down",
@@ -71,7 +72,7 @@
   "clock": {
     "format": " {0:%d/%m}  󰥔 {0:%H:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "on-click": "thunderbird -calendar && hyprctl dispatch focuswindow 'title:^(Calendar - Mozilla Thunderbird)$'"
+    "on-click": "thunderbird -calendar && hyprctl dispatch 'hl.dsp.focus({ window = \"title:^(Calendar - Mozilla Thunderbird)$\" })'"
  },
   "custom/search": {
     "format": "",
@@ -81,8 +82,8 @@
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
-      "activated": "",
-      "deactivated": ""
+      "activated": "",
+      "deactivated": ""
     },
   },
   "custom/power": {
