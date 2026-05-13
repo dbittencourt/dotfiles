@@ -32,3 +32,5 @@ set -gx PNPM_HOME "$HOME/.local/share/pnpm"
 fish_add_path $PNPM_HOME
 
 zoxide init fish --cmd cd | source
+
+codex completion fish | source
