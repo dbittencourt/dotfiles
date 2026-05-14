@@ -1,5 +1,15 @@
+vim.opt_local.shiftwidth = 4
+vim.opt_local.softtabstop = 4
+vim.opt_local.tabstop = 4
+vim.opt_local.expandtab = true
+
+vim.g.dotnet_errors_only = true
+vim.g.dotnet_show_project_file = false
+vim.cmd("compiler dotnet")
+
 local function get_project_root()
-	local start_dir = vim.uv.cwd() or vim.fn.getcwd()
+	local bufname = vim.api.nvim_buf_get_name(0)
+	local start_dir = bufname ~= "" and vim.fs.dirname(bufname) or vim.uv.cwd() or vim.fn.getcwd()
 
 	local sln = vim.fs.find(function(name)
 		return name:match("%.sln$") ~= nil
@@ -49,7 +59,7 @@ local function run_dotnet_test()
 
 				local abs_path, line_num = line:match(" in (.+%.cs):line (%d+)")
 				if last_test_name and abs_path and line_num then
-					local rel_path = abs_path:gsub(project_root .. "/", "")
+					local rel_path = vim.fs.relpath(project_root, abs_path) or abs_path
 					local name = last_test_name:match("([^.]+)$") or last_test_name
 
 					table.insert(quickfix_items, {
@@ -77,35 +87,8 @@ local function run_dotnet_test()
 	end)
 end
 
-local setup_compiler = function()
-	vim.cmd("compiler dotnet")
-	-- normal dotnet build behavior spins a lot of processes every time you trigger a build
-	-- if you dont set MSBUILDDISABLENODEREUSE=1 environment variable, uncomment line bellow
-	-- vim.o.makeprg = "dotnet build /nodeReuse:false"
-	vim.g.dotnet_errors_only = true
-	vim.g.dotnet_show_project_file = false
-end
-
-local dotnet_group = vim.api.nvim_create_augroup("dbitt/dotnet", { clear = true })
-
-vim.api.nvim_create_autocmd("VimEnter", {
-	group = dotnet_group,
-	callback = function()
-		setup_compiler()
-		if get_project_root() then
-			vim.keymap.set("n", "<leader>td", run_dotnet_test, {
-				noremap = true,
-				silent = true,
-				desc = "Run dotnet test and populate quickfix",
-			})
-		end
-	end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	group = dotnet_group,
-	pattern = "cs",
-	callback = function()
-		setup_compiler()
-	end,
+vim.keymap.set("n", "<leader>pt", run_dotnet_test, {
+	buffer = true,
+	silent = true,
+	desc = "Run tests",
 })
