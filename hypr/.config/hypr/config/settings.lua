@@ -1,14 +1,14 @@
 hl.config({
 	general = {
 		gaps_in = 2,
-		gaps_out = 4,
+		gaps_out = { top = 4, right = 0, bottom = 0, left = 0 },
 		border_size = 1,
 		col = {
-			active_border = "rgb(1f1f28)",
+			active_border = "rgb(5f646d)",
 		},
 		resize_on_border = true,
 		allow_tearing = false,
-		layout = "dwindle",
+		layout = "master",
 	},
 	group = {
 		col = {
@@ -34,9 +34,6 @@ hl.config({
 	},
 	animations = {
 		enabled = true,
-	},
-	dwindle = {
-		preserve_split = true,
 	},
 	misc = {
 		force_default_wallpaper = 0,
