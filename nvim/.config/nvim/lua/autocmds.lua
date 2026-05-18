@@ -17,8 +17,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("dbitt/spell_on", { clear = true }),
-	desc = "Turn on spell check for markdown and text files",
-	pattern = { "text", "tex", "markdown", "gitcommit" },
+	desc = "Turn on spell check for prose filetypes",
+	pattern = { "text", "typst", "markdown", "gitcommit" },
 	callback = function()
 		vim.opt_local.spell = true
 	end,
