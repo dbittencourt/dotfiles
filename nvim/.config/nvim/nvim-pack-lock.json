@@ -10,7 +10,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "fzf-lua": {
-      "rev": "311a630292310ea3bfe46dd616e17f283e975801",
+      "rev": "3ff77862f6c62f7b850668435ae43aa026de8758",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "kanagawa.nvim": {
@@ -22,11 +22,11 @@
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mini.files": {
-      "rev": "5e0f0d264166e71d37ca35d84c54b1887ea76b40",
+      "rev": "423d6b5afb7a94e658950d470957f830d43dd41e",
       "src": "https://github.com/nvim-mini/mini.files"
     },
     "mini.icons": {
-      "rev": "bac6317300e205335df425296570d84322730067",
+      "rev": "520995f1d75da0e4cc901ee95080b1ff2bc46b94",
       "src": "https://github.com/nvim-mini/mini.icons"
     },
     "mini.pairs": {
@@ -34,7 +34,7 @@
       "src": "https://github.com/nvim-mini/mini.pairs"
     },
     "mini.surround": {
-      "rev": "2715e04bea3ec9244f15b421dc5b18c0fe326210",
+      "rev": "c375ea503646fe8393593b5fb8a40406eaa437b2",
       "src": "https://github.com/nvim-mini/mini.surround"
     },
     "nvim-dap": {
