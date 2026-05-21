@@ -30,7 +30,7 @@ end
 ---@type vim.lsp.Config
 return {
 	cmd = { "sourcekit-lsp" },
-	filetypes = { "swift", "objc", "objcpp", "c", "cpp" },
+	filetypes = { "swift", "objc", "objcpp" },
 	root_dir = function(bufnr, on_dir)
 		on_dir(
 			root_pattern(bufnr, { "buildServer.json" })
