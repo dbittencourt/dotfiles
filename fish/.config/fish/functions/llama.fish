@@ -14,6 +14,10 @@ function __llama_model_args --argument-names name
         case qwen
             printf '%s\n' \
                 -m "$HOME/code/llama.cpp/models/personal/Qwen3.6-27B-UD-IQ3_XXS.gguf" \
+                --spec-type draft-mtp \
+                --spec-draft-n-max 2 \
+                --no-mmproj \
+                -np 1 \
                 --temp 0.7 \
                 --top-p 0.8 \
                 --top-k 20
