@@ -32,21 +32,16 @@ set("v", "K", ":m '<-2<cr>gv=gv", { desc = "Move selection up one line" })
 set("x", "<leader>p", '"_dP', { desc = "Replace selection with default register content" })
 set("n", "<leader>P", "goVGP", { desc = "Replace buffer with default register content" })
 
--- programming
-set("n", "<leader>pb", "<cmd>make<cr>", { desc = "Build project" })
+-- quickfix
 set("n", "<leader>pq", vim.diagnostic.setqflist, { desc = "Send diagnostics to quickfix" })
 set("n", "<leader>q", function()
-	local qf_open = false
-	for _, win in ipairs(vim.api.nvim_list_wins()) do
-		if vim.bo[vim.api.nvim_win_get_buf(win)].buftype == "quickfix" then
-			qf_open = true
-			break
-		end
-	end
+	local qf_open = vim.iter(vim.fn.getwininfo()):any(function(win)
+		return win.quickfix == 1
+	end)
 
 	if qf_open then
-		vim.cmd("cclose")
+		vim.cmd.cclose()
 	else
-		vim.cmd("copen")
+		vim.cmd.copen()
 	end
 end, { desc = "Toggle quickfix window" })
