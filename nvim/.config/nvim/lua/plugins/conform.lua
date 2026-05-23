@@ -19,7 +19,7 @@ conform.setup({
 		yaml = { "oxfmt" },
 		markdown = { "oxfmt" },
 		lua = { "stylua" },
-		python = { "ruff" },
+		python = { "ruff_fix", "ruff_format" },
 		bash = { "shfmt", "shellcheck" },
 		zsh = { "shfmt", "shellcheck" },
 		sh = { "shfmt", "shellcheck" },
@@ -45,12 +45,12 @@ conform.setup({
 			stdin = true,
 		},
 	},
-	format_on_save = { lsp_fallback = true, timeout_ms = 1000 },
+	format_on_save = { lsp_format = "fallback", timeout_ms = 1000 },
 })
 
 vim.keymap.set({ "n", "v" }, "<leader>mp", function()
 	conform.format({
-		lsp_fallback = true,
+		lsp_format = "fallback",
 		async = false,
 		timeout_ms = 1000,
 	})

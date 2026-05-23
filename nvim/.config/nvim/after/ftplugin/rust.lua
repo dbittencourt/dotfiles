@@ -36,13 +36,13 @@ local function run_cargo_test()
 end
 
 vim.keymap.set("n", "<leader>pb", "<cmd>make build<cr>", {
-	buffer = true,
+	buf = 0,
 	silent = true,
 	desc = "Build project",
 })
 
 vim.keymap.set("n", "<leader>pt", run_cargo_test, {
-	buffer = true,
+	buf = 0,
 	silent = true,
 	desc = "Run tests",
 })

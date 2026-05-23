@@ -75,13 +75,13 @@ local function run_dotnet_test()
 end
 
 vim.keymap.set("n", "<leader>pb", "<cmd>make<cr>", {
-	buffer = true,
+	buf = 0,
 	silent = true,
 	desc = "Build project",
 })
 
 vim.keymap.set("n", "<leader>pt", run_dotnet_test, {
-	buffer = true,
+	buf = 0,
 	silent = true,
 	desc = "Run tests",
 })
