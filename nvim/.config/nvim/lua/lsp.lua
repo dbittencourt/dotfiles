@@ -16,6 +16,7 @@ local function on_attach(client, bufnr)
 	keymap("n", "grr", fzf.lsp_references, "Show lsp references")
 	keymap("n", "grc", fzf.lsp_incoming_calls, "Show lsp incoming calls")
 	keymap("n", "gO", fzf.lsp_document_symbols, "Show document symbols")
+	-- <C-w>d show line diagnostics (I always forget it)
 
 	if client:supports_method("textDocument/documentColor", bufnr) then
 		keymap({ "n", "x" }, "grp", function()
