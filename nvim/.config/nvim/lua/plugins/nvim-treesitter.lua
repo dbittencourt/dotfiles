@@ -14,7 +14,7 @@ vim.pack.add({
 local languages = {
 	"angular",
 	"bash",
-	"c_sharp",
+	{ parser = "c_sharp", filetype = "cs" },
 	"c",
 	"cpp",
 	"css",
@@ -40,8 +40,25 @@ local languages = {
 	"rust",
 }
 
+local function parser_name(lang)
+	return type(lang) == "table" and lang.parser or lang
+end
+
+local function filetype_name(lang)
+	return type(lang) == "table" and (lang.filetype or lang.parser) or lang
+end
+
+local parsers = vim.tbl_map(parser_name, languages)
+local filetypes = vim.tbl_map(filetype_name, languages)
+
+for _, lang in ipairs(languages) do
+	if type(lang) == "table" and lang.filetype then
+		vim.treesitter.language.register(lang.parser, lang.filetype)
+	end
+end
+
 local treesitter = require("nvim-treesitter")
-treesitter.install(languages)
+treesitter.install(parsers)
 treesitter.setup()
 
 require("treesitter-context").setup({
@@ -65,7 +82,7 @@ local move = require("nvim-treesitter-textobjects.move")
 -- enable syntax highlighting, folding, indentation and keymaps
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("dbitt/treesitter_ft", { clear = true }),
-	pattern = languages,
+	pattern = filetypes,
 	callback = function(ev)
 		vim.treesitter.start()
 		vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
