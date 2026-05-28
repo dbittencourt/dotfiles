@@ -22,12 +22,11 @@
 #custom-power {
   color: @foreground;
   background-color: @background;
-  margin-top: 0.2rem;
 }
 
 #waybar {
-  background: transparent;
-  margin: 0.2rem;
+  background-color: @background;
+  margin: 0 0.2rem;
 }
 
 #workspaces {
@@ -38,7 +37,7 @@
 #workspaces button {
   color: @foreground;
   border-radius: 1rem;
-  padding: 0.5rem;
+  padding: 0 0.5rem;
 }
 
 #workspaces button.active {
@@ -62,11 +61,11 @@
 #clock,
 #custom-search,
 #idle_inhibitor {
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
 }
 
 #custom-power {
-  padding: 0.5rem;
+  padding: 0 0.5rem;
   padding-left: 1.2rem;
 }
 

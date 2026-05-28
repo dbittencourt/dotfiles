@@ -1,9 +1,5 @@
 hl.window_rule({ match = { class = ".*" }, suppress_event = "maximize" })
 
--- remove borders when there is a single window in workspace
-hl.window_rule({ match = { float = false, workspace = "w[tv1]" }, border_size = 0 })
-hl.window_rule({ match = { float = false, workspace = "f[1]" }, border_size = 0 })
-
 hl.window_rule({
 	match = { title = "(Volume Control)" },
 	float = true,

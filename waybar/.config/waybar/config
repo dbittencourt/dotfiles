@@ -1,6 +1,7 @@
 {
-  "layer": "top", // Waybar at top layer
-  "position": "top", // Waybar position (top|bottom|left|right)
+  "layer": "top",
+  "position": "top",
+  "height": 24,
   // Choose the order of the modules
   "modules-left": ["ext/workspaces"],
   "modules-center": ["custom/obs", "mpris"],
