@@ -15,13 +15,13 @@
     "clock",
     "custom/search",
     "idle_inhibitor",
-    "custom/power"
+    "custom/power",
   ],
   "custom/obs": {
     "format": "{}",
     "interval": 5,
     "exec": "~/.config/obs-studio/scripts/waybar-obs.sh",
-    "return-type": "json"
+    "return-type": "json",
   },
   "mpris": {
     "format": "  {dynamic}",
@@ -30,19 +30,19 @@
     "tooltip": false,
   },
   "ext/workspaces": {
-    "on-click": "activate"
+    "on-click": "activate",
   },
   "tray": {
     "icon-size": 21,
-    "spacing": 10
+    "spacing": 10,
   },
   "wireplumber": {
     "format": "{icon} {volume}%",
     "format-muted": "",
     "format-icons": {
-      "default": ["", "", " "]
+      "default": ["", "", " "],
     },
-    "on-click": "pavucontrol"
+    "on-click": "pavucontrol",
   },
   "custom/brightness": {
     "format": " {}",
@@ -59,37 +59,39 @@
     "critical-threshold": 80,
     "format": "{icon} {temperatureC}°C",
     "format-icons": ["", "", ""],
-    "tooltip": false
+    "tooltip": false,
   },
   "cpu": {
     "format": "{icon} {usage}%",
     "format-icons": [""],
+    "on-click": "~/.config/waybar/scripts/btop.sh cpu",
   },
   "memory": {
     "format": "{icon} {used:0.1f}G",
     "format-icons": [""],
-    "tooltip": false
+    "tooltip": false,
+    "on-click": "~/.config/waybar/scripts/btop.sh memory",
   },
   "clock": {
     "format": " {0:%d/%m}  󰥔 {0:%H:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "on-click": "thunderbird -calendar && hyprctl dispatch 'hl.dsp.focus({ window = \"title:^(Calendar - Mozilla Thunderbird)$\" })'"
- },
+    "on-click": "~/.config/waybar/scripts/calendar.sh",
+  },
   "custom/search": {
     "format": "",
     "tooltip": false,
-    "on-click": "rofi -show drun"
+    "on-click": "rofi -show drun",
   },
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
       "activated": "",
-      "deactivated": ""
+      "deactivated": "",
     },
   },
   "custom/power": {
     "on-click": "~/.config/waybar/scripts/power.sh",
     "format": " ",
-    "tooltip": false
-  }
+    "tooltip": false,
+  },
 }
