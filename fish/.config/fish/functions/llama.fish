@@ -13,13 +13,13 @@ function __llama_model_args --argument-names name
 
         case qwen
             printf '%s\n' \
-                -m "$HOME/code/llama.cpp/models/personal/Qwen3.6-27B-UD-IQ3_XXS.gguf" \
+                -m "$HOME/code/llama.cpp/models/personal/Qwen3.5-9B-UD-Q4_K_XL.gguf" \
                 --spec-type draft-mtp \
                 --spec-draft-n-max 2 \
                 --no-mmproj \
                 -np 1 \
-                --temp 0.7 \
-                --top-p 0.8 \
+                --temp 0.2 \
+                --top-p 0.9 \
                 --top-k 20
 
         case '*'
@@ -79,7 +79,7 @@ function llama
             end
 
             if test -z "$ctx"
-                set ctx 32768
+                set ctx 8192
             else if not string match -qr '^[1-9][0-9]*$' -- "$ctx"
                 echo "ctx must be a positive integer: $ctx"
                 return 2
@@ -112,6 +112,7 @@ function llama
             command nohup llama-server \
                 $model_args \
                 -ngl 999 \
+                --device Vulkan0 \
                 -c "$ctx" \
                 --host "$host" \
                 --port "$port" \
