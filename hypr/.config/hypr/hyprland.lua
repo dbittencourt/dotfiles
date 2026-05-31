@@ -2,6 +2,7 @@ require("config.settings")
 require("config.animations")
 require("config.keybindings")
 require("config.rules")
+require("config.obs")
 
 -- autostart
 hl.on("hyprland.start", function()

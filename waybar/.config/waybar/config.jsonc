@@ -19,9 +19,11 @@
   ],
   "custom/obs": {
     "format": "{}",
-    "interval": 5,
-    "exec": "~/.config/obs-studio/scripts/waybar-obs.sh",
+    "interval": 30,
+    "signal": 8,
+    "exec": "~/.config/obs-studio/scripts/obs.sh waybar",
     "return-type": "json",
+    "hide-empty-text": true,
   },
   "mpris": {
     "format": "  {dynamic}",
