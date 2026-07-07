@@ -19,8 +19,6 @@ hl.window_rule({
 
 -- disable screenshare for certain apps
 local private_classes = {
-	[[^personal\.ghostty$]],
-	"^(firefox-personal)$",
 	"^(discord)$",
 	[[^org\.mozilla\.Thunderbird$]],
 	"^(Bitwarden)$",
@@ -35,3 +33,4 @@ hl.window_rule({ match = { class = "^(personal.ghostty)$" }, workspace = "1" })
 hl.window_rule({ match = { class = "^(firefox-personal)$" }, workspace = "2" })
 hl.window_rule({ match = { class = "^(org.mozilla.Thunderbird)$" }, workspace = "3" })
 hl.window_rule({ match = { class = "^(sone)$" }, workspace = "4" })
+hl.window_rule({ match = { class = "^(steam)$" }, workspace = "5" })
