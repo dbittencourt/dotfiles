@@ -44,7 +44,7 @@
     "format-icons": {
       "default": ["", "", " "],
     },
-    "on-click": "pavucontrol",
+    "on-click": "ghostty --class=wiremix.ghostty -e wiremix",
   },
   "custom/brightness": {
     "format": " {}",

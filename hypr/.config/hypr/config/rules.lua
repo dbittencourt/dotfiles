@@ -1,7 +1,7 @@
 hl.window_rule({ match = { class = ".*" }, suppress_event = "maximize" })
 
 hl.window_rule({
-	match = { title = "(Volume Control)" },
+	match = { class = [[^(wiremix\.ghostty)$]] },
 	float = true,
 	size = "70% 70%",
 	center = true,
