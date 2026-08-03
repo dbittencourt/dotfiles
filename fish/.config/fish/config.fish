@@ -10,6 +10,10 @@ set -gx ELECTRON_OZONE_PLATFORM_HINT auto # make electron apps use wayland
 set -gx MSBUILDDISABLENODEREUSE 1 # prevent dotnet build zombie processes
 set -gx ARTIFACTS_CREDENTIALPROVIDER_TOKENTYPE SelfDescribing # nuget oauth 
 
+if test -d "$HOME/.nix-profile/bin"
+    fish_add_path "$HOME/.nix-profile/bin"
+end
+
 if test -d "$HOME/.cargo/bin"
     source "$HOME/.cargo/env.fish"
 end
