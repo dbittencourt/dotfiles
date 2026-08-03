@@ -25,7 +25,6 @@ local languages = {
 	"html",
 	"javascript",
 	"json",
-	"latex",
 	"lua",
 	"markdown_inline",
 	"markdown",
