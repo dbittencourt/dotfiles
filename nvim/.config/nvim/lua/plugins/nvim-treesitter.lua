@@ -29,6 +29,7 @@ local languages = {
 	"lua",
 	"markdown_inline",
 	"markdown",
+	"nix",
 	"python",
 	"scss",
 	"sql",

@@ -18,6 +18,7 @@ conform.setup({
 		jsonc = { "oxfmt" },
 		yaml = { "oxfmt" },
 		markdown = { "oxfmt" },
+		nix = { "nixfmt" },
 		lua = { "stylua" },
 		python = { "ruff_fix", "ruff_format" },
 		bash = { "shfmt" },
