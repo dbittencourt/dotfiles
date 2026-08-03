@@ -10,6 +10,9 @@ Thumbs.db
 *.swo
 *~
 
+# claude
+**/.claude/settings.local.json
+
 # node
 node_modules/
 npm-debug.log

@@ -1,15 +1,14 @@
 [include]
   # include personal details
-  path = .gitconfig-personal
+  path = personal
 
 [includeIf "gitdir:~/work/"]
   # configure work details
-  path = .gitconfig-work
+  path = work
 
 [core]
   editor = nvim
   pager = delta
-  excludesfile = ~/.gitignore
 
 [fetch]
   prune = true
