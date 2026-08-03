@@ -14,6 +14,9 @@ scroll-to-bottom = no-keystroke,no-output
 keybind = ctrl+shift+u=scroll_page_up
 keybind = ctrl+shift+d=scroll_page_down
 
-config-file = kanagawa-dragon.conf
-config-file = ?config-macos
-config-file = ?config-linux
+theme = Kanagawa Dragon
+selection-background = 2d4f67
+selection-foreground = c8c093
+
+config-file = ?macos.ghostty
+config-file = ?linux.ghostty

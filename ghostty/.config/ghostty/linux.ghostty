@@ -1,4 +1,3 @@
 command = fish
-gtk-tabs-location = top
 gtk-wide-tabs = false
 gtk-custom-css = "tabs.css"

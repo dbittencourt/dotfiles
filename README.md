@@ -19,7 +19,7 @@ I also believe it will improve dramatically over the years given how popular it 
 For my fonts, I use
 [JetBrainsMono Nerd Fonts](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/JetBrainsMono.zip).
 
-You can find my configuration for Ghostty [here](/ghostty/.config/ghostty/config).
+You can find my configuration for Ghostty [here](/ghostty/.config/ghostty/config.ghostty).
 
 #### Fish
 
