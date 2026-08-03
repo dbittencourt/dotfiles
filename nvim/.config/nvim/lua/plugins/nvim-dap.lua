@@ -18,7 +18,7 @@ end
 
 dap.adapters.coreclr = {
 	type = "executable",
-	command = os.getenv("HOME") .. "/.dotnet/tools/netcoredbg/netcoredbg",
+	command = "netcoredbg",
 	args = { "--interpreter=vscode" },
 }
 
