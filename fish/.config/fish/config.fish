@@ -4,8 +4,8 @@ status is-interactive; or exit
 set -g fish_prompt_pwd_dir_length 0
 set -g fish_greeting ""
 
+set -gx GPG_TTY (tty) # route GPG passphrase prompts to current terminal
 set -gx EDITOR nvim
-set -gx BAT_THEME kanagawa
 set -gx ELECTRON_OZONE_PLATFORM_HINT auto # make electron apps use wayland
 set -gx MSBUILDDISABLENODEREUSE 1 # prevent dotnet build zombie processes
 set -gx ARTIFACTS_CREDENTIALPROVIDER_TOKENTYPE SelfDescribing # nuget oauth 
