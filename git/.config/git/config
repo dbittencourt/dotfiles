@@ -1,10 +1,11 @@
 [include]
-  # include personal details
   path = personal
 
 [includeIf "gitdir:~/work/"]
-  # configure work details
   path = work
+
+[user]
+  useConfigOnly = true
 
 [core]
   editor = nvim
@@ -29,12 +30,13 @@
 [delta]
   # use n and N to move between diff sections
   navigate = true
-  true-color = always
-  keep-plus-minus-markers = false
   hyperlinks = true
 
 [gpg]
   format = ssh
+
+[gpg "ssh"]
+  allowedSignersFile = ~/.ssh/allowed_signers
 
 [commit]
   gpgsign = true

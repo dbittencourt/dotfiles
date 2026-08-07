@@ -38,8 +38,8 @@ You can find my setup [here](/fish/.config/fish/config.fish).
 
 ### Git
 
-I keep my common configuration under the usual .gitconfig and if I have the need to define
-specific information (work/personal), I setup additional .gitconfig-work/personal files for that.
+I keep my common configuration under `~/.config/git/config`. Personal and work identities live in
+private `~/.config/git/personal` and `~/.config/git/work` files outside this public repository.
 
 I use [delta](https://github.com/dandavison/delta) for cli diffs.
 
@@ -47,7 +47,7 @@ For authentication/signing, I use and **recommend** physical security keys like
 the [YubiKey](https://www.yubico.com/products/yubikey-5-overview/).
 Once everything is configured it is quite fun (and safe). You feel like a secret agent.
 
-You can find my default configuration [here](/git/.gitconfig).
+You can find my default configuration [here](/git/.config/git/config).
 
 ### Editor
 
